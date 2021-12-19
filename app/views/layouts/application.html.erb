@@ -15,106 +15,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <%= render 'layouts/shim' %>
   </head>
 
   <body>
-      <header>
-      <section id="modal" class="hidden">
-        <div class="container">
-          <ul class="modal-ul">
-            <li class="login-li">
-              <form method="get" action="#" class="login_container">
-              <input type="text" size="25" placeholder="ID">
-              <input type="text" size="25" placeholder="PASSWORD">
-              <input type="submit"  value="log in!">
-              </form>
-              <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
-            </li>
-            <li class="sign-up-li">
-              <p>Sign Up!</p>
-              <form method="get" class="login_container">
-              <input type="text" size="25" placeholder="NAME">
-              <input type="text" size="25" placeholder="ID">
-              <input type="text" size="25" placeholder="PASSWORD">
-              <input type="text" size="25" placeholder="PASSWORD">
-              <input type="submit"  value="sign up!" onclick="SignUpGaid();return false;">
-              </form>
-            </li>
-            <li id="signup-about">
-              <div class="list-area">
-                <h2><img src="/assets/logo.png"></h2>
-                <p>は誰でも&nbsp;誰とでも繋がれるコミュニティツールです!</p>
-              </div>
-            </li>
-            <li id="signup-about2">
-              <div class="list-area2">
-                <h2><img src="/assets/logo.png"></h2>
-                <p>を使って、レッスンに参加したり、<br>
-                  自分の演奏を披露したりすることが出来ます。
-                </p>
-                <p>
-                  また、新たなコミュニティを通じて自身の可能性を<br>
-                  見出すこともできるかも知れません。
-                </p>
-                <p>
-                  チャットや音声で、ただ会話を楽しむ事も<br>
-                  それはあなたのライフスタイルの一部になってくれるでしょう。
-                </p>
-              </div>
-            </li>
-            <li id="signup-about3">
-              <div class="list-area3">
-                <h2><img src="/assets/logo.png"></h2>
-                <p>を通じて、</p>
-                <p>あなたの世界が少しでも広がる事を</p>
-                <p>願っています。</p>
-                <button class="btn-go">Go!</button>
-              </div>
-            </li>
-          
-      
-          </ul>
-            
-        </div>
-        <button id="prev" class="hidden">←戻る</button>
-        <button id="next" class="hidden">進む→</button>
-        <div id="close">
-          閉じる
-        </div>
-      </section>
-      <div id="mask" class="hidden"></div>
-      
-      
-      <div class="status_bar">
-        <form method="get" action="#" class="search_container">
-          <input type="text" size="25" placeholder="キーワード検索">
-          <input type="submit"  value="&#xf002">
-        </form>
-        
-        <div class="status_bar_right">
-            <%= link_to image_tag("/assets/login.png"), mypage_path ,class:"acount-logo" %>
-            <span onclick="LoginPage()"><a>Log in</a></span>
-            <ul>
-              <li><a><img src="/assets/facebook.png"></a></li>
-              <li><a><img src="/assets/Messenger.png"></a></li>
-              <li><a><img src="/assets/insta.png"></a></li>
-              <li><a><img src="/assets/twitter.png"></a></li>
-            </ul>
-        </div>
-      </div>
-      <div class="global-menu">
-        <h1 class="main-logo"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
-        <div class="menu">
-          <ul>
-            <li><%= link_to "about", about_path %></li>
-            <li><%= link_to "ジャンル別", genre_path %></li>
-            <li><%= link_to "気分別", feel_path %></li>
-            <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    <%= render 'layouts/header' %>
+     
     <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
+    
+    <%= render 'layouts/footer' %>
     <script>
 
       const targets = document.querySelectorAll('div.anime-section li');

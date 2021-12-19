@@ -173,6 +173,17 @@ button {
         margin-bottom:16px ;
         border:1px solid black;
       }
+      & input[type="password"]{
+        padding: 1px 8px;
+        font-size: 24px;
+        display: block;
+        margin:0 auto;
+        width: 500px;
+        height: 50px;
+        border-radius: 10px;
+        margin-bottom:16px ;
+        border:1px solid black;
+      }
       & input[type="submit"]{
         font-size: 24px;
         display:block;
@@ -369,8 +380,8 @@ button {
     & input[type="text"] {
       width: 75%;
       padding:5px 4px;
-    
     }
+    
     & textarea{
       vertical-align: top;
       padding:5px 4px;
