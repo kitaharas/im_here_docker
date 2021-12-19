@@ -1,0 +1,207 @@
+
+<header>
+  <section id="modal" class="hidden">
+    <div class="container">
+      <ul class="modal-ul">
+        <li class="login-li">
+          <form method="get" action="#" class="login_container">
+          <input type="text" size="25" placeholder="ID">
+          <input type="text" size="25" placeholder="PASSWORD">
+          <input type="submit"  value="log in!">
+          </form>
+          <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
+        </li>
+        <li class="sign-up-li">
+          <p>Sign Up!</p>
+          <form method="get" action="#" class="login_container">
+          <input type="text" size="25" placeholder="NAME">
+          <input type="text" size="25" placeholder="ID">
+          <input type="text" size="25" placeholder="PASSWORD">
+          <input type="text" size="25" placeholder="PASSWORD">
+          <input type="submit"  value="sign up!" onclick="SignUpGaid();return false;">
+          </form>
+        </li>
+        <li id="signup-about">
+          <div class="list-area">
+            <h2><img src="assets/logo.png"></h2>
+            <p>は誰でも誰とでも繋がれるコミュニティツールです！</p>
+          </div>
+        </li>
+        <li id="signup-about2">
+          <div class="list-area2">
+            <h2><img src="assets/logo.png"></h2>
+            <p>を使って、レッスンに参加したり、<br>
+              自分の演奏を披露したりすることが出来ます。
+            </p>
+            <p>
+              また、新たなコミュニティを通じて自身の可能性を<br>
+              見出すこともできるかも知れません。
+            </p>
+            <p>
+              チャットや音声で、ただ会話を楽しむ事も<br>
+              それはあなたのライフスタイルの一部になってくれるでしょう。
+            </p>
+          </div>
+        </li>
+        <li id="signup-about3">
+          <div class="list-area3">
+            <h2><img src="assets/logo.png"></h2>
+            <p>を通じて、</p>
+            <p>あなたの世界が少しでも広がる事を</p>
+            <p>願っています。</p>
+            <button class="btn-go">Go!</button>
+          </div>
+        </li>
+      </ul>
+        
+    </div>
+    <button id="prev" class="hidden">←戻る</button>
+    <button id="next" class="hidden">進む→</button>
+    <div id="close">
+      閉じる
+    </div>
+  </section>
+  <div id="mask" class="hidden"></div>
+  
+  
+  <div class="status_bar">
+    <form method="get" action="#" class="search_container">
+      <input type="text" size="25" placeholder="キーワード検索">
+      <input type="submit"  value="&#xf002">
+    </form>
+    
+    <div class="status_bar_right">
+        <a href="mypage.html"><img src="assets/login.png" class="acount-logo"></a>
+        <span onclick="LoginPage()"><a>Log in</a></span>
+        <ul>
+          <li><a><img src="assets/facebook.png"></a></li>
+          <li><a><img src="assets/Messenger.png"></a></li>
+          <li><a><img src="assets/insta.png"></a></li>
+          <li><a><img src="assets/twitter.png"></a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="global-menu">
+    <h1 class="main-logo"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
+    <div class="menu">
+      <ul>
+        <li><a href="about.html">about</a></li>
+        <li><a href="genre.html">ジャンル別</a></li>
+        <li><a href="feel.html">気分別</a></li>
+        <li class="hov-menu"><a>マイメニュー<span>▼</span></a>
+          <ul>
+            <li><a>マイページ</a></li>
+            <li><a>プロフィール編集</a></li>
+            <li onclick="eventModal()"><a>イベント登録</a></li>
+          </ul>
+        </li>
+
+
+        
+
+
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="event-modal hidden">
+    <h3>イベント情報入力</h3>
+    <form method="get" action="#" class="event_container">
+      <div>
+        <label for="e_title">タイトル</label>
+        <input id="e_title" type="text" name="title" value="" placeholder="ギター弾く19時まで">
+      </div>
+
+      <div>
+        <label for="e_memo">メモ</label>
+        <textarea id="e_memo" name="memo" rows="5">これからなんとなくギター弾きます。暇人集まれー。</textarea>
+      </div>
+
+      <div>
+        <label>日時</label>
+        <label for="e_play">今すぐ</label>
+        <input id="e_play" type="radio" name="radio">
+        <label for="e_date">時間指定</label>
+        <input id="e_date" type="radio" name="radio">
+      </div>
+
+      <div>
+        <label for="regularly">定期開催</label>
+        <input id="regularly" type="checkbox">
+      </div>
+      
+      <div>
+        <label>方法</label>
+        <label for="online">オンライン</label>
+        <input id="online" type="radio" name="line">
+        <label for="offline">オフライン</label>
+        <input id="offline" type="radio" name="line">
+      </div>
+
+      <div>
+        <label for="place">場所</label>
+        <input id="place" type="text" name="place" value="">
+      </div>
+      
+      <div>
+        <label for="people">参加人数</label>
+        <input id="people" type="number" name="people" value="">名
+        <span>※空欄で制限なし</span>
+      </div>
+
+      <input type="submit" value="イベント登録" onclick="goEvent();return false;">
+      </form>
+    
+    <div id="event-close" onclick="eventClose()">
+      閉じる
+    </div>
+  </div>
+
+</header>
+
+<section id="confi-modal" class="hidden">
+  <div class="confi-container">
+    <p>以下の内容で登録します。<br>
+      よろしいですか？
+    </p>
+  </div>
+
+  <div id="confi-close" onclick="confiClose()">
+    戻る
+  </div>
+</section>
+<div id="confi-mask" class="hidden"></div>
+
+
+
+<div class="my-page-section">
+  <div class="profile">
+    <div class="profile-img">
+      <img src="assets/catman.png">
+    </div>
+    <p>shoichi kitahara</p>
+    <p>フォロー：３ フォロワー：４</p>
+    <div class="profile-coment">
+      <p>自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。</p>
+    </div>
+
+  </div>
+  <div class="event-display">
+    <div class="event-container">
+      <ul class="tab-menu">
+        <li><a class="active" data-id="event">フォロー開催中</a></li>
+        <li><a data-id="schedule">スケジュール</a></li>
+      </ul>
+
+      <section class="content active" id="event">
+        開催中のイベントはありません
+      </section>
+      <section class="content" id="schedule">
+        登録されているスケジュールはありません
+      </section>
+    </div>
+  </div>
+</div>
+<footer></footer>
+
