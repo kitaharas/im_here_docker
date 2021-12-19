@@ -60,11 +60,6 @@ const eventClose = () => {
 //  モーダルカルーセル
 
 
-// window.addEventListener('DOMContentLoaded',()=>{
-  
-  
-// });
-
 let currentIndex = 0;
 function updateButtons(){
   if(currentIndex === 0){
@@ -123,35 +118,6 @@ window.addEventListener('resize',() => {
   moveSlides();
 });
 
-
-
-// インターセクションオブザーバー
-
-const targets = document.querySelectorAll('div.anime-section li');
-const options = {
-  root: null,
-  threshold:1,
-};
-
-const observer = new IntersectionObserver(callback ,options);
-
-
-function callback(entries, obs){
-  console.log("unko");
-  entries.forEach(entry => {
-
-    if (!entry.isIntersecting){
-      return;
-    }
-
-  entry.target.classList.add('appear');
-  obs.unobserve(entry.target);
-});
-}
-
-targets.forEach(target => {
-  observer.observe(target);
-});
 
 
 
