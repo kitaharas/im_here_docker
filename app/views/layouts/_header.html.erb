@@ -16,8 +16,8 @@
           <%= render 'shared/error_messages' %>
           <input type="text" size="25" placeholder="NAME" name="user[name]"  >
           <input type="text" size="25" placeholder="EMAIL" name="user[email]" >
-          <input type="password" size="25" placeholder="PASSWORD" name="user[password]">
-          <input type="password" size="25" placeholder="PASSWORD" name="user[password_confirmation]">
+          <input type="password" size="25" placeholder="PASSWORD" name="user[password]" autocomplete="off">
+          <input type="password" size="25" placeholder="PASSWORD" name="user[password_confirmation]" autocomplete="off">
           <input type="submit"  value="sign up!" >
           <% end %>
           <%# onclick="SignUpGaid();return false;" %>

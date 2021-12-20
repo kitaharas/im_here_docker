@@ -9,12 +9,15 @@ class HomeController < ApplicationController
   
   
   def about
+    @user = User.new
   end
   
   def feel
+    @user = User.new
   end
   
   def genre
+    @user = User.new
   end
   
 
