@@ -1,12 +1,12 @@
 <% provide(:title, "Genre") %>
 <%= javascript_include_tag "slider.js" %>
 <body>
-  
 
 
   <div class="genre-top-section">
     <div class="hero">
-      <h3>Talk</h3>
+      <h3><%= Ganre.find(1).ganre_title %></h3>
+
       <div class="swiper" id="swipers">
         <ul class="swiper-wrapper swipes">
           <% @random.each do |event| %>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="hero">
-      <h3>Learning</h3>
+      <h3><%= Ganre.find(2).ganre_title %></h3>
       <div class="swiper" id="swipers2">
         <ul class="swiper-wrapper swipes">
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="hero">
-      <h3>Game</h3>
+      <h3><%= Ganre.find(3).ganre_title %></h3>
       <div class="swiper" id="swipers3">
         <ul class="swiper-wrapper swipes">
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="hero">
-      <h3>Music</h3>
+      <h3><%= Ganre.find(4).ganre_title %></h3>
       <div class="swiper" id="swipers4">
         <ul class="swiper-wrapper swipes">
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="hero">
-      <h3>Culture</h3>
+      <h3><%= Ganre.find(5).ganre_title %></h3>
       <div class="swiper" id="swipers5">
         <ul class="swiper-wrapper swipes">
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="hero">
-      <h3>Exercise</h3>
+      <h3><%= Ganre.find(6).ganre_title %></h3>
       <div class="swiper" id="swipers6">
         <ul class="swiper-wrapper swipes">
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
