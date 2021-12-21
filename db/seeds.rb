@@ -9,6 +9,6 @@
 (1..50).each do |n|
   Event.create!(
     event_title: "event#{n}",
-
+    ganre
   )
 end

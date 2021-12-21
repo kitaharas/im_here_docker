@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_20_142125) do
+ActiveRecord::Schema.define(version: 2021_12_21_085821) do
+
+  create_table "event_ganre_relations", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "ganre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "event_title"
+  end
+
+  create_table "ganres", force: :cascade do |t|
+    t.string "ganre_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

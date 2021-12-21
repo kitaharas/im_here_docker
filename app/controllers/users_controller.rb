@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       
     else
-      render 'root_path'
+      render template: "home/index"
     end
 
   end

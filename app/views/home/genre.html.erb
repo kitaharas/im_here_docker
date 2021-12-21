@@ -9,12 +9,9 @@
       <h3>Talk</h3>
       <div class="swiper" id="swipers">
         <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
+          <% @random.each do |event| %>
+          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+          <% end %>
         </ul>
       </div>
     </div>

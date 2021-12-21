@@ -1057,7 +1057,8 @@ footer .copy-write {
 }
 
 .genre-top-section li {
-  height: 150px;
+  height: 100%;
+  text-align: center;
 }
 
 .hero {

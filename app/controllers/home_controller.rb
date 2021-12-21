@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < EventsController
   def index
     p "-------------------"
     p params
@@ -18,6 +18,8 @@ class HomeController < ApplicationController
   
   def genre
     @user = User.new
+    # 親のindexを呼び出す
+    public_method(:genre).super_method.call
   end
   
 
