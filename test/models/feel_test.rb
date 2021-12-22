@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EventGanreRelationTest < ActiveSupport::TestCase
+class FeelTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

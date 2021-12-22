@@ -4,82 +4,19 @@
 
 
   <div class="genre-top-section">
-    <div class="hero">
-      <h3><%= Ganre.find(1).ganre_title %></h3>
-
-      <div class="swiper" id="swipers">
-        <ul class="swiper-wrapper swipes">
-          <% @random.each do |event| %>
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
-          <% end %>
-        </ul>
+    <% @ganre.each_with_index do |g, index| %>
+      <div class="hero">
+        <h3><%= g.ganre_title %></h3>
+        <div class="swiper" id="swiper<%= index %>">
+          <ul class="swiper-wrapper swipes">
+            <% @event.where(ganre_id: g).order("RANDOM()").limit(6).each do |event| %>
+            <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="hero">
-      <h3><%= Ganre.find(2).ganre_title %></h3>
-      <div class="swiper" id="swipers2">
-        <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <h3><%= Ganre.find(3).ganre_title %></h3>
-      <div class="swiper" id="swipers3">
-        <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <h3><%= Ganre.find(4).ganre_title %></h3>
-      <div class="swiper" id="swipers4">
-        <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <h3><%= Ganre.find(5).ganre_title %></h3>
-      <div class="swiper" id="swipers5">
-        <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <h3><%= Ganre.find(6).ganre_title %></h3>
-      <div class="swiper" id="swipers6">
-        <ul class="swiper-wrapper swipes">
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/culture.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/dance.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/exacize.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/game.png"></li>
-          <li class="swiper-slide" alt=""><img src="assets/guitergirl.png"></li>
-        </ul>
-      </div>
-    </div>
+    <% end %>
+   
     
   </div>
-  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>

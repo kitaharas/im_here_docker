@@ -31,16 +31,16 @@ class HeroSliders {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  const hero = new HeroSliders('#swipers');
-  const hero2 = new HeroSliders('#swipers2');
-  const hero3 = new HeroSliders('#swipers3');
-  const hero4 = new HeroSliders('#swipers4');
-  const hero5 = new HeroSliders('#swipers5');
-  const hero6 = new HeroSliders('#swipers6');
-  hero.start();
+  const hero0 = new HeroSliders('#swiper0');
+  const hero1 = new HeroSliders('#swiper1');
+  const hero2 = new HeroSliders('#swiper2');
+  const hero3 = new HeroSliders('#swiper3');
+  const hero4 = new HeroSliders('#swiper4');
+  const hero5 = new HeroSliders('#swiper5');
+  hero0.start();
+  hero1.start();
   hero2.start();
   hero3.start();
   hero4.start();
   hero5.start();
-  hero6.start();
 });

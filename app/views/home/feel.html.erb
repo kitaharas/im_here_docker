@@ -3,87 +3,21 @@
 <body>
   
 
-<div class="genre-top-section">
-  <div class="hero">
-    <h3>わいわいお喋り</h3>
-    <div class="swiper" id="swipers">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
+  <div class="genre-top-section">
+    <% @feel.each_with_index do |f, index| %>
+      <div class="hero">
+        <h3><%= f.feel_title %></h3>
+        <div class="swiper" id="swiper<%= index %>">
+          <ul class="swiper-wrapper swipes">
+            <% @event.where(feel_id: f).order("RANDOM()").limit(6).each do |event| %>
+            <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="hero">
-    <h3>まったり話したい</h3>
-    <div class="swiper" id="swipers2">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
-  </div>
-  <div class="hero">
-    <h3>学びを深めたい</h3>
-    <div class="swiper" id="swipers3">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
-  </div>
-  <div class="hero">
-    <h3>実況系</h3>
-    <div class="swiper" id="swipers4">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
-  </div>
-  <div class="hero">
-    <h3>イベント予定をたてませんか？</h3>
-    <div class="swiper" id="swipers5">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
-  </div>
-  <div class="hero">
-    <h3>忍者モード</h3>
-    <div class="swiper" id="swipers6">
-      <ul class="swiper-wrapper swipes">
-        <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/culture.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/dance.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/exacize.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/game.png"></li>
-        <li class="swiper-slide" alt=""><img src="/assets/guitergirl.png"></li>
-      </ul>
-    </div>
-  </div>
-  
-</div>
+
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
 </body>

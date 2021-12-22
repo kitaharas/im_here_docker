@@ -14,6 +14,7 @@ class HomeController < EventsController
   
   def feel
     @user = User.new
+    public_method(:feel).super_method.call
   end
   
   def genre
