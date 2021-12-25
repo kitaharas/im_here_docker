@@ -3,11 +3,11 @@
     <div class="container">
       <ul class="modal-ul">
         <li class="login-li">
-          <form method="get" action="#" class="login_container">
-              <input type="text" size="25" placeholder="ID">
-              <input type="text" size="25" placeholder="PASSWORD">
-              <input type="submit"  value="log in!">
-              </form>
+          <%= form_for(:session, url: login_path , html: { class: "login_container" }) do |f| %>
+            <input type="text" size="25" placeholder="EMAIL" name="user[email]">
+            <input type="text" size="25" placeholder="PASSWORD" name="user[password]">
+            <input type="submit"  value="log in!">
+          <% end %>
               <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
         </li>
         <li class="sign-up-li">
@@ -77,10 +77,10 @@
         <%= link_to image_tag("/assets/login.png"), root_path ,class:"acount-logo" %>
         <span onclick="LoginPage()"><a>Log in</a></span>
         <ul>
-          <li><a><img src="/assets/facebook.png"></a></li>
-          <li><a><img src="/assets/Messenger.png"></a></li>
-          <li><a><img src="/assets/insta.png"></a></li>
-          <li><a><img src="/assets/twitter.png"></a></li>
+          <li><%= link_to image_tag("/assets/facebook.png"),'https://www.facebook.com/' %></li>
+          <li><%= link_to image_tag("/assets/Messenger.png"),'https://www.facebook.com/messenger/' %></li>
+          <li><%= link_to image_tag("/assets/insta.png"),'https://www.instagram.com/' %></li>
+          <li><%= link_to image_tag("/assets/twitter.png"),'https://www.twitter.com/' %></li>
         </ul>
     </div>
   </div>

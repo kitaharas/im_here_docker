@@ -23,6 +23,22 @@ class HomeController < EventsController
     public_method(:genre).super_method.call
   end
   
+  def login
+    @user = User.find_by(email: params[:email],
+      password: params[:password])
+      if @user
+        flash[:notice] = "ログインしました"
+        redirect_to root_path
+      else
+        redirect_to root_path
+        flash[:notice] = "ログインしてません"
+        p "-------------------"
+        p params
+        p "-------------------"
+
+    end
+  end
+
 
 
 

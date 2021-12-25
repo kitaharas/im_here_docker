@@ -9,14 +9,30 @@ class UsersController < ApplicationController
   end
 
   def create
+    p "-------------------"
+    p params
+    p "-------------------"
     @user = User.new(user_params)
     if @user.save
       
     else
-      render template: "home/index"
+      redirect_to "home/index"
     end
 
   end
+
+  def login
+    @user = User.find_by(email: params[:email],
+                         password: params[:password])
+    if @user
+      flash[:notice] = "ログインしました"
+      redirect_to "home/index"
+    else
+      redirect_to "home/index"
+    end
+  end
+
+
 
       private
 

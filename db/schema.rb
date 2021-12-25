@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_22_142711) do
+ActiveRecord::Schema.define(version: 2021_12_24_125238) do
 
   create_table "event_ganre_relations", force: :cascade do |t|
     t.integer "event_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_12_22_142711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "password"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
