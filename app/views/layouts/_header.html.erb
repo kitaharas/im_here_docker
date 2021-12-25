@@ -3,9 +3,14 @@
     <div class="container">
       <ul class="modal-ul">
         <li class="login-li">
+          <% if @error_message %>
+            <div class="form-error">
+              <%= @error_message %>
+            </div>
+          <% end %>
           <%= form_for(:session, url: login_path , html: { class: "login_container" }) do |f| %>
-            <input type="text" size="25" placeholder="EMAIL" name="user[email]">
-            <input type="text" size="25" placeholder="PASSWORD" name="user[password]">
+            <input type="text" size="25" placeholder="EMAIL" name="session[email]">
+            <input type="text" size="25" placeholder="PASSWORD" name="session[password]">
             <input type="submit"  value="log in!">
           <% end %>
               <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
@@ -68,6 +73,11 @@
   
   
   <div class="status_bar">
+    <% if @error_message %>
+      <div class="form-error">
+        <%= @error_message %>
+      </div>
+    <% end %>
     <form method="get" action="#" class="search_container">
       <input type="text" size="25" placeholder="キーワード検索">
       <input type="submit"  value="&#xf002">
