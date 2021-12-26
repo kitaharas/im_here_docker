@@ -3,16 +3,66 @@
     <div class="container">
       <ul class="modal-ul">
         <li class="login-li">
-          <% if @error_message %>
-            <div class="form-error">
-              <%= @error_message %>
+        
+            <div style="height:26px;">
+              <p class="form-error" style="color:red; text-align:center;">emailもしくはpasswordに誤りがあります</p>
             </div>
-          <% end %>
-          <%= form_for(:session, url: login_path , html: { class: "login_container" }) do |f| %>
+   
+
+
+
+
+
+<%# ajax実装 %>
+
+
+  <div class="login_container">
+    <input type="text" size="25" name="session[email]" id="user_email" placeholder="EMAIL">
+    <input type="text" size="25" name="session[password]" id ="user_password" placeholder="PASSWORD" >
+    <input type="submit" id="btn_submit" name="commit" value="log in!" data-disable-with="Create User">
+  </div>
+
+  <%# <% @users.each do |user| %/>
+    <%= user.name %/><br>
+  <% end %/> %>
+
+  <script>
+    $("#btn_submit").click(function(){
+      const email = $("#user_email").val();
+      const password = $("#user_password").val();
+      $.ajax({
+        type: 'POST', //post,get
+        url: "/sessions/create",
+        data: {email: email, password: password},//user[name]
+        dataType: "json",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
+        },
+      }).done(function(data){
+        
+        console.log(data.error);
+        if (data.message === "error"){
+          console.log("unko");
+          $(".form-error").addClass('error-message');
+        } else if (data.message === "success"){
+          window.location.replace('<%= root_path %>');
+        } 
+        
+        //alert(data.user.name + "で登録されました！")
+
+      });
+      // console.log($("#user_name").val());
+    });
+  </script>
+
+
+
+<%# 
+          <%= form_for(:session, url: login_path , html: { class: "login_container" }) do |f| %/>
             <input type="text" size="25" placeholder="EMAIL" name="session[email]">
             <input type="text" size="25" placeholder="PASSWORD" name="session[password]">
             <input type="submit"  value="log in!">
-          <% end %>
+          </% end %/> %>
               <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
         </li>
         <li class="sign-up-li">
@@ -85,7 +135,11 @@
     
     <div class="status_bar_right">
         <%= link_to image_tag("/assets/login.png"), root_path ,class:"acount-logo" %>
-        <span onclick="LoginPage()"><a>Log in</a></span>
+          <% if logged_in? %>
+            <%= link_to "Log out", logout_path, method: :delete %>
+          <% else %>
+            <span onclick="LoginPage()"><%= link_to "Log in", "#" %></span>
+          <% end %>
         <ul>
           <li><%= link_to image_tag("/assets/facebook.png"),'https://www.facebook.com/' %></li>
           <li><%= link_to image_tag("/assets/Messenger.png"),'https://www.facebook.com/messenger/' %></li>

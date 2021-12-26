@@ -175,6 +175,14 @@ button:hover {
   min-width: 100%;
 }
 
+.container ul li .form-error {
+  display: none;
+}
+
+.container ul li .form-error.error-message {
+  display: block;
+}
+
 .container ul li input[type="text"] {
   padding: 1px 8px;
   font-size: 24px;

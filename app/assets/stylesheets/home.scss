@@ -162,6 +162,12 @@ button {
       padding-top: 134px;
       height:100%;
       min-width:100%;
+      & .form-error{
+        display:none;
+      }
+      & .form-error.error-message{
+      display: block;
+      }
       & input[type="text"]{
         padding: 1px 8px;
         font-size: 24px;

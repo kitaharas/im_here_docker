@@ -1,26 +1,58 @@
 class SessionsController < ApplicationController
   # before_action :set_user, only: [:create]
-
+  include AjaxHelper 
   # def new
   # end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+
+    p "============="
+    p params
+    p "============="
+    # @user = User.new(name: params[:user])
+    # respond_result(@user)
+    user = User.find_by(email: params[:email].downcase)
+    if user && user.authenticate(params[:password]) 
+      log_in user
+      respond_to do |format|
+        format.json { render json: {message: "success"} }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: {message: "error"} }
+          
+          # user.errors.full_messages} }
+      end
+    end
+
+    #   respond_to do |format|
+    #     format.json { render json: {user: data} }
+    #   end
+    #   else
+    #     respond_to do |format|
+    #       format.json { render json: {error: data.errors.full_messages} }
+    #     end
+    #   end
+    # end
+
+  end
+
+
+
+    # user = User.find_by(email: params[:session][:email].downcase)
+    # if user && user.authenticate(params[:session][:password])
       
       
      
-      redirect_to root_path
-    else
-      p "あれれ？"
-      @error_message = "メールアドレスまたはパスワードが間違っています"
-      redirect_to root_path
-    end
-  end
+  #     redirect_to root_path
+  #   else
+  #     p "あれれ？"
+  #     @error_message = "メールアドレスまたはパスワードが間違っています"
+  #     redirect_to root_path
+  #   end
+  # end
 
   def destroy
-    sign_out
-    redirect_to login_path
   end
 
     # private
