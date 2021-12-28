@@ -1,22 +1,19 @@
 <% provide(:title, "Genre") %>
-<%= javascript_include_tag "slider.js" %>
-<body>
+<%= javascript_include_tag "slider.js" %> 
 
 
-  <div class="genre-top-section">
-    <% @ganre.each_with_index do |g, index| %>
-      <div class="hero">
-        <h3><%= g.ganre_title %></h3>
-        <div class="swiper" id="swiper<%= index %>">
-          <ul class="swiper-wrapper swipes">
-            <% @event.where(ganre_id: g).order("RANDOM()").limit(6).each do |event| %>
-            <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
-            <% end %>
-          </ul>
-        </div>
+
+<div class="genre-top-section">
+  <% @ganre.each_with_index do |g, index| %>
+    <div class="hero">
+      <h3><%= g.ganre_title %></h3>
+      <div class="swiper" id="swiper<%= index %>">
+        <ul class="swiper-wrapper swipes">
+          <% @event.where(ganre_id: g).order("RANDOM()").limit(6).each do |event| %>
+          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+          <% end %>
+        </ul>
       </div>
-    <% end %>
-   
-    
-  </div>
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    </div>
+  <% end %>
+</div>

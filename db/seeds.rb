@@ -9,6 +9,8 @@
 (1..50).each do |n|
   Event.create!(
     event_title: "event#{n}",
-    ganre_id: (n % 6) + 1
+    ganre_id: (n % 6) + 1,
+    feel_id: (n % 6) + 1
   )
 end
+

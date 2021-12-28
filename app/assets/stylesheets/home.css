@@ -42,13 +42,18 @@ li {
   list-style: none;
 }
 
-a {
+a,
+.loginout {
   display: block;
   text-decoration: none;
   cursor: pointer;
 }
 
 a:hover {
+  opacity: 0.7;
+}
+
+.loginout:hover {
   opacity: 0.7;
 }
 
@@ -571,7 +576,7 @@ header .status_bar .search_container input[type="submit"]:hover {
 header .status_bar .status_bar_right {
   height: 60px;
   margin-left: auto;
-  width: 317px;
+  width: 330px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -587,7 +592,7 @@ header .status_bar .status_bar_right span {
   line-height: 60px;
 }
 
-header .status_bar .status_bar_right span a {
+header .status_bar .status_bar_right span .loginout {
   color: #ffffff;
 }
 
@@ -1118,6 +1123,26 @@ footer .copy-write {
   display: -ms-flexbox;
   display: flex;
   height: 610px;
+}
+
+.edit-page-section {
+  height: 610px;
+}
+
+.edit-page-section .profile .profile-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 245px;
+}
+
+.edit-page-section .profile .profile-img img {
+  width: 50%;
+}
+
+.edit-page-section .profile .profile-img .img-btn {
+  width: 50%;
+  background-color: lightgray;
 }
 
 .profile {

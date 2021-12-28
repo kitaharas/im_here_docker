@@ -1,5 +1,4 @@
 
-
 class HeroSliders {
   constructor(el) {
     this.el = el;
@@ -44,3 +43,5 @@ document.addEventListener('DOMContentLoaded', function() {
   hero4.start();
   hero5.start();
 });
+
+

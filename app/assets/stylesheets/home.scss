@@ -44,14 +44,17 @@ ul,dl,dt,dd{
 li{
     list-style:none;
 }
-a{
+a,
+.loginout{
 	display: block;
 	text-decoration: none;
 	cursor: pointer;
-
 }
 a:hover{
 	opacity: 0.7;
+}
+.loginout:hover{
+  opacity: 0.7;
 }
 img{
     vertical-align: bottom;
@@ -537,14 +540,14 @@ header{
     .status_bar_right{
       height: 60px;
       margin-left:auto;
-      width: 317px;
+      width: 330px;
       display: flex;
       flex-wrap:wrap;
       align-items: center;
       & span{
         margin-left: 30px;
         line-height: 60px;
-        & a{
+        & .loginout{
           color: #ffffff;
         }
       }
@@ -1009,6 +1012,22 @@ footer{
   display: flex;
   height: 610px;
 }
+.edit-page-section{
+  height: 610px;
+  & .profile{
+    & .profile-img{
+      display: flex;
+      width:245px;
+      & img{
+        width:50%;
+      }
+      & .img-btn{
+        width:50%;
+        background-color: lightgray;
+      }
+    }
+  }
+}
 .profile{
   padding-right: 30px;
   text-align: center;
@@ -1075,5 +1094,4 @@ footer{
 .content {
   display: none;
 }
-
     

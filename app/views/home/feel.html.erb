@@ -1,23 +1,19 @@
 <% provide(:title, "Feel") %>
 <%= javascript_include_tag "slider.js" %>
-<body>
-  
 
-  <div class="genre-top-section">
-    <% @feel.each_with_index do |f, index| %>
-      <div class="hero">
-        <h3><%= f.feel_title %></h3>
-        <div class="swiper" id="swiper<%= index %>">
-          <ul class="swiper-wrapper swipes">
-            <% @event.where(feel_id: f).order("RANDOM()").limit(6).each do |event| %>
-            <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
-            <% end %>
-          </ul>
-        </div>
+
+<div class="genre-top-section">
+  <% @feel.each_with_index do |f, index| %>
+    <div class="hero">
+      <h3><%= f.feel_title %></h3>
+      <div class="swiper" id="swiper<%= index %>">
+        <ul class="swiper-wrapper swipes">
+          <% @event.where(feel_id: f).order("RANDOM()").limit(6).each do |event| %>
+          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+          <% end %>
+        </ul>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
-</body>
