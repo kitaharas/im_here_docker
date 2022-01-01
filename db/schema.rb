@@ -10,20 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_125238) do
-
-  create_table "event_ganre_relations", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "ganre_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2021_12_30_133714) do
 
   create_table "events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "event_title"
-    t.integer "ganre_id"
+    t.integer "genre_id"
     t.integer "feel_id"
   end
 
@@ -33,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_12_24_125238) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ganres", force: :cascade do |t|
-    t.string "ganre_title"
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_125238) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
-    t.string "password"
+    t.text "comment"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

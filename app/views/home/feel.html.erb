@@ -5,7 +5,8 @@
 <div class="genre-top-section">
   <% @feel.each_with_index do |f, index| %>
     <div class="hero">
-      <h3><%= f.feel_title %></h3>
+      <h3 style="display:inline-block;"><%= f.feel_title %></h3>
+       <%= link_to ">>",feel_page_path(f) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">
         <ul class="swiper-wrapper swipes">
           <% @event.where(feel_id: f).order("RANDOM()").limit(6).each do |event| %>

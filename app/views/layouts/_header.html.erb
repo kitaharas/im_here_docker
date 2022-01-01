@@ -22,15 +22,46 @@
         </li>
         <li class="sign-up-li">
           <p>Sign Up!</p>
-          <%= form_for(@user, html: { class: "login_container"}) do |f| %>
-          <%= render 'shared/error_messages' %>
-          <input type="text" size="25" placeholder="NAME" name="user[name]"  >
-          <input type="text" size="25" placeholder="EMAIL" name="user[email]" >
-          <input type="password" size="25" placeholder="PASSWORD" name="user[password]" autocomplete="off">
-          <input type="password" size="25" placeholder="PASSWORD" name="user[password_confirmation]" autocomplete="off">
-          <input type="submit"  value="sign up!" >
-          <% end %>
+          <form class="login_container"  data-remote="true">
+            <input type="text" size="25" placeholder="NAME" name="user[name]" id="user_new_name" >
+            <input type="text" size="25" placeholder="EMAIL" name="user[email]" id="user_new_email">
+            <input type="password" size="25" placeholder="PASSWORD" name="user[password]" id="user_new_password" autocomplete="off">
+            <input type="password" size="25" placeholder="PASSWORD" name="user[password_confirmation]" id="user_new_passconfi" autocomplete="off">
+            <input type="submit"  value="sign up!" id="signup-btn" data-disable-with="Signup User">
+          </form>
           <%# onclick="SignUpGaid();return false;" %>
+
+        <script>
+          $("#signup-btn").click(function(){
+            const name = $("#user_new_name").val();
+            const email = $("#user_new_email").val();
+            const password = $("#user_new_password").val();
+            const passconfi = $("#user_new_passconfi").val();
+          $.ajax({
+            type: 'POST', //post,get
+            url: "/users/create",
+            data: {name: name, email: email, password: password, password_confirmation: passconfi},//user[name]
+            dataType: "json",
+            beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
+            },
+          }).done(function(data){
+        
+          // console.log(data.error);
+          if (data.message === "success"){
+            window.location.replace('<%= root_path %>');
+        } else {
+          console.log(data);
+          alert(data.error);
+        } 
+        
+        //alert(data.user.name + "で登録されました！")
+
+      });
+      // console.log($("#user_name").val());
+    });
+</script>
+
         </li>
         <li id="signup-about">
           <div class="list-area">
@@ -109,8 +140,8 @@
 
         <li class="hov-menu"><a>マイメニュー<span>▼</span></a>
           <ul>
-            <li><a>マイページ</a></li>
-            <li><a>プロフィール編集</a></li>
+            <li><%= link_to "マイページ" ,"/users/#{current_user.id}" %></li>
+            <li><%= link_to "プロフィール編集" ,"/users/#{current_user.id}/edit" %></li>
             <li onclick="eventModal()"><a>イベント登録</a></li>
           </ul>
         </li>

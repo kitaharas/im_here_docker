@@ -919,6 +919,18 @@ header .global-menu ul a:hover {
   margin-top: 20px;
 }
 
+.pick-section a:-webkit-any-link {
+  color: green;
+}
+
+.pick-section a:-moz-any-link {
+  color: green;
+}
+
+.pick-section a:any-link {
+  color: green;
+}
+
 .pick-event {
   border: 1px solid black;
   grid-area: pickevent;
@@ -1074,6 +1086,10 @@ footer .copy-write {
   text-align: center;
 }
 
+.genre-top-section .g-page-title {
+  margin: 0 0 10px 30px;
+}
+
 .hero {
   width: 95%;
   overflow: hidden;
@@ -1133,6 +1149,9 @@ footer .copy-write {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   width: 245px;
 }
 
@@ -1142,11 +1161,30 @@ footer .copy-write {
 
 .edit-page-section .profile .profile-img .img-btn {
   width: 50%;
-  background-color: lightgray;
+  background-color: #30e9a5;
+  margin: 20px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 30px;
+  cursor: pointer;
+  border-color: lightgray;
+}
+
+.edit-page-section .profile .profile-img .img-btn:hover {
+  opacity: 0.7;
+}
+
+.edit-page-section .profile #edit-btn {
+  margin: 0 auto;
+  width: 100px;
+  font-size: 14px;
+  background-color: green;
+  height: 50px;
+  border-radius: 22px;
 }
 
 .profile {
-  padding-right: 30px;
   text-align: center;
   -webkit-box-flex: .8;
       -ms-flex: .8;
@@ -1171,8 +1209,33 @@ footer .copy-write {
 }
 
 .profile .profile-coment {
-  width: 245px;
+  overflow-wrap: anywhere;
+  width: 300px;
+  margin: 0 auto 20px;
+}
+
+.profile .profile-coment .edit-error {
+  color: red;
+  font-size: 14px;
+}
+
+.profile .profile-coment .profile-comment-text {
+  text-align: left;
+}
+
+.profile .edit-btn {
   margin: 0 auto;
+  width: 100px;
+  font-size: 14px;
+  background-color: green;
+  height: 50px;
+  border-radius: 22px;
+  border: none;
+  color: white;
+}
+
+.profile .edit-btn:hover {
+  opacity: 0.7;
 }
 
 .event-display {

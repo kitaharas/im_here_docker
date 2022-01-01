@@ -3,5 +3,5 @@ class Event < ApplicationRecord
   # has_many :ganres, through: :event_ganre_relations
   # validates :event_id, presence: true
   # validates :ganre_id, presence: true
-  belongs_to :ganre
+  belongs_to :genre
 end

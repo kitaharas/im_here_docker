@@ -31,57 +31,61 @@
   <div class="pick-event-right"><p>May your world expand.</p></div>
   <div class="t-body1-left">
     <dl>
-      <a>
+      <%= link_to genre_page_path(1) do %>
         <dt><img src="/assets/talk.png"></dt>
         <dd>Talk</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="t-body1-right">
     <dl>
-      <a>
+      <%= link_to genre_page_path(2) do %>
         <dt><img src="/assets/learning.png"></dt>
         <dd>Learning</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="t-body2-left">
     <dl>
-      <a>
+      <%= link_to genre_page_path(3) do %>
         <dt><img src="/assets/game.png"></dt>
         <dd>Game</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="t-body2-right">
     <dl>
-      <a>
+      <%= link_to genre_page_path(4) do %>
         <dt><img src="/assets/guitergirl.png"></dt>
         <dd>Music</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="t-body3-left">
     <dl>
-      <a>
+      <%= link_to genre_page_path(5) do %>
         <dt><img src="/assets/culture.png"></dt>
         <dd>Culture</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="t-body3-right">
     <dl>
-      <a>
+      <%= link_to genre_page_path(6) do %>
         <dt><img src="/assets/exacize.png"></dt>
         <dd>Exercise</dd>
-      </a>
+      <% end %>
     </dl>
   </div>
   <div class="btn-left">
-    <button>ジャンルで探す</button>
+    <%= link_to genre_path do %>
+      <button>ジャンルで探す</button>
+    <% end %>
   </div>
   <div class="btn-right">
-    <button>気分で探す</button>
+    <%= link_to feel_path do %>
+      <button>気分で探す</button>
+    <% end %>
   </div>
 </div>
 <div class="btn-area">

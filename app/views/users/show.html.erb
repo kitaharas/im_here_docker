@@ -9,7 +9,13 @@
     <p><%= @user.name %></p>
     <p>フォロー：３ フォロワー：４</p>
     <div class="profile-coment">
-      <p>自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。</p>
+      <% if @user.comment == nil || @user.comment == "" %>
+      <span>プロフィールコメント<span>
+      <% else %>
+      <p class="profile-comment-text">
+        <%= @user.comment %>
+      </p>
+      <% end %>
     </div>
 
   </div>

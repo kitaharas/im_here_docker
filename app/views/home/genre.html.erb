@@ -2,14 +2,14 @@
 <%= javascript_include_tag "slider.js" %> 
 
 
-
 <div class="genre-top-section">
-  <% @ganre.each_with_index do |g, index| %>
+  <% @genre.each_with_index do |g, index| %>
     <div class="hero">
-      <h3><%= g.ganre_title %></h3>
+      <h3 style="display:inline-block;"><%= g.genre_title %></h3>
+      <%= link_to ">>",genre_page_path(g) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">
         <ul class="swiper-wrapper swipes">
-          <% @event.where(ganre_id: g).order("RANDOM()").limit(6).each do |event| %>
+          <% @event.where(genre_id: g).order("RANDOM()").limit(6).each do |event| %>
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
           <% end %>
         </ul>

@@ -7,14 +7,25 @@
   <div class="profile">
     <div class="profile-img">
       <img src="/assets/catman.png">
-      <div class="img-btn"></div>
+      <div class="img-btn">画像変更</div>
     </div>
     <p><%= @user.name %></p>
     <p>フォロー：３ フォロワー：４</p>
+    <%= form_for(@user, url:{controller: 'users',action: 'update', id: @user.id}) do |f| %>
     <div class="profile-coment">
-      <p>自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。自己紹介文です。</p>
+      <% @user.errors.full_messages.each do |message| %>
+      <p class="edit-error">
+      <%= message %>
+      </p>
+      <% end %>
+      <% if @user.comment.nil? %>
+      <%= f.text_area(:comment, class: "profile-comment-text", placeholder: "プロフィールコメント", size:"40x15") %>
+      <% else %>
+      <%= f.text_area(:comment, class: "profile-comment-text", placeholder: :comment, size:"40x15") %>
+      <% end %>
     </div>
-
+    <%= f.submit(class: "edit-btn") %>
+    <% end %>
   </div>
   
 </div>

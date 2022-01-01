@@ -6,11 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+(1..6).each do |n|
+  Feel.create!(
+    feel_title: "feel#{n}"
+  )
+end
+
+(1..6).each do |n|
+  Genre.create!(
+    genre_title: "genre#{n}"
+  )
+end
+
 (1..50).each do |n|
   Event.create!(
     event_title: "event#{n}",
-    ganre_id: (n % 6) + 1,
+    genre_id: (n % 6) + 1,
     feel_id: (n % 6) + 1
   )
 end
+
+
 

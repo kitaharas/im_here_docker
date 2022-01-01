@@ -1,0 +1,132 @@
+<% provide(:title, "Genre_page") %>
+
+
+
+<div class="genre-top-section">
+  <h3 class="g-page-title"><%= @genre.genre_title %></h3>
+
+  <% if @event.count == 0 %>
+
+    <p>No event</p>
+
+  <% elsif @event.count <= 6 %>
+
+    <div class="hero">
+      <div class="swiper" id="swiper0">
+        <ul class="swiper-wrapper swipes">
+          <% @event[0..5].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+  <% elsif @event.count <= 12 %>
+
+    <div class="hero">
+      <div class="swiper" id="swiper0">
+        <ul class="swiper-wrapper swipes">
+          <% @event[0..5].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="swiper" id="swiper1">
+        <ul class="swiper-wrapper swipes">
+          <% @event[6..11].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="hero">
+      <div class="swiper" id="swiper0">
+        <ul class="swiper-wrapper swipes">
+          <% @event[0..5].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="swiper" id="swiper1">
+        <ul class="swiper-wrapper swipes">
+          <% @event[6..11].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="swiper" id="swiper2">
+        <ul class="swiper-wrapper swipes">
+          <% @event[12..17].each do |e| %>
+        
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>
+
+  <%# <% @genre.each_with_index do |g, index| %・> %>
+  
+
+          
+  <%# <% end %>
+
+<script>
+
+  class HeroSliders {
+    constructor(el) {
+      this.el = el;
+      this.swiper = this.__initSwiper();
+    }
+
+    __initSwiper() {
+      return new Swiper(this.el, {
+        loop: true,
+        grabCursor: true,
+        effect: 'slide',
+        slidesPerView: 3.5,
+        spaceBetween: 10,
+        speed: 1000,
+      });
+    }
+
+    start(options = {}) {
+      options = Object.assign({
+        delay: 5000,
+        disableOnInteraction: false
+      }, options);
+      this.swiper.params.autoplay =
+        options;
+      this.swiper.autoplay.start();
+    }
+  }
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const hero0 = new HeroSliders('#swiper0');
+    hero0.start();
+    const hero1 = new HeroSliders('#swiper1');
+    hero1.start();
+    const hero2 = new HeroSliders('#swiper2');
+    hero2.start();
+  });
+
+</script>
