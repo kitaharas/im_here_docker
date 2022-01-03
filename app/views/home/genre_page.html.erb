@@ -82,14 +82,9 @@
 
 </div>
 
-  <%# <% @genre.each_with_index do |g, index| %・> %>
-  
-
-          
-  <%# <% end %>
 
 <script>
-
+$(document).on('turbolinks:load', function() { 
   class HeroSliders {
     constructor(el) {
       this.el = el;
@@ -120,7 +115,7 @@
 
 
 
-  document.addEventListener('DOMContentLoaded', function() {
+ 
     const hero0 = new HeroSliders('#swiper0');
     hero0.start();
     const hero1 = new HeroSliders('#swiper1');

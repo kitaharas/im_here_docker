@@ -1,0 +1,7 @@
+<% if current_user.following?(user) %>
+  <span class="follow-btn" onclick="ModalFollow()">フォロー解除</span>
+  
+  <%# <%= link_to 'フォロー解除', unfollow_path(user), method: :post, class:'btn btn-info', remote: true %> 
+<% else %>
+  <%= link_to 'フォローする', follow_path(user), method: :post, class:'btn btn-default', remote: true %>
+<% end %>

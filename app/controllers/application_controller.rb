@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def respond_result(data)
     if data.save
-      log_in @user
+      session[:user_id] = data.id
       respond_to do |format|
         format.json { render json: {message: "success"} }
       end

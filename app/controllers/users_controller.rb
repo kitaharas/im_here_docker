@@ -5,7 +5,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_path unless current_user.id == @user.id
   end
+
+  def show_our
+    @user = User.find(params[:id])
+    redirect_to root_path unless current_user.id == @user.id
+    @users = User.all
+  end
+
 
   def new
     @user = User.new
@@ -20,30 +28,20 @@ class UsersController < ApplicationController
     p @user
     p "-------------------"
     respond_result(@user)
-
-    # if @user.save
-    #   log_in @user
-    #   respond_to do |format|
-    #     format.json { render json: {message: "success"} }
-    #   end
-    # else
-    #   respond_to do |format|
-    #     format.json { render json: {error: @user.errors.full_messages }
-    #   end
-    # end
-
-
+  
   end
 
 
 
   def edit
     @user = User.find_by(id: params[:id])
+    redirect_to root_path unless current_user.id == @user.id
   end
 
   def update
 
     @user = User.find(params[:id])
+    redirect_to root_path unless current_user.id == @user.id
     p "------"
     p @user
     p "------"

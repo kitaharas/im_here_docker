@@ -335,6 +335,35 @@ button {
 
 }
 
+#follower{
+  position: relative;
+}
+
+#follow-modal{
+  position: absolute;
+  top:10%;
+  width:250px;
+  height:150px;
+  border-radius: 60px;
+  padding: 40px;
+  border:solid 1px black;
+  background: #fff;
+  z-index: 20;
+  & p{
+    margin-bottom: 30px;
+  }
+  & .unlock-btn{
+    border: solid 1px black;
+    width:150px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto 20px;
+
+  }
+ 
+}
+
 
 
 .event-modal{
@@ -1108,7 +1137,7 @@ footer{
 
 .event-container{
   margin: 60px auto 0;
-  width:500px;
+  width:600px;
   & .tab-menu{
     display: flex;
     & li {
@@ -1130,6 +1159,33 @@ footer{
 
   }
 }
+
+.follower{
+  background-color:white;
+  border:solid 1px black;
+  border-radius: 10px;
+  height: 50px;
+  margin-top: 10px;
+  padding:5px 10px;
+  position: relative;
+  & p{
+    display: inline-block;
+    line-height: 50px;
+  }
+  & .follow-btn{
+    border:solid 1px black;
+    border-radius: 15px;
+    line-height: 30px;
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    right: 40px;
+    padding: 2px;
+    color:black;
+    cursor: pointer;
+  }
+}
+
 
 
 .content.active{

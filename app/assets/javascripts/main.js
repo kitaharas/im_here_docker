@@ -1,16 +1,39 @@
+$(document).on('turbolinks:load', function() { 
 
-window.addEventListener('DOMContentLoaded',()=>{
-  const close = document.getElementById('close');
-  const mask = document.getElementById('mask');
-  const modal = document.getElementById('modal');
   
-  close.addEventListener('click', ()=>{
-    modal.classList.add('hidden');
-    mask.classList.add('hidden');
-    currentIndex = 0;
-    moveSlides();
-  });
+    const close = document.getElementById('close');
+    const mask = document.getElementById('mask');
+    const modal = document.getElementById('modal');
+    
+    
+    close.addEventListener('click', ()=>{
+      modal.classList.add('hidden');
+      mask.classList.add('hidden');
+      currentIndex = 0;
+      moveSlides();
+    });
+
+  
 });
+
+function Next(){
+  const next = document.getElementById('next');
+  if(!next){
+    return false;
+  } else {
+    currentIndex++;
+    updateButtons();
+    moveSlides();
+  }
+}
+
+function Prev(){
+  currentIndex--;
+  updateButtons();
+  moveSlides();
+  
+}
+
 
 
 function LoginList(){
@@ -25,32 +48,37 @@ function ModalApp(){
   mask.classList.remove('hidden');
 }
 
-const LoginPage = ()=>{
+
+
+
+function LoginPage(){
   ModalApp();
   LoginList();
-  updateButtons();
+  // updateButtons();
 }
-  
-const SignUpPage =()=>{
+
+
+function SignUpPage(){
   const loginli = document.querySelector('.login-li');
   if(modal.classList.contains('hidden')){
     ModalApp();}
     loginli.classList.add('hidden');
-    updateButtons();
+    // updateButtons();
 }
 
 
-const SignUpGaid =()=>{
+
+function SignUpGaid(){
   currentIndex = 1;
   updateButtons();
   moveSlides();
 }
 
-const eventModal =()=>{
+function eventModal(){
   document.querySelector('.event-modal').classList.remove('hidden');
 }
 
-const eventClose = () => {
+function eventClose(){
   document.querySelector('.event-modal').classList.add('hidden');
 }
 
@@ -60,15 +88,18 @@ const eventClose = () => {
 //  モーダルカルーセル
 
 
-let currentIndex = 0;
 function updateButtons(){
+  // let currentIndex = 1;
+  const close = document.getElementById('close');
   if(currentIndex === 0){
     next.classList.add('hidden');
     prev.classList.add('hidden');
   } else if(currentIndex === 1){
+    close.classList.add('hidden');
     next.classList.remove('hidden'); 
     prev.classList.add('hidden');
   } else if(currentIndex === 3){
+    // close.classList.remove('hidden');
     next.classList.add('hidden');
   } else {
     prev.classList.remove('hidden');
@@ -76,27 +107,6 @@ function updateButtons(){
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", function(){
-  const next = document.getElementById('next');
-  next.addEventListener('click',function(){
-    if(!next){
-      return false;
-    } else {
-      currentIndex++;
-      updateButtons();
-      moveSlides();
-    }
-  });
-  
-  
-  const prev = document.getElementById('prev');
-  prev.addEventListener('click',() => {
-    currentIndex--;
-    updateButtons();
-    moveSlides();
-  });
-});
 
 
 
@@ -114,9 +124,9 @@ function moveSlides(){
 
 
 
-window.addEventListener('resize',() => {
-  moveSlides();
-});
+// window.addEventListener('resize',() => {
+//   moveSlides();
+// });
 
 
 
@@ -125,17 +135,15 @@ window.addEventListener('resize',() => {
 
 // ゴーイベント
 
-const conmodal = document.getElementById('confi-modal');
-const conmask = document.getElementById('confi-mask');
 
 
 
 function goEvent(){
-  conmodal.classList.remove('hidden');
-  conmask.classList.remove('hidden');
+  document.querySelector('#confi-modal').classList.remove('hidden');
+  document.querySelector('#confi-mask').classList.remove('hidden');
 }
 
-const confiClose = () => {
+function confiClose(){
   document.querySelector('#confi-modal').classList.add('hidden');
   document.querySelector('#confi-mask').classList.add('hidden');
 }

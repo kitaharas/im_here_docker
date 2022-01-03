@@ -89,7 +89,7 @@
   <%# <% end %>
 
 <script>
-
+$(document).on('turbolinks:load', function() { 
   class HeroSliders {
     constructor(el) {
       this.el = el;
@@ -120,13 +120,13 @@
 
 
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const hero0 = new HeroSliders('#swiper0');
-    hero0.start();
-    const hero1 = new HeroSliders('#swiper1');
-    hero1.start();
-    const hero2 = new HeroSliders('#swiper2');
-    hero2.start();
-  });
+ 
+  const hero0 = new HeroSliders('#swiper0');
+  hero0.start();
+  const hero1 = new HeroSliders('#swiper1');
+  hero1.start();
+  const hero2 = new HeroSliders('#swiper2');
+  hero2.start();
+});
 
 </script>

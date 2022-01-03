@@ -92,6 +92,7 @@
 </div>
 <script>
 
+$(document).on('turbolinks:load', function(){
   const targets = document.querySelectorAll('div.anime-section li');
   const options = {
     root: null,
@@ -117,6 +118,8 @@
   targets.forEach(target => {
     observer.observe(target);
   });
+
+});
 </script>
 
 

@@ -49,7 +49,8 @@
         
           // console.log(data.error);
           if (data.message === "success"){
-            window.location.replace('<%= root_path %>');
+            // window.location.replace('<%= root_path %>');
+            SignUpGaid()
         } else {
           console.log(data);
           alert(data.error);
@@ -91,13 +92,15 @@
             <p>を通じて、</p>
             <p>あなたの世界が少しでも広がる事を</p>
             <p>願っています。</p>
+            <%= link_to root_path do %>
             <button class="btn-go">Go!</button>
+            <% end %>
           </div>
         </li>
       </ul>
     </div>
-    <button id="prev" class="hidden">←戻る</button>
-    <button id="next" class="hidden">進む→</button>
+    <button id="prev" onclick="Prev()" class="hidden">←戻る</button>
+    <button id="next" onclick="Next()" class="hidden">進む→</button>
     <div id="close">
       閉じる
     </div>
@@ -111,14 +114,14 @@
     </form>
     <div class="status_bar_right">
       <% if logged_in? %>
-        <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo" %>
+        <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
       <% else %>
-        <a class="acount-logo" onclick="LoginPage()"><%= image_tag("/assets/login.png") %></a>
+        <div class="acount-logo" onclick="LoginPage()" data-turbolinks="false" ><%= image_tag("/assets/login.png") %></div>
       <% end %>
       <% if logged_in? %>
         <span><%= link_to "Log out", logout_path, method: :delete ,class:"loginout" %></span>
       <% else %>
-        <span onclick="LoginPage()"><a class="loginout">Log in</a></span>
+        <span onclick="LoginPage()" data-turbolinks="false"><a class="loginout">Log in</a></span>
       <% end %>
       <ul>
         <li><%= link_to image_tag("/assets/facebook.png"),'https://www.facebook.com/' %></li>

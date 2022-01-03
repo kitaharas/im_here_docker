@@ -1,4 +1,4 @@
-
+$(document).on('turbolinks:load', function() { 
 class HeroSliders {
   constructor(el) {
     this.el = el;
@@ -29,7 +29,7 @@ class HeroSliders {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+
   const hero0 = new HeroSliders('#swiper0');
   const hero1 = new HeroSliders('#swiper1');
   const hero2 = new HeroSliders('#swiper2');
@@ -42,6 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
   hero3.start();
   hero4.start();
   hero5.start();
+
+
 });
-
-

@@ -1,0 +1,137 @@
+<% provide(:title, "MyPage") %>
+
+
+<div class="my-page-section">
+  <div class="profile">
+    <div class="profile-img">
+      <img src="/assets/catman.png">
+    </div>
+    <p><%= @user.name %></p>
+    <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
+    <div class="profile-coment">
+      <% if @user.comment == nil || @user.comment == "" %>
+      <span>プロフィールコメント<span>
+      <% else %>
+      <p class="profile-comment-text">
+        <%= @user.comment %>
+      </p>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="event-display">
+    <div class="event-container">
+      <ul class="tab-menu">
+        <li><a class="active" data-id="follower">フォロワー</a></li>
+        <li><a data-id="follow">フォロー中</a></li>
+      </ul>
+      <button onclick="ModalFollow()">a</button>
+      <section class="content active" id="follower">
+      <div id="follow-modal" class="hidden">
+        <p>○○さんのフォローを解除しますか？</p>
+        <div class="unlock-btn" id="unlock">フォロー解除</div>
+        <div class="unlock-btn" id="cancel">キャンセル</div>
+      </div>
+        <%# フォロワーはいません %>
+        <% @users.each do |user| %>
+
+          <% unless user == current_user %>
+            <div class="follower">
+            <p><%= user.name %><p>
+              <span id='follow-button_<%= user.id %>'>
+              <%= render 'users/follow-button', user: user %>
+              </span>
+              
+            </div>
+          <% end %>
+          <% end %>
+          <script>
+         
+            $("#follow-button_<%= @user.id %>").html("<%= j(render 'users/follow-button', user: @user) %>");
+            $("#follow-button_<%= @user.id %>").html("<%= j(render 'users/follow-button', user: @user) %>");
+          </script>
+            <%# <% if current_user.following?(user) %/>
+          <div class="follower">
+            <p><%= user.name %/><p>
+              <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete ,class: "follow-btn" ,onclick: "ModalFollow()" %/>
+          </div>
+          
+          
+            <% else %>
+              <%# <%= link_to "フォローする", user_relationships_path(user.id), method: :post ,class: "follow-btn" %/> %/>
+            <% end %/>
+        <% end %/> %>
+      </section>
+      <section class="content" id="follow">
+        フォロー中はありません。
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<% @users.each do |user| %>
+  <div style="background-color:green">
+  <%= user.name %>
+  <% if current_user.following?(user) %>
+    <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
+  <% else %>
+    <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+  <% end %>
+  </div>
+<% end %>
+
+<%= render 'relationships/follow_list' %>
+
+
+<script>
+// タブメニュー
+
+$(document).on('turbolinks:load', function(){
+  const menuItems = document.querySelectorAll('.tab-menu li a');
+  const contents = document.querySelectorAll('.content');
+  
+  menuItems.forEach(clickedItem => {
+    clickedItem.addEventListener('click', e => {
+      e.preventDefault();
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      clickedItem.classList.add('active');
+
+
+      contents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      document.getElementById(clickedItem.dataset.id).classList.add('active');
+
+    });
+  });
+
+
+
+// フォロワーモーダル
+
+
+  const mask = document.getElementById('mask');
+  const cancel = document.getElementById('cancel');
+  const follow_modal = document.querySelector('#follow-modal');
+
+  cancel.addEventListener('click', ()=>{
+    follow_modal.classList.add('hidden');
+    mask.classList.add('hidden');
+  });
+
+
+});
+  
+function ModalFollow(){
+  const follow_modal = document.querySelector('#follow-modal')
+  mask.classList.remove('hidden');
+  follow_modal.classList.remove('hidden');
+}
+
+
+</script>

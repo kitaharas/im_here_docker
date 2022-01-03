@@ -18,11 +18,8 @@ class HomeController < EventsController
   end
   
   def feel_page
-    # Event.where(genre_id: g).order("RANDOM()").limit(18)
     @event = Event.where(feel_id: params[:id]).order(created_at: :desc).all
     @feel = Feel.find(params[:id])
-    # @genre = Genre.find(params[:id])
-    # @events = @genre.events.order(created_at: :desc).all
   end
 
   def genre

@@ -38,7 +38,7 @@
 
 <script>
 // タブメニュー
-
+$(document).on('turbolinks:load', function() { 
 
 const menuItems = document.querySelectorAll('.tab-menu li a');
 const contents = document.querySelectorAll('.content');
@@ -60,6 +60,8 @@ menuItems.forEach(clickedItem => {
     document.getElementById(clickedItem.dataset.id).classList.add('active');
 
   });
+});
+
 });
 
 </script>
