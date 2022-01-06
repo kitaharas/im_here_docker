@@ -362,7 +362,7 @@ button:hover {
   position: relative;
 }
 
-#follow-modal {
+.follow-modal {
   position: absolute;
   top: 10%;
   width: 250px;
@@ -374,11 +374,11 @@ button:hover {
   z-index: 20;
 }
 
-#follow-modal p {
+.follow-modal p {
   margin-bottom: 30px;
 }
 
-#follow-modal .unlock-btn {
+.follow-modal .unlock-btn {
   border: solid 1px black;
   width: 150px;
   border-radius: 5px;

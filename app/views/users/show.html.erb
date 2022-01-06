@@ -10,14 +10,13 @@
     <p>フォロー：３ フォロワー：４</p>
     <div class="profile-coment">
       <% if @user.comment == nil || @user.comment == "" %>
-      <span>プロフィールコメント<span>
+        <span>プロフィールコメント<span>
       <% else %>
-      <p class="profile-comment-text">
-        <%= @user.comment %>
-      </p>
+        <p class="profile-comment-text">
+          <%= @user.comment %>
+        </p>
       <% end %>
     </div>
-
   </div>
   <div class="event-display">
     <div class="event-container">
@@ -25,7 +24,6 @@
         <li><a class="active" data-id="event">フォロー開催中</a></li>
         <li><a data-id="schedule">スケジュール</a></li>
       </ul>
-
       <section class="content active" id="event">
         開催中のイベントはありません
       </section>
@@ -39,29 +37,25 @@
 <script>
 // タブメニュー
 $(document).on('turbolinks:load', function() { 
+  const menuItems = document.querySelectorAll('.tab-menu li a');
+  const contents = document.querySelectorAll('.content');
 
-const menuItems = document.querySelectorAll('.tab-menu li a');
-const contents = document.querySelectorAll('.content');
+  menuItems.forEach(clickedItem => {
+    clickedItem.addEventListener('click', e => {
+      e.preventDefault();
 
-menuItems.forEach(clickedItem => {
-  clickedItem.addEventListener('click', e => {
-    e.preventDefault();
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      clickedItem.classList.add('active');
 
-    menuItems.forEach(item => {
-      item.classList.remove('active');
+      contents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      document.getElementById(clickedItem.dataset.id).classList.add('active');
     });
-    clickedItem.classList.add('active');
-
-
-    contents.forEach(content => {
-      content.classList.remove('active');
-    });
-
-    document.getElementById(clickedItem.dataset.id).classList.add('active');
-
   });
-});
-
 });
 
 </script>

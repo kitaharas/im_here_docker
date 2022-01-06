@@ -2,6 +2,7 @@ class HomeController < EventsController
   def index
     p "-------------------"
     p params
+    p session[:user_id]
     p "-------------------"
     @user = User.new
   end

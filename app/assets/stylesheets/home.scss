@@ -18,7 +18,7 @@ body{
 	font-weight: 400;
 	font-size: 1.6rem; /* 規定フォントサイズを16pxに設定 */
 	letter-spacing: 0.1em;
-    line-height: 1.6;
+  line-height: 1.6;
   padding-top: 120px;
 }
 
@@ -339,7 +339,7 @@ button {
   position: relative;
 }
 
-#follow-modal{
+.follow-modal{
   position: absolute;
   top:10%;
   width:250px;

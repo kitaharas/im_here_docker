@@ -4,7 +4,7 @@
 
 <div class="genre-top-section">
   <% @genre.each_with_index do |g, index| %>
-    <div class="hero">
+    <div class="hero" data-turbolinks="false">
       <h3 style="display:inline-block;"><%= g.genre_title %></h3>
       <%= link_to ">>",genre_page_path(g) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">

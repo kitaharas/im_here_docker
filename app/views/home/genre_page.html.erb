@@ -6,29 +6,24 @@
   <h3 class="g-page-title"><%= @genre.genre_title %></h3>
 
   <% if @event.count == 0 %>
-
     <p>No event</p>
-
   <% elsif @event.count <= 6 %>
-
+    now less than 6
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
           <% @event[0..5].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
       </div>
     </div>
-
   <% elsif @event.count <= 12 %>
-
+    now less than 12
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
           <% @event[0..5].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
@@ -38,20 +33,17 @@
       <div class="swiper" id="swiper1">
         <ul class="swiper-wrapper swipes">
           <% @event[6..11].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
       </div>
     </div>
-
   <% else %>
-
+    now is more than 12
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
           <% @event[0..5].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
@@ -61,7 +53,6 @@
       <div class="swiper" id="swiper1">
         <ul class="swiper-wrapper swipes">
           <% @event[6..11].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
@@ -71,57 +62,71 @@
       <div class="swiper" id="swiper2">
         <ul class="swiper-wrapper swipes">
           <% @event[12..17].each do |e| %>
-        
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %></li>
           <% end %>
         </ul>
       </div>
     </div>
-
   <% end %>
-
 </div>
 
 
-<script>
-$(document).on('turbolinks:load', function() { 
-  class HeroSliders {
-    constructor(el) {
-      this.el = el;
-      this.swiper = this.__initSwiper();
+<script data-turbolinks-eval="false">
+  $(document).on('turbolinks:load', function() { 
+    class HeroSliders {
+      constructor(el) {
+        this.el = el;
+        this.swiper = this.__initSwiper();
+      }
+
+      __initSwiper() {
+        return new Swiper(this.el, {
+          loop: true,
+          grabCursor: true,
+          effect: 'slide',
+          slidesPerView: 3.5,
+          spaceBetween: 10,
+          speed: 1000,
+        });
+      }
+
+      start(options = {}) {
+        options = Object.assign({
+          delay: 5000,
+          disableOnInteraction: false
+        }, options);
+        this.swiper.params.autoplay =
+          options;
+        this.swiper.autoplay.start();
+      }
     }
 
-    __initSwiper() {
-      return new Swiper(this.el, {
-        loop: true,
-        grabCursor: true,
-        effect: 'slide',
-        slidesPerView: 3.5,
-        spaceBetween: 10,
-        speed: 1000,
-      });
+    let lesson = document.getElementsByClassName("hero");
+    console.log(lesson.length);
+
+    if(lesson.length == 1){
+      const hero0 = new HeroSliders('#swiper0');
+      hero0.start();
+    }else if(lesson.length == 2){
+      const hero0 = new HeroSliders('#swiper0');
+      hero0.start();
+      const hero1 = new HeroSliders('#swiper1');
+      hero1.start();
+    }else{
+      const hero0 = new HeroSliders('#swiper0');
+      hero0.start();
+      const hero1 = new HeroSliders('#swiper1');
+      hero1.start();
+      const hero2 = new HeroSliders('#swiper2');
+      hero2.start();
     }
 
-    start(options = {}) {
-      options = Object.assign({
-        delay: 5000,
-        disableOnInteraction: false
-      }, options);
-      this.swiper.params.autoplay =
-        options;
-      this.swiper.autoplay.start();
-    }
-  }
-
-
-
- 
-    const hero0 = new HeroSliders('#swiper0');
-    hero0.start();
-    const hero1 = new HeroSliders('#swiper1');
-    hero1.start();
-    const hero2 = new HeroSliders('#swiper2');
-    hero2.start();
+  
+      // const hero0 = new HeroSliders('#swiper0');
+      // hero0.start();
+      // const hero1 = new HeroSliders('#swiper1');
+      // hero1.start();
+      // const hero2 = new HeroSliders('#swiper2');
+      // hero2.start();
   });
-
 </script>

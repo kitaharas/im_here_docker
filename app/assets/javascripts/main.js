@@ -1,19 +1,14 @@
 $(document).on('turbolinks:load', function() { 
-
+  const close = document.getElementById('close');
+  const mask = document.getElementById('mask');
+  const modal = document.getElementById('modal');
   
-    const close = document.getElementById('close');
-    const mask = document.getElementById('mask');
-    const modal = document.getElementById('modal');
-    
-    
-    close.addEventListener('click', ()=>{
-      modal.classList.add('hidden');
-      mask.classList.add('hidden');
-      currentIndex = 0;
-      moveSlides();
-    });
-
-  
+  close.addEventListener('click', ()=>{
+    modal.classList.add('hidden');
+    mask.classList.add('hidden');
+    currentIndex = 0;
+    moveSlides();
+  });
 });
 
 function Next(){
@@ -31,10 +26,7 @@ function Prev(){
   currentIndex--;
   updateButtons();
   moveSlides();
-  
 }
-
-
 
 function LoginList(){
   const loginli = document.querySelector('.login-li');
@@ -48,25 +40,20 @@ function ModalApp(){
   mask.classList.remove('hidden');
 }
 
-
-
-
 function LoginPage(){
   ModalApp();
   LoginList();
   // updateButtons();
 }
 
-
 function SignUpPage(){
   const loginli = document.querySelector('.login-li');
   if(modal.classList.contains('hidden')){
-    ModalApp();}
-    loginli.classList.add('hidden');
-    // updateButtons();
+    ModalApp();
+  }
+  loginli.classList.add('hidden');
+  // updateButtons();
 }
-
-
 
 function SignUpGaid(){
   currentIndex = 1;
@@ -82,11 +69,7 @@ function eventClose(){
   document.querySelector('.event-modal').classList.add('hidden');
 }
 
-
-
-
 //  モーダルカルーセル
-
 
 function updateButtons(){
   // let currentIndex = 1;
@@ -107,10 +90,6 @@ function updateButtons(){
   }
 }
 
-
-
-
-
 function moveSlides(){
   const ul = document.querySelector('.modal-ul');
   const slides = ul.children;
@@ -118,25 +97,11 @@ function moveSlides(){
   ul.style.transform = `translateX(${-1 * slideWidth * currentIndex}px)`;
 }
 
-
-
-
-
-
-
 // window.addEventListener('resize',() => {
 //   moveSlides();
 // });
 
-
-
-
-
-
 // ゴーイベント
-
-
-
 
 function goEvent(){
   document.querySelector('#confi-modal').classList.remove('hidden');

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
-  post 'create/:id', to: 'relationships#create', as: 'follow'
-  post 'destroy/:id', to: 'relationships#destroy', as: 'unfollow'
+  post 'follow/:id', to: 'relationships#follow', as: 'follow'
+  post 'unfollow/:id', to: 'relationships#unfollow', as: 'unfollow'
+  get 'users/following/:user_id', to: 'users#following', as:'users_following'
+  get 'users/follower/:user_id', to: 'users#follower', as:'users_follower'
   get 'relationships/followings'
   get 'relationships/followers'
   root 'home#index'

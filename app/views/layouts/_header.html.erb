@@ -6,18 +6,16 @@
       <ul class="modal-ul">
         <li class="login-li">
           <div style="height:26px;">
-            <p class="form-error" style="color:red; text-align:center;">emailもしくはpasswordに誤りがあります</p>
+            <p class="form-error" style="color:red; text-align:center;">
+              emailもしくはpasswordに誤りがあります
+            </p>
           </div>
-
-
 <%# ajax実装 %>
-
           <div class="login_container">
             <input type="text" size="25" name="session[email]" id="user_email" placeholder="EMAIL">
             <input type="text" size="25" name="session[password]" id ="user_password" placeholder="PASSWORD" >
             <input type="submit" id="btn_submit" name="commit" value="log in!" data-disable-with="Create User">
           </div>
-
           <p class="signup-text">新規登録は<span onclick="SignUpPage()"><a>コチラ</a></span></p>
         </li>
         <li class="sign-up-li">
@@ -29,40 +27,6 @@
             <input type="password" size="25" placeholder="PASSWORD" name="user[password_confirmation]" id="user_new_passconfi" autocomplete="off">
             <input type="submit"  value="sign up!" id="signup-btn" data-disable-with="Signup User">
           </form>
-          <%# onclick="SignUpGaid();return false;" %>
-
-        <script>
-          $("#signup-btn").click(function(){
-            const name = $("#user_new_name").val();
-            const email = $("#user_new_email").val();
-            const password = $("#user_new_password").val();
-            const passconfi = $("#user_new_passconfi").val();
-          $.ajax({
-            type: 'POST', //post,get
-            url: "/users/create",
-            data: {name: name, email: email, password: password, password_confirmation: passconfi},//user[name]
-            dataType: "json",
-            beforeSend: function(xhr) {
-            xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
-            },
-          }).done(function(data){
-        
-          // console.log(data.error);
-          if (data.message === "success"){
-            // window.location.replace('<%= root_path %>');
-            SignUpGaid()
-        } else {
-          console.log(data);
-          alert(data.error);
-        } 
-        
-        //alert(data.user.name + "で登録されました！")
-
-      });
-      // console.log($("#user_name").val());
-    });
-</script>
-
         </li>
         <li id="signup-about">
           <div class="list-area">
@@ -134,13 +98,11 @@
   <div class="global-menu">
     <h1 class="main-logo"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
     <div class="menu">
-      <ul>
-        <li><%= link_to "about", about_path %></li>
-        <li><%= link_to "ジャンル別", genre_path %></li>
-        <li><%= link_to "気分別", feel_path %></li>
-
+      <ul data-turbolinks="false">
+        <li data-turbolinks="false"><%= link_to "about", about_path %></li>
+        <li data-turbolinks="false"><%= link_to "ジャンル別", genre_path %></li>
+        <li data-turbolinks="false"><%= link_to "気分別", feel_path %></li>
         <% if logged_in? %>
-
         <li class="hov-menu"><a>マイメニュー<span>▼</span></a>
           <ul>
             <li><%= link_to "マイページ" ,"/users/#{current_user.id}" %></li>
@@ -148,116 +110,121 @@
             <li onclick="eventModal()"><a>イベント登録</a></li>
           </ul>
         </li>
-
-
-          <% else %>
-            <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
-          <% end %>
-        
+        <% else %>
+        <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
+        <% end %>
       </ul>
     </div>
   </div>
 
-
-
-<div class="event-modal hidden">
-  <h3>イベント情報入力</h3>
-  <form method="get" action="#" class="event_container">
-    <div>
-      <label for="e_title">タイトル</label>
-      <input id="e_title" type="text" name="title" value="" placeholder="ギター弾く19時まで">
-    </div>
-
-    <div>
-      <label for="e_memo">メモ</label>
-      <textarea id="e_memo" name="memo" rows="5">これからなんとなくギター弾きます。暇人集まれー。</textarea>
-    </div>
-
-    <div>
-      <label>日時</label>
-      <label for="e_play">今すぐ</label>
-      <input id="e_play" type="radio" name="radio">
-      <label for="e_date">時間指定</label>
-      <input id="e_date" type="radio" name="radio">
-    </div>
-
-    <div>
-      <label for="regularly">定期開催</label>
-      <input id="regularly" type="checkbox">
-    </div>
-    
-    <div>
-      <label>方法</label>
-      <label for="online">オンライン</label>
-      <input id="online" type="radio" name="line">
-      <label for="offline">オフライン</label>
-      <input id="offline" type="radio" name="line">
-    </div>
-
-    <div>
-      <label for="place">場所</label>
-      <input id="place" type="text" name="place" value="">
-    </div>
-    
-    <div>
-      <label for="people">参加人数</label>
-      <input id="people" type="number" name="people" value="">名
-      <span>※空欄で制限なし</span>
-    </div>
-
-    <input type="submit" value="イベント登録" onclick="goEvent();return false;">
+  <div class="event-modal hidden">
+    <h3>イベント情報入力</h3>
+    <form method="get" action="#" class="event_container">
+      <div>
+        <label for="e_title">タイトル</label>
+        <input id="e_title" type="text" name="title" value="" placeholder="ギター弾く19時まで">
+      </div>
+      <div>
+        <label for="e_memo">メモ</label>
+        <textarea id="e_memo" name="memo" rows="5">これからなんとなくギター弾きます。暇人集まれー。</textarea>
+      </div>
+      <div>
+        <label>日時</label>
+        <label for="e_play">今すぐ</label>
+        <input id="e_play" type="radio" name="radio">
+        <label for="e_date">時間指定</label>
+        <input id="e_date" type="radio" name="radio">
+      </div>
+      <div>
+        <label for="regularly">定期開催</label>
+        <input id="regularly" type="checkbox">
+      </div>
+      <div>
+        <label>方法</label>
+        <label for="online">オンライン</label>
+        <input id="online" type="radio" name="line">
+        <label for="offline">オフライン</label>
+        <input id="offline" type="radio" name="line">
+      </div>
+      <div>
+        <label for="place">場所</label>
+        <input id="place" type="text" name="place" value="">
+      </div>
+      <div>
+        <label for="people">参加人数</label>
+        <input id="people" type="number" name="people" value="">名
+        <span>※空欄で制限なし</span>
+      </div>
+      <input type="submit" value="イベント登録" onclick="goEvent();return false;">
     </form>
-  
-  <div id="event-close" onclick="eventClose()">
-    閉じる
-  </div>
-</div>
-
-<section id="confi-modal" class="hidden">
-  <div class="confi-container">
-    <p>以下の内容で登録します。<br>
-      よろしいですか？
-    </p>
+    <div id="event-close" onclick="eventClose()">
+      閉じる
+    </div>
   </div>
 
-  <div id="confi-close" onclick="confiClose()">
-    戻る
-  </div>
-</section>
-<div id="confi-mask" class="hidden"></div>
-
-
-
-  <script>
-    $("#btn_submit").click(function(){
-      const email = $("#user_email").val();
-      const password = $("#user_password").val();
-      $.ajax({
-        type: 'POST', //post,get
-        url: "/sessions/create",
-        data: {email: email, password: password},//user[name]
-        dataType: "json",
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
-        },
-      }).done(function(data){
-        
-        console.log(data.error);
-        if (data.message === "error"){
-          console.log("unko");
-          $(".form-error").addClass('error-message');
-        } else if (data.message === "success"){
-          window.location.replace('<%= root_path %>');
-        } 
-        
-        //alert(data.user.name + "で登録されました！")
-
-      });
-      // console.log($("#user_name").val());
-    });
-
-  
-
-
-  </script>
+  <section id="confi-modal" class="hidden">
+    <div class="confi-container">
+      <p>以下の内容で登録します。<br>
+        よろしいですか？
+      </p>
+    </div>
+    <div id="confi-close" onclick="confiClose()">
+      戻る
+    </div>
+  </section>
+  <div id="confi-mask" class="hidden"></div>
 </header>
+
+<script>
+  $("#btn_submit").click(function(){
+    const email = $("#user_email").val();
+    const password = $("#user_password").val();
+    $.ajax({
+      type: 'POST', //post,get
+      url: "/sessions/create",
+      data: {email: email, password: password},//user[name]
+      dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
+      },
+    }).done(function(data){
+      console.log(data.error);
+      if (data.message === "error"){
+        console.log("komatta");
+        $(".form-error").addClass('error-message');
+      } else if (data.message === "success"){
+        window.location.replace('<%= root_path %>');
+      } 
+    });
+      // console.log($("#user_name").val());
+  });
+
+
+
+  $("#signup-btn").click(function(){
+    const name = $("#user_new_name").val();
+    const email = $("#user_new_email").val();
+    const password = $("#user_new_password").val();
+    const passconfi = $("#user_new_passconfi").val();
+    $.ajax({
+      type: 'POST', //post,get
+      url: "/users/create",
+      data: {name: name, email: email, password: password, password_confirmation: passconfi},//user[name]
+      dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
+      },
+    }).done(function(data){
+      if (data.message === "success"){
+        // console.log(data);
+        window.location.replace('<%= root_path %>');
+        // SignUpGaid()
+      } else {
+        console.log(data);
+        alert(data.error);
+      } 
+      //alert(data.user.name + "で登録されました！")
+    });
+    // console.log($("#user_name").val());
+  });
+</script>

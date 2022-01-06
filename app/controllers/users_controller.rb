@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  include RelationshipsHelper
 
   before_action :login_check, {only: [:edit, :update, :show, :destroy]}
 
@@ -14,6 +15,16 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def following
+    @user = User.find(params[:user_id])
+    @followings = @user.following_user.where.not(id: current_user.id)
+  end
+
+  # 自分をフォローしているユーザー一覧
+  def follower
+    @user = User.find(params[:user_id])
+    @followers = @user.follower_user.where.not(id: current_user.id)
+  end
 
   def new
     @user = User.new
@@ -30,8 +41,6 @@ class UsersController < ApplicationController
     respond_result(@user)
   
   end
-
-
 
   def edit
     @user = User.find_by(id: params[:id])
@@ -51,14 +60,11 @@ class UsersController < ApplicationController
     p "------"
     redirect_to mypage_path
     else
-    p "unko"
     render("users/edit")
     end
  
   end
   
-
-
 
   private
 

@@ -2,7 +2,7 @@
 <%= javascript_include_tag "slider.js" %>
 
 
-<div class="genre-top-section">
+<div class="genre-top-section" data-turbolinks="false">
   <% @feel.each_with_index do |f, index| %>
     <div class="hero">
       <h3 style="display:inline-block;"><%= f.feel_title %></h3>
