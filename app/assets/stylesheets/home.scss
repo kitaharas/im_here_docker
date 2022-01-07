@@ -1054,20 +1054,22 @@ footer{
   height: 610px;
   & .profile{
     & .profile-img{
-      display: flex;
-      align-items: flex-end;
+      
+      // display: flex;
+      // align-items: flex-end;
       width:245px;
       & img{
-        width:50%;
+        border-radius: 5px;
+        // width:50%;
       }
       & .img-btn{
-        width:50%;
+        // width:50%;
         background-color: $emerald;
-        margin:20px;
-        height: 30px;
+        margin-top:20px;
+        height: 72px;
         border-radius: 5px;
         font-size:14px;
-        line-height:30px;
+        line-height:33px;
         cursor: pointer;
         border-color: lightgray;
         &:hover{
@@ -1095,8 +1097,9 @@ footer{
   display: flex;
   & .profile-img{
     padding-top: 20px;
-    width: 200px;
+    width: 245px;
     margin: 50px auto 10px;
+    min-height:190px;
   }
   & p{
     margin-bottom:10px;

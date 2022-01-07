@@ -4,7 +4,11 @@
 <div class="my-page-section">
   <div class="profile">
     <div class="profile-img">
-      <img src="/assets/catman.png">
+      <% if @user.image_name == "default_user.jpg"%>
+        <img src="/assets/catman">
+      <% else %>
+        <img src="<%= "/user_images/#{@user.image_name}"%>" >
+      <% end %>
     </div>
     <p><%= @user.name %></p>
     <p>フォロー：３ フォロワー：４</p>

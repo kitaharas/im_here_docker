@@ -1175,27 +1175,20 @@ footer .copy-write {
 }
 
 .edit-page-section .profile .profile-img {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
   width: 245px;
 }
 
 .edit-page-section .profile .profile-img img {
-  width: 50%;
+  border-radius: 5px;
 }
 
 .edit-page-section .profile .profile-img .img-btn {
-  width: 50%;
   background-color: #30e9a5;
-  margin: 20px;
-  height: 30px;
+  margin-top: 20px;
+  height: 72px;
   border-radius: 5px;
   font-size: 14px;
-  line-height: 30px;
+  line-height: 33px;
   cursor: pointer;
   border-color: lightgray;
 }
@@ -1229,8 +1222,9 @@ footer .copy-write {
 
 .profile .profile-img {
   padding-top: 20px;
-  width: 200px;
+  width: 245px;
   margin: 50px auto 10px;
+  min-height: 190px;
 }
 
 .profile p {

@@ -6,12 +6,18 @@
 <div class="edit-page-section">
   <div class="profile">
     <div class="profile-img">
-      <img src="/assets/catman.png">
-      <div class="img-btn">画像変更</div>
-    </div>
-    <p><%= @user.name %></p>
-    <p>フォロー：３ フォロワー：４</p>
+      <% if @user.image_name == "default_user.jpg"%>
+        <img src="/assets/catman">
+      <% else %>
+        <img src="<%= "/user_images/#{@user.image_name}"%>" >
+      <% end %>
     <%= form_for(@user, url:{controller: 'users',action: 'update', id: @user.id}) do |f| %>
+      <div class="img-btn">画像変更
+      <%= f.file_field :image_name %>
+      </div>
+    </div>
+    <p>name： <%= @user.name %></p>
+    <p>フォロー：３ フォロワー：４</p>
     <div class="profile-coment">
       <% @user.errors.full_messages.each do |message| %>
       <p class="edit-error">

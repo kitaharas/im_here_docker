@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     p params
     p "-------------------"
     @user = User.new(user_params)
+    @user.image_name = "default_user.jpg"
     p "-------------------"
     p @user
     p "-------------------"
@@ -45,11 +46,23 @@ class UsersController < ApplicationController
   def edit
     @user = User.find_by(id: params[:id])
     redirect_to root_path unless current_user.id == @user.id
+
   end
 
   def update
 
     @user = User.find(params[:id])
+    p "------"
+    p @user
+    p "------"
+    if params[:user][:image_name]
+      p "------"
+      p "うんち"
+      p "------"
+      @user.image_name="#{@user.id}.jpg"
+      image = params[:user][:image_name]
+      File.binwrite("public/user_images/#{@user.image_name}", image.read)
+    end
     redirect_to root_path unless current_user.id == @user.id
     p "------"
     p @user
