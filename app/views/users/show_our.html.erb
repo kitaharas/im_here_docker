@@ -4,10 +4,19 @@
 <div class="my-page-section">
   <div class="profile">
     <div class="profile-img">
-      <img src="/assets/catman.png">
+      <% if @user.image_name == "default_user.jpg"%>
+        <img src="/assets/catman">
+      <% else %>
+        <img src="<%= "/user_images/#{@user.image_name}"%>" >
+      <% end %>
     </div>
     <p><%= @user.name %></p>
-    <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
+    <div>
+      <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
+      <%= link_to mypage_path do %>
+        <button class="follow_viewer" style="background-color:green;">戻る</button>
+      <% end %>
+    </div>
     <div class="profile-coment">
       <% if @user.comment == nil || @user.comment == "" %>
       <span>プロフィールコメント<span>
@@ -21,10 +30,10 @@
   <div class="event-display">
     <div class="event-container">
       <ul class="tab-menu">
-        <li><a class="active" data-id="follower">フォロワー</a></li>
-        <li><a data-id="follow">フォロー中</a></li>
+        <li><a class="active" data-id="follow">フォロー中</a></li>
+        <li><a data-id="follower">フォロワー</a></li>
       </ul>
-      <section class="content active" id="follower">
+      <section class="content active" id="follow">
         <% if follower.count == 0 %>
           フォロワーはいません
         <% else %>
@@ -49,6 +58,7 @@
           <% end %>
         <% end %>
       </section>
+      <section id="follower">
     </div>
   </div>
 </div>

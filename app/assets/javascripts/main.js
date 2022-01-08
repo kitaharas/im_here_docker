@@ -9,7 +9,12 @@ $(document).on('turbolinks:load', function() {
     currentIndex = 0;
     moveSlides();
   });
+
+
+
 });
+
+
 
 function Next(){
   const next = document.getElementById('next');
@@ -43,7 +48,6 @@ function ModalApp(){
 function LoginPage(){
   ModalApp();
   LoginList();
-  // updateButtons();
 }
 
 function SignUpPage(){
@@ -52,10 +56,10 @@ function SignUpPage(){
     ModalApp();
   }
   loginli.classList.add('hidden');
-  // updateButtons();
 }
 
 function SignUpGaid(){
+  document.querySelector('.login-li').classList.add('hidden');
   currentIndex = 1;
   updateButtons();
   moveSlides();
@@ -72,7 +76,6 @@ function eventClose(){
 //  モーダルカルーセル
 
 function updateButtons(){
-  // let currentIndex = 1;
   const close = document.getElementById('close');
   if(currentIndex === 0){
     next.classList.add('hidden');

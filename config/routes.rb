@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'about', to: 'home#about'
   get 'feel', to: 'home#feel'
   get 'feel_page/:id', to: 'home#feel_page', as:'feel_page'
-  get 'genre', to: 'home#genre'
+  get 'genre', to: 'home#genre', as:'genre'
   get 'genre_page/:id', to: 'home#genre_page', as:'genre_page'
   post 'users/create', to: 'users#create'
   post 'home/login' , to: 'home#login'

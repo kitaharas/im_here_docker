@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     p "------"
     if params[:user][:image_name]
       p "------"
-      p "うんち"
+      p "TEST"
       p "------"
       @user.image_name="#{@user.id}.jpg"
       image = params[:user][:image_name]

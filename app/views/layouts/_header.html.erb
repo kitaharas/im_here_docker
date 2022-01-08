@@ -57,9 +57,10 @@
             <p>あなたの世界が少しでも広がる事を</p>
             <p>願っています。</p>
             <%= link_to root_path do %>
-            <button class="btn-go">Go!</button>
+            <button class="btn-go" id="btn-go">Go!</button>
             <% end %>
           </div>
+
         </li>
       </ul>
     </div>
@@ -96,7 +97,7 @@
     </div>
   </div>
   <div class="global-menu">
-    <h1 class="main-logo"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
+    <h1 class="main-logo" data-turbolinks="false"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
     <div class="menu">
       <ul data-turbolinks="false">
         <li data-turbolinks="false"><%= link_to "about", about_path %></li>
@@ -217,8 +218,11 @@
     }).done(function(data){
       if (data.message === "success"){
         // console.log(data);
+        sessionStorage.setItem('occupation','new_login');
+        
         window.location.replace('<%= root_path %>');
-        // SignUpGaid()
+       
+        
       } else {
         console.log(data);
         alert(data.error);
@@ -226,5 +230,13 @@
       //alert(data.user.name + "で登録されました！")
     });
     // console.log($("#user_name").val());
+
+  });
+  window.addEventListener('load',()=>{
+    if (sessionStorage.getItem('occupation') === 'new_login'){
+      ModalApp();
+      SignUpGaid();
+      sessionStorage.removeItem('occupation')
+    }
   });
 </script>

@@ -834,11 +834,11 @@ header .global-menu ul a:hover {
           animation-delay: 1.4s;
 }
 
-.anime-section li {
+.anime-section ul li {
   opacity: 0;
 }
 
-.anime-section li.appear:nth-child(-n+7) {
+.anime-section ul li.appear:nth-child(-n+7) {
   -webkit-animation: pop-bounce;
           animation: pop-bounce;
   -webkit-animation-duration: 1s;
@@ -849,12 +849,12 @@ header .global-menu ul a:hover {
           animation-timing-function: ease;
 }
 
-.anime-section li.appear:nth-child(-n+7):nth-child(3) {
+.anime-section ul li.appear:nth-child(-n+7):nth-child(3) {
   -webkit-animation-delay: .4s;
           animation-delay: .4s;
 }
 
-.anime-section li.appear:nth-child(-n+7):nth-child(5) {
+.anime-section ul li.appear:nth-child(-n+7):nth-child(5) {
   -webkit-animation-delay: .8s;
           animation-delay: .8s;
 }
@@ -923,6 +923,7 @@ header .global-menu ul a:hover {
   -webkit-transform: rotate(15deg);
           transform: rotate(15deg);
   left: 33px;
+  color: black;
 }
 
 .pick-section {
@@ -1225,10 +1226,26 @@ footer .copy-write {
   width: 245px;
   margin: 50px auto 10px;
   min-height: 190px;
+  border-radius: 5px;
 }
 
-.profile p {
+.profile div p {
   margin-bottom: 10px;
+  margin-left: 60px;
+  display: inline-block;
+}
+
+.profile div a {
+  display: inline-block;
+}
+
+.profile div .follow_viewer {
+  font-size: 16px;
+  width: 58px;
+  height: 27px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #ec2567;
 }
 
 .profile .profile-coment {

@@ -766,31 +766,29 @@ header{
   
   // とびだすアニメ
   
-  & li {
-    opacity: 0;
-    // transform: translateY(20px);
-    // transition: opacity .3s, transform .3s;
-  }
-  
-  & li.appear:nth-child(-n+7) {
-    animation: pop-bounce;
-    animation-duration: 1s;
-    animation-fill-mode:forwards;
-    animation-timing-function: ease;
-    &:nth-child(3){
-      animation-delay:.4s ;
+  & ul{
+    & li {
+      opacity: 0;
     }
-    &:nth-child(5){
-      animation-delay:.8s ;
-    }
-    
-    // &:nth-child(8){
-      //   animation-delay:1.2s ;
-      //   transform: rotate(-15deg);
-      // }
+    & li.appear:nth-child(-n+7) {
+      animation: pop-bounce;
+      animation-duration: 1s;
+      animation-fill-mode:forwards;
+      animation-timing-function: ease;
+      &:nth-child(3){
+        animation-delay:.4s ;
+      }
+      &:nth-child(5){
+        animation-delay:.8s ;
+      }
+      
+      // &:nth-child(8){
+        //   animation-delay:1.2s ;
+        //   transform: rotate(-15deg);
+        // }
     }
   }
-  
+}
   @keyframes rolling {
     0%{
       transform: translate(400px,-100px) rotate(0);
@@ -823,6 +821,7 @@ header{
   top: 133px;
   transform: rotate(15deg);
   left: 33px;
+  color:black;
 }
 
 
@@ -1100,9 +1099,29 @@ footer{
     width: 245px;
     margin: 50px auto 10px;
     min-height:190px;
+    border-radius: 5px;
   }
-  & p{
-    margin-bottom:10px;
+  & div{
+    // display: flex;
+
+    & p{
+      margin-bottom:10px;
+      margin-left:60px;
+      display: inline-block;
+    }
+    & a{
+      display: inline-block;
+    }
+    .follow_viewer{
+      font-size: 16px;
+      width: 58px;
+      height: 27px;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: $ruby;
+      
+      
+    }
   }
   & .profile-coment{
     overflow-wrap: anywhere;

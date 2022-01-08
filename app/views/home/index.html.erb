@@ -11,7 +11,7 @@
     <img src="/assets/pc-woman.jpg">
   </div>
 </div>
-<div class="anime-section">
+<div class="anime-section" data-turbolinks="false">
   <ul>
     <li class="lesson"><img src="/assets/lesson.png"></li>
     <li class="catmovie"><img src="/assets/catmovie.png"></li>
@@ -20,13 +20,22 @@
     <li class="pc-man"><img src="/assets/pc-man.png"></li>
     <li class="dance"><img src="/assets/dance.png"></li>
     <li class="exacize"><img src="/assets/exacize.png"></li>
-    <li class="load" onclick="LoginPage()"><a><img src="/assets/load.png">
-      <p class="play">使ってみる</p></a>
-    </li>
+    <% if logged_in? %>
+        <li class="load">
+      <%= link_to genre_path do %>
+          <img src="/assets/load.png">
+          <p class="play">使ってみる</p>
+      <% end %>
+        </li>
+    <% else %>
+        <li class="load" onclick="LoginPage()"><img src="/assets/load.png">
+          <p class="play">使ってみる</p>
+        </li>
+    <% end %>
   </ul>
 
 </div>
-<div class="pick-section">
+<div class="pick-section" data-turbolinks="false">
   <div class="pick-event"><p>Pick Your Event</p></div>
   <div class="pick-event-right"><p>May your world expand.</p></div>
   <div class="t-body1-left">
