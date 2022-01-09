@@ -135,6 +135,18 @@
         <input id="e_play" type="radio" name="radio">
         <label for="e_date">時間指定</label>
         <input id="e_date" type="radio" name="radio">
+        <br>
+          <%= form_for root_path do |f| %>
+          <%# .form-inline.text-left
+        .form-group %>
+            <%= f.label :created_at, '登録日', class: 'control-label' %>
+            <%= f.date_field :created_at, class: 'form-control' %>
+
+        <%# .form-group %>
+            <%= f.label :created_at, '登録時間', class: 'control-label' %>
+            <%= f.time_field :created_at, class: 'form-control' %>
+          <% end %>
+          
       </div>
       <div>
         <label for="regularly">定期開催</label>

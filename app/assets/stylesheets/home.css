@@ -385,6 +385,7 @@ button:hover {
   cursor: pointer;
   text-align: center;
   margin: 0 auto 20px;
+  color: black;
 }
 
 .event-modal {
