@@ -10,7 +10,6 @@
               emailもしくはpasswordに誤りがあります
             </p>
           </div>
-<%# ajax実装 %>
           <div class="login_container">
             <input type="text" size="25" name="session[email]" id="user_email" placeholder="EMAIL">
             <input type="text" size="25" name="session[password]" id ="user_password" placeholder="PASSWORD" >
@@ -60,15 +59,12 @@
             <button class="btn-go" id="btn-go">Go!</button>
             <% end %>
           </div>
-
         </li>
       </ul>
     </div>
     <button id="prev" onclick="Prev()" class="hidden">←戻る</button>
     <button id="next" onclick="Next()" class="hidden">進む→</button>
-    <div id="close">
-      閉じる
-    </div>
+    <div id="close">閉じる</div>
   </section>
   <div id="mask" class="hidden"></div>
   
@@ -104,15 +100,15 @@
         <li data-turbolinks="false"><%= link_to "ジャンル別", genre_path %></li>
         <li data-turbolinks="false"><%= link_to "気分別", feel_path %></li>
         <% if logged_in? %>
-        <li class="hov-menu"><a>マイメニュー<span>▼</span></a>
-          <ul>
-            <li><%= link_to "マイページ" ,"/users/#{current_user.id}" %></li>
-            <li><%= link_to "プロフィール編集" ,"/users/#{current_user.id}/edit" %></li>
-            <li onclick="eventModal()"><a>イベント登録</a></li>
-          </ul>
-        </li>
+          <li class="hov-menu"><a>マイメニュー<span>▼</span></a>
+            <ul>
+              <li><%= link_to "マイページ" ,"/users/#{current_user.id}" %></li>
+              <li><%= link_to "プロフィール編集" ,"/users/#{current_user.id}/edit" %></li>
+              <li onclick="eventModal()"><a>イベント登録</a></li>
+            </ul>
+          </li>
         <% else %>
-        <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
+          <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
         <% end %>
       </ul>
     </div>
@@ -120,75 +116,179 @@
 
   <div class="event-modal hidden">
     <h3>イベント情報入力</h3>
-    <form method="get" action="#" class="event_container">
-      <div>
-        <label for="e_title">タイトル</label>
-        <input id="e_title" type="text" name="title" value="" placeholder="ギター弾く19時まで">
-      </div>
-      <div>
-        <label for="e_memo">メモ</label>
-        <textarea id="e_memo" name="memo" rows="5">これからなんとなくギター弾きます。暇人集まれー。</textarea>
-      </div>
-      <div>
-        <label>日時</label>
-        <label for="e_play">今すぐ</label>
-        <input id="e_play" type="radio" name="radio">
-        <label for="e_date">時間指定</label>
-        <input id="e_date" type="radio" name="radio">
-        <br>
-          <%= form_for root_path do |f| %>
-          <%# .form-inline.text-left
-        .form-group %>
-            <%= f.label :created_at, '登録日', class: 'control-label' %>
-            <%= f.date_field :created_at, class: 'form-control' %>
+      <%= form_for :event, url: event_confirm_path ,class: "event_container" do |f| %>
+        <div>
+          <%= f.label :event_title, "タイトル" %>
+          <%= f.text_field :event_title, :placeholder => "ギター弾く19時まで", id: :e_title %>
+        </div>
+        <div>
+          <%= f.label :content, "メモ" %>
+          <%= f.text_area :content, :placeholder => "これからなんとなくギター弾きます。暇人集まれー。", size: "30x5", id: :e_memo %>
+        </div>
+        <div>
+          <%= f.label :genre_id ,'ジャンル'%>
+          <%= f.select :genre_id, {'aaa':1,'bbb':2,'ccc':3,'ddd':4,'eee':5,'fff':6}, { include_blank: '選択してください'} %>
+        </div>
+        <div>
+          <%= f.label :feel_id ,'気分'%>
+          <%= f.select :feel_id, {'aaa':1,'bbb':2,'ccc':3,'ddd':4,'eee':5,'fff':6}, { include_blank: '選択してください'} %>
+        </div>
+        <div>
+          <label>日時</label>
+          <label><%= f.radio_button :date ,"今すぐ",id: :e_play ,checked: true %>今すぐ</label>
+          <label><%= f.radio_button :date ,1,id: :e_date %>時間指定</label>
+          <br>
+          <%= f.label :created_at_date, '登録日', class: 'control-label' %>
+          <%= f.date_field :created_at_date, class: 'form-control' , disabled: true %>
 
-        <%# .form-group %>
-            <%= f.label :created_at, '登録時間', class: 'control-label' %>
-            <%= f.time_field :created_at, class: 'form-control' %>
-          <% end %>
-          
-      </div>
-      <div>
+          <%= f.label :created_at_time, '登録時間', class: 'control-label' %>
+          <%= f.time_field :created_at_time, class: 'form-control' , disabled: true %>
+        </div>
+        <div>
+          <label>方法</label>
+          <label><%= f.radio_button :line ,"オンライン",id: :online, checked: true %>オンライン</label>
+          <label><%= f.radio_button :line ,1,id: :offline %>オフライン</label>
+        </div>
+
+        <div>
+          <%= f.label :place ,"場所" %>
+          <%= f.text_field :place, :placeholder => "江戸川区西葛西", id: :place , disabled: true %>
+        </div>
+        <div>
+          <%= f.label :people,"人数" %>
+          <%= f.text_field :people, id: :people %>
+          <span>※空欄で制限なし</span>
+        </div>
+        <input type="submit" value="イベント登録" onclick="goEvent();return false;" id="event_confirm">
+      <% end %>
+        <%# <div>
         <label for="regularly">定期開催</label>
         <input id="regularly" type="checkbox">
-      </div>
-      <div>
-        <label>方法</label>
-        <label for="online">オンライン</label>
-        <input id="online" type="radio" name="line">
-        <label for="offline">オフライン</label>
-        <input id="offline" type="radio" name="line">
-      </div>
-      <div>
-        <label for="place">場所</label>
-        <input id="place" type="text" name="place" value="">
-      </div>
-      <div>
-        <label for="people">参加人数</label>
-        <input id="people" type="number" name="people" value="">名
-        <span>※空欄で制限なし</span>
-      </div>
-      <input type="submit" value="イベント登録" onclick="goEvent();return false;">
+      </div> %>
     </form>
     <div id="event-close" onclick="eventClose()">
       閉じる
     </div>
   </div>
 
-  <section id="confi-modal" class="hidden">
+
+
+  <section id="confi-modal" class="hidden" tabindex="-1" aria-labelledby="exampleModalLabel">
     <div class="confi-container">
       <p>以下の内容で登録します。<br>
         よろしいですか？
       </p>
     </div>
-    <div id="confi-close" onclick="confiClose()">
-      戻る
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-body">
+        <div>
+          <p class="text-muted">タイトル</p>
+          <p class="px-2" id="modalTitle"></p>
+        </div>
+        <div>
+          <p class="text-muted">本文</p>
+          <p class="px-2" id="modalBody"></p>
+        </div>
+        <div>
+          <p class="text-muted">ジャンル</p>
+          <p class="px-2" id="modalGenre"></p>
+        </div>
+        <div>
+          <p class="text-muted">気分</p>
+          <p class="px-2" id="modalFeel"></p>
+        </div>
+        <div>
+          <p class="text-muted">日にち</p>
+          <p class="px-2" id="modalDate"></p>
+          <p class="px-2" id="modalFullDate"></p>
+          <p class="px-2" id="modalTime"></p>
+        </div>
+        <div>
+          <p class="text-muted">場所</p>
+          <p class="px-2" id="modalPlace"></p>
+        </div>
+        <div>
+          <p class="text-muted">人数</p>
+          <p class="px-2" id="modalPeople"></p>
+        </div>
+      </div>
     </div>
+    <div id="confi-close" onclick="confiClose()">戻る</div>
   </section>
   <div id="confi-mask" class="hidden"></div>
 </header>
 
 <script>
+  $(function(){
+    $( 'input[name="event[date]"]:radio').change(function(){
+      var radioval = $(this).val();
+      if(radioval == 1){
+        $('#event_created_at_date').removeAttr('disabled');
+        $('#event_created_at_time').removeAttr('disabled');
+      } else {
+        $('#event_created_at_date').attr('disabled','disabled');
+        $('#event_created_at_time').attr('disabled','disabled');
+      }
+    });
+  });
+
+  $(function(){
+    $( 'input[name="event[line]"]:radio').change(function(){
+      var radioval = $(this).val();
+      if(radioval == 1){
+        $('#place').removeAttr('disabled');
+      } else {
+        $('#place').attr('disabled','disabled');
+      }
+    });
+  });
+
+  $(function(){
+    $('#event_confirm').on('click',function(){
+      var title = $('#e_title').val();
+      var body = $('#e_memo').val();
+      var modal = $('#confi-modal');
+      if ($('input:radio[name="event[date]"]:checked').val() == 1){
+        const date = "";
+        modal.find('#modalDate').text(date);
+      } else {
+        const date = $('input:radio[name="event[date]"]:checked').val();
+        modal.find('#modalDate').text(date);
+      }
+
+      if ($('#place').val() == 1){
+        const place = "";
+        modal.find('#modalPlace').text(place);
+      } else {
+        const place = $('#place').val();
+        modal.find('#modalPlace').text(place);
+      }
+
+      const createdDate = new Date($('#event_created_at_date').val());
+      var year = createdDate.getFullYear().toString();
+			var mm = (createdDate.getMonth() + 1).toString();
+			var dd = createdDate.getDate().toString();
+			var yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
+      const createdTime = $('#event_created_at_time').val();
+      const people = $('#people').val();
+      const genre = $('#event_genre_id').val();
+      const genreText = $('#event_genre_id option:selected').text();
+      const feel = $('#event_feel_id').val();
+      const feelText = $('#event_feel_id option:selected').text();
+      console.log(genreText);
+
+
+      modal.find('#modalTitle').text(title);
+      modal.find('#modalBody').text(body);
+      modal.find('#modalFullDate').text(yyyymmdd);
+      modal.find('#modalTime').text(createdTime);
+      modal.find('#modalPeople').text(people);
+      modal.find('#modalGenre').text(genreText);
+      modal.find('#modalFeel').text(feelText);
+
+    });
+  });
+  
   $("#btn_submit").click(function(){
     const email = $("#user_email").val();
     const password = $("#user_password").val();

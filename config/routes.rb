@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'mypage'
   get 'users/:id/our', to: 'users#show_our', as: 'show_our'
   get 'login',   to: 'sessions#new'
+  post 'events/new', to: 'events#new', as:'event_new'
+  post 'events/confirm', to: 'events#confirm', as:'event_confirm'
+  post 'events/create', to: 'events#create', as:'event_create'
   post 'sessions/create',   to: 'sessions#create'
   delete 'logout',  to: 'sessions#destroy'
   resources :users, params: :id
