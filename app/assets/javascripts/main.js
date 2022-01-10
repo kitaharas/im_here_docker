@@ -65,14 +65,6 @@ function SignUpGaid(){
   moveSlides();
 }
 
-function eventModal(){
-  document.querySelector('.event-modal').classList.remove('hidden');
-}
-
-function eventClose(){
-  document.querySelector('.event-modal').classList.add('hidden');
-}
-
 //  モーダルカルーセル
 
 function updateButtons(){
@@ -104,7 +96,55 @@ function moveSlides(){
 //   moveSlides();
 // });
 
+
+// イベントモーダル
+// function eventModal(){
+//   document.querySelector('.event-modal').classList.remove('hidden');
+//   mask.classList.remove('hidden');
+// }
+
+// function eventClose(){
+//   document.querySelector('.event-modal').classList.add('hidden');
+//   mask.classList.add('hidden');
+// }
+
+
+$(function(){
+  $('[data-modal="overlay"], [data-modal="content"]').hide();
+  
+  $('#eventModalUp').on('click', function(){
+    console.log("unpoko");
+    posi = $(window).scrollTop();
+    $('body').css({
+      position: 'fixed',
+      top: -1 * posi ,
+      left: 0 ,
+      right: 0 ,
+      'padding-right': '15px'
+    });
+    $('#status_bar_right').css({
+      'padding-right':'15px'
+    });
+    $('#global-menu').css({
+      'padding-right':'15px'
+    });
+    $('[data-modal="overlay"], [data-modal="content"]').fadeIn();
+  });
+  
+  $('#event-close').on('click', function(){
+    $('body').attr('style', '');
+    $('#status_bar_right').attr('style', '');
+    $('#global-menu').attr('style', '');
+    $('html, body').prop({scrollTop: posi});
+    $('[data-modal="overlay"], [data-modal="content"]').fadeOut();
+  });
+});
 // ゴーイベント
+
+
+
+
+
 
 function goEvent(){
   document.querySelector('#confi-modal').classList.remove('hidden');

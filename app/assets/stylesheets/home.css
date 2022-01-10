@@ -390,10 +390,10 @@ button:hover {
 
 .event-modal {
   background: #fff;
-  width: 480px;
+  width: 600px;
   padding: 20px;
   position: absolute;
-  top: 139px;
+  top: 129px;
   right: 6%;
   margin: 0 auto;
   -webkit-transition: all 0.4s;
@@ -402,7 +402,7 @@ button:hover {
   opacity: 1;
   pointer-events: painted;
   display: block;
-  height: 520px;
+  height: 633px;
   border: 1px solid black;
 }
 
@@ -416,7 +416,7 @@ button:hover {
 
 #event-close {
   position: absolute;
-  top: 80%;
+  top: 82%;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -430,8 +430,16 @@ button:hover {
 }
 
 .event_container {
-  margin: 0 auto;
+  margin: 35px auto 0;
   width: 90%;
+}
+
+.event_container .err_text {
+  color: red;
+  padding-left: 90px;
+  margin: 0;
+  line-height: 14px;
+  font-size: 14px;
 }
 
 .event_container div {
@@ -439,20 +447,36 @@ button:hover {
   margin-bottom: 5px;
 }
 
-.event_container div :first-child {
+.event_container div select {
+  padding: 2px;
+}
+
+.event_container div div .control-label {
+  margin-left: 143px;
+  width: auto;
+}
+
+.event_container div div input {
+  padding: 2px;
+}
+
+.event_container div label {
   width: 80px;
+}
+
+.event_container div :first-child {
   display: inline-block;
 }
 
 .event_container div input[type="text"] {
-  width: 75%;
+  width: 80%;
   padding: 5px 4px;
 }
 
 .event_container div textarea {
   vertical-align: top;
   padding: 5px 4px;
-  width: 75%;
+  width: 80%;
 }
 
 .event_container div #people {
@@ -467,7 +491,8 @@ button:hover {
   width: 105px;
   height: 42px;
   position: absolute;
-  right: 57px;
+  top: 25px;
+  right: 63px;
   background-color: #30e9a5;
   border-radius: 10px;
   border-color: #999;
@@ -499,7 +524,34 @@ button:hover {
   opacity: 1;
   pointer-events: painted;
   display: block;
-  height: 550px;
+  height: 602px;
+}
+
+.modal-body {
+  margin: 30px 50px;
+  overflow-y: scroll;
+  font-size: 18px;
+  height: 400px;
+  background: #80808014;
+}
+
+.modal-body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.modal-body div .text-muted {
+  width: 15%;
+}
+
+.modal-body div .px-2 {
+  width: 80%;
+  overflow-wrap: anywhere;
+}
+
+.modal-body div .px-2 #modalTime {
+  margin-left: 20px;
 }
 
 #confi-modal > p {

@@ -66,14 +66,14 @@
     <button id="next" onclick="Next()" class="hidden">進む→</button>
     <div id="close">閉じる</div>
   </section>
-  <div id="mask" class="hidden"></div>
+  <div id="mask" class="hidden" data-modal="overlay"></div>
   
   <div class="status_bar">
     <form method="get" action="#" class="search_container">
       <input type="text" size="25" placeholder="キーワード検索">
       <input type="submit"  value="&#xf002">
     </form>
-    <div class="status_bar_right">
+    <div class="status_bar_right" id="status_bar_right">
       <% if logged_in? %>
         <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
       <% else %>
@@ -92,7 +92,7 @@
       </ul>
     </div>
   </div>
-  <div class="global-menu">
+  <div class="global-menu" id="global-menu">
     <h1 class="main-logo" data-turbolinks="false"><%= link_to image_tag("/assets/logo.png"), root_path %></h1>
     <div class="menu">
       <ul data-turbolinks="false">
@@ -104,7 +104,7 @@
             <ul>
               <li><%= link_to "マイページ" ,"/users/#{current_user.id}" %></li>
               <li><%= link_to "プロフィール編集" ,"/users/#{current_user.id}/edit" %></li>
-              <li onclick="eventModal()"><a>イベント登録</a></li>
+              <li id="eventModalUp" ><a>イベント登録</a></li>
             </ul>
           </li>
         <% else %>
@@ -114,17 +114,20 @@
     </div>
   </div>
 
-  <div class="event-modal hidden">
+  <div class="event-modal" id="event-modal" data-modal="content">
     <h3>イベント情報入力</h3>
-      <%= form_for :event, url: event_confirm_path ,class: "event_container" do |f| %>
+      <%= form_with url: event_confirm_path ,class: "event_container" do |f| %>
+        <div class="err_text" id="err_textbox"></div>
         <div>
           <%= f.label :event_title, "タイトル" %>
           <%= f.text_field :event_title, :placeholder => "ギター弾く19時まで", id: :e_title %>
         </div>
+        <div class="err_text" id="err_textarea"></div>
         <div>
           <%= f.label :content, "メモ" %>
           <%= f.text_area :content, :placeholder => "これからなんとなくギター弾きます。暇人集まれー。", size: "30x5", id: :e_memo %>
         </div>
+        <div class="err_text" id="err_category"></div>
         <div>
           <%= f.label :genre_id ,'ジャンル'%>
           <%= f.select :genre_id, {'aaa':1,'bbb':2,'ccc':3,'ddd':4,'eee':5,'fff':6}, { include_blank: '選択してください'} %>
@@ -135,38 +138,46 @@
         </div>
         <div>
           <label>日時</label>
-          <label><%= f.radio_button :date ,"今すぐ",id: :e_play ,checked: true %>今すぐ</label>
+          <label><%= f.radio_button :date ,0,id: :e_play ,checked: true %>今すぐ</label>
           <label><%= f.radio_button :date ,1,id: :e_date %>時間指定</label>
-          <br>
-          <%= f.label :created_at_date, '登録日', class: 'control-label' %>
-          <%= f.date_field :created_at_date, class: 'form-control' , disabled: true %>
+        <div class="err_text" id="err_radio_item"></div>
+          <div>
+            <%= f.label :created_at_date, '登録日', class: 'control-label' %>
+            <%= f.date_field :created_at_date, class: 'form-control' , disabled: true %>
 
-          <%= f.label :created_at_time, '登録時間', class: 'control-label' %>
-          <%= f.time_field :created_at_time, class: 'form-control' , disabled: true %>
+            <%= f.label :created_at_time, '登録時間' %>
+            <%= f.time_field :created_at_time, class: 'form-control' , disabled: true %>
+          </div>
         </div>
+      
         <div>
           <label>方法</label>
-          <label><%= f.radio_button :line ,"オンライン",id: :online, checked: true %>オンライン</label>
+          <label><%= f.radio_button :line ,0,id: :online, checked: true %>オンライン</label>
           <label><%= f.radio_button :line ,1,id: :offline %>オフライン</label>
         </div>
+        <div class="err_text" id="err_radio_item2"></div>
 
         <div>
           <%= f.label :place ,"場所" %>
           <%= f.text_field :place, :placeholder => "江戸川区西葛西", id: :place , disabled: true %>
         </div>
+        <div class="err_text" id="err_people"></div>
         <div>
           <%= f.label :people,"人数" %>
           <%= f.text_field :people, id: :people %>
           <span>※空欄で制限なし</span>
         </div>
-        <input type="submit" value="イベント登録" onclick="goEvent();return false;" id="event_confirm">
+        <%# <div class="btn">
+	        <a href="javascript:void(0)" onclick="do_submit(this);" class="btn_transmit">送信</a>
+        </div> %>
+        <input type="submit" value="イベント登録" onclick="do_submit(this);return false;" id="event_confirm">
       <% end %>
         <%# <div>
         <label for="regularly">定期開催</label>
         <input id="regularly" type="checkbox">
       </div> %>
     </form>
-    <div id="event-close" onclick="eventClose()">
+    <div id="event-close">
       閉じる
     </div>
   </div>
@@ -179,6 +190,7 @@
         よろしいですか？
       </p>
     </div>
+    <button id="event_create"></button>
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-body">
         <div>
@@ -186,7 +198,7 @@
           <p class="px-2" id="modalTitle"></p>
         </div>
         <div>
-          <p class="text-muted">本文</p>
+          <p class="text-muted">メモ</p>
           <p class="px-2" id="modalBody"></p>
         </div>
         <div>
@@ -200,8 +212,10 @@
         <div>
           <p class="text-muted">日にち</p>
           <p class="px-2" id="modalDate"></p>
-          <p class="px-2" id="modalFullDate"></p>
-          <p class="px-2" id="modalTime"></p>
+          <div class="px-2" id="modalDateContent">
+          <p id="modalFullDate"></p>
+          <p id="modalTime"></p>
+          </div>
         </div>
         <div>
           <p class="text-muted">場所</p>
@@ -219,22 +233,199 @@
 </header>
 
 <script>
+
+  // イベントタイトルチェック
+  function check_e_title(str){
+    $("#err_textbox p").remove();
+    let _result = true;
+    let _e_title = $.trim(str);
+    console.log("unko");
+    if(_e_title.match(/^[ \r\n\t]*$/)){
+      $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルを入力してください。</p>");
+      console.log("tinko");
+      _result = false;
+    }else if(_e_title.length > 50){
+      $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルは50文字以内で入力してください。</p>");
+      _result = false;
+    }
+    return _result;
+  }
+
+  // イベントコンテントチェック
+  function check_e_memo(str){
+    $("#err_textarea p").remove();
+    let _result = true;
+    let _e_memo = $.trim(str);
+    if(_e_memo.length == 0){
+      $("#err_textarea").append("<p><i class=\"fa fa-exclamation-triangle\"></i>テキストエリアを入力してください。</p>");
+      _result = false;
+    }else if(_e_memo.length > 1000){
+      $("#err_textarea").append("<p><i class=\"fa fa-exclamation-triangle\"></i>テキストエリアは1000文字以内で入力してください。</p>");
+      _result = false;
+    }
+    return _result;
+  }
+
+  // ジャンルセレクトチェック
+  function check_genre_id(id){
+    $("#err_category p").remove();
+    let _result = true;
+    let _id = id;
+    if(!_id.match(/^[0-9]+$/)){
+      $("#err_category").append("<p><i class=\"fa fa-exclamation-triangle\"></i>ジャンルを選択してください。</p>");
+      _result = false;
+    }
+    return _result;
+  }
+
+  // 日時指定チェック
+  function check_radio_item(type){
+    $("#err_radio_item p").remove();
+    let _result = true;
+    let _type = type;
+    let at_date = $('#created_at_date').val();
+    let at_time = $('#created_at_time').val();
+    let modal = $('#confi-modal');
+
+    if(_type == undefined || !_type.match(/^[0]+$/)){
+      if(at_date.length == 0 || at_time.length == 0 ){
+        $("#err_radio_item").append("<p><i class=\"fa fa-exclamation-triangle\"></i>日付・時刻を入力してください</p>");
+        _result = false;
+      }
+      modal.find('#modalDate').css("display", "none");
+      modal.find('#modalDateContent').css("display", "flex");
+    } else {
+      const date = "今すぐ";
+      modal.find('#modalDate').text(date);
+      modal.find('#modalDate').css("display", "block");
+      modal.find('#modalDateContent').css("display", "none");
+    }
+    return _result;
+  }
+
+  // 方法チェック
+  function check_radio_item2(type){
+    $("#err_radio_item2 p").remove();
+    let _result = true;
+    let _type = type;
+    let at_place = $('#place').val();
+    let modal = $('#confi-modal');
+
+    if(_type == undefined || !_type.match(/^[0]+$/)){
+      if(at_place.length == 0 ){
+        $("#err_radio_item2").append("<p><i class=\"fa fa-exclamation-triangle\"></i>場所を入力してください</p>");
+        _result = false;
+      }
+      const place = $('#place').val();
+      modal.find('#modalPlace').text(place);
+    } else {
+      const place = "オンライン";
+      modal.find('#modalPlace').text(place);
+    }
+    return _result;
+  }
+
+  // 人数半角数字チェック
+  function check_people(int){
+    $("#err_people p").remove();
+    let _result = true;
+    let _int = int;
+    console.log(_int);
+    if(_int.length != 0 && !_int.match(/^[0-9]+$/)){
+      $("#err_people").append("<p><i class=\"fa fa-exclamation-triangle\"></i>半角数字で入力してください。</p>");
+      _result = false;
+    }
+    return _result;
+  }
+
+
+  function do_check() {
+    let result = true;
+    let check_result = true;
+
+    // エラーメッセージ初期化
+    $(".err_text").empty();
+
+    // テキストボックス
+    let _e_title = $("#e_title").val();
+    console.log(_e_title);
+    result = check_e_title(_e_title);
+    if(!result){
+      check_result = result;
+    }
+
+    // セレクトボックス
+    let _genre_id = $("#genre_id").val();
+    result = check_genre_id(_genre_id);
+    if(!result){
+      check_result = result;
+    }
+
+    // 人数
+    let _people = $("#people").val();
+    result = check_people(_people);
+    if(!result){
+      check_result = result;
+    }
+
+    // ラジオボタン
+    let _radio_item = $("input[name='date']:checked").val();
+    result = check_radio_item(_radio_item);
+    if(!result){
+      check_result = result;
+    }
+    // ラジオボタン方法
+    let _radio_item2 = $("input[name='line']:checked").val();
+    result = check_radio_item2(_radio_item2);
+    if(!result){
+      check_result = result;
+    }
+
+    // テキストエリア
+    let _e_memo = $("#e_memo").val();
+    result = check_e_memo(_e_memo);
+    if(!result){
+      check_result = result;
+    }
+
+    if(!result){
+      check_result = result;
+    }
+
+    return check_result;
+  }
+
+  function do_submit(btn){
+    $(btn).css("pointer-events", "none");
+    let result = do_check();
+
+    if(result){
+      goEvent();
+      $(btn).css("pointer-events", "inherit");
+    }else{
+      $(btn).css("pointer-events", "inherit");
+    }
+  }
+
+
+
+
   $(function(){
-    $( 'input[name="event[date]"]:radio').change(function(){
-      var radioval = $(this).val();
+    $( 'input[name="date"]:radio').change(function(){
+      let radioval = $(this).val();
       if(radioval == 1){
-        $('#event_created_at_date').removeAttr('disabled');
-        $('#event_created_at_time').removeAttr('disabled');
+        $('#created_at_date').removeAttr('disabled');
+        $('#created_at_time').removeAttr('disabled');
       } else {
-        $('#event_created_at_date').attr('disabled','disabled');
-        $('#event_created_at_time').attr('disabled','disabled');
+        $('#created_at_date').attr('disabled','disabled');
+        $('#created_at_time').attr('disabled','disabled');
       }
     });
   });
 
   $(function(){
-    $( 'input[name="event[line]"]:radio').change(function(){
-      var radioval = $(this).val();
+    $( 'input[name="line"]:radio').change(function(){
+      let radioval = $(this).val();
       if(radioval == 1){
         $('#place').removeAttr('disabled');
       } else {
@@ -245,38 +436,29 @@
 
   $(function(){
     $('#event_confirm').on('click',function(){
-      var title = $('#e_title').val();
-      var body = $('#e_memo').val();
-      var modal = $('#confi-modal');
-      if ($('input:radio[name="event[date]"]:checked').val() == 1){
-        const date = "";
-        modal.find('#modalDate').text(date);
-      } else {
-        const date = $('input:radio[name="event[date]"]:checked').val();
-        modal.find('#modalDate').text(date);
-      }
+      let title = $('#e_title').val();
+      let body = $('#e_memo').val();
+      let modal = $('#confi-modal');
 
-      if ($('#place').val() == 1){
-        const place = "";
-        modal.find('#modalPlace').text(place);
-      } else {
-        const place = $('#place').val();
-        modal.find('#modalPlace').text(place);
-      }
-
-      const createdDate = new Date($('#event_created_at_date').val());
-      var year = createdDate.getFullYear().toString();
-			var mm = (createdDate.getMonth() + 1).toString();
-			var dd = createdDate.getDate().toString();
-			var yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
-      const createdTime = $('#event_created_at_time').val();
+      const createdDate = new Date($('#created_at_date').val());
+      let year = createdDate.getFullYear().toString();
+			let mm = (createdDate.getMonth() + 1).toString();
+			let dd = createdDate.getDate().toString();
+			let yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
+      const createdTime = $('#created_at_time').val();
       const people = $('#people').val();
-      const genre = $('#event_genre_id').val();
-      const genreText = $('#event_genre_id option:selected').text();
-      const feel = $('#event_feel_id').val();
-      const feelText = $('#event_feel_id option:selected').text();
-      console.log(genreText);
-
+      // const genre = $('#genre_id').val();
+      const genreText = $('#genre_id option:selected').text();
+      const feel = $('#feel_id').val();
+      
+      if (feel.length == 0){
+        const feelText = "指定なし";
+        modal.find('#modalFeel').text(feelText);
+      } else {
+        const feelText = $('#feel_id option:selected').text();
+        modal.find('#modalFeel').text(feelText);
+      }
+        
 
       modal.find('#modalTitle').text(title);
       modal.find('#modalBody').text(body);
@@ -284,11 +466,35 @@
       modal.find('#modalTime').text(createdTime);
       modal.find('#modalPeople').text(people);
       modal.find('#modalGenre').text(genreText);
-      modal.find('#modalFeel').text(feelText);
+      
 
     });
   });
   
+  // イベント登録
+  $("#event_create").click(function(){
+    const eveTitle = $("#modalTitle").text();
+    const eveContent = $("#modalBody").text();
+    const eveGenre = $('#genre_id').val();
+    const eveFeel = $('#feel_id').val();
+    // 日程どうする
+    const evePlace = $('#modalPlace').text();
+    const evePeople = $("#modalPeople").text();
+    console.log(evePeople); 
+    $.ajax({
+      type: 'POST',
+      url: "/events/create",
+      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople},
+      dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
+      },
+    }).done(function(data){
+      console.log(data);
+    });
+  });
+
+
   $("#btn_submit").click(function(){
     const email = $("#user_email").val();
     const password = $("#user_password").val();

@@ -368,10 +368,10 @@ button {
 
 .event-modal{
   background: #fff;
-  width: 480px;
+  width: 600px;
   padding: 20px;
   position: absolute;
-  top: 139px;
+  top: 129px;
   right: 6%;
   margin: 0 auto;
   -webkit-transition: all 0.4s;
@@ -380,7 +380,7 @@ button {
   opacity: 1;
   pointer-events: painted;
   display: block;
-  height: 520px;
+  height: 633px;
   border: 1px solid black;
 }
 
@@ -393,7 +393,7 @@ button {
 
 #event-close{
   position: absolute;
-  top: 80%;
+  top: 82%;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
@@ -406,24 +406,46 @@ button {
 }
 
 .event_container {
-  margin: 0 auto;
+  margin: 35px auto 0;
   width: 90%;
+  .err_text{
+    color: red;
+    padding-left: 90px;
+    margin: 0;
+    line-height: 14px;
+    font-size: 14px;
+  }
   & div {
     padding: 2px 3px;
     margin-bottom: 5px;
+    & select {
+      padding: 2px;
+    }
+    & div {
+      .control-label{
+        margin-left: 143px;
+        width:auto;
+      }
+      & input{
+        padding:2px;
+      }
+    }
+    & label {
+      width:80px;
+    }
     & :first-child{
-     width: 80px;
+    //  width: 80px;
      display: inline-block; 
     }
     & input[type="text"] {
-      width: 75%;
+      width: 80%;
       padding:5px 4px;
     }
     
     & textarea{
       vertical-align: top;
       padding:5px 4px;
-      width: 75%;
+      width: 80%;
     }
     & #people {
       width: 45px;
@@ -436,7 +458,8 @@ button {
     width: 105px;
     height: 42px;
     position: absolute;
-    right: 57px;
+    top:25px;
+    right: 63px;
     background-color: $emerald;
     border-radius:10px ;
     border-color: #999;
@@ -470,8 +493,30 @@ button {
   opacity: 1;
   pointer-events:painted;
   display: block;
-  height: 550px;
+  height: 602px;
 }
+.modal-body{
+  margin: 30px 50px;
+  overflow-y: scroll;
+  font-size: 18px;
+  height: 400px;
+  background: #80808014;
+  & div{
+    display: flex;
+    & .text-muted{
+      width:15%;
+    }
+    & .px-2{
+      width:80%;
+      overflow-wrap: anywhere;
+      & #modalTime{
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+
 
 #confi-modal > p{
   margin:0 0 20px;
