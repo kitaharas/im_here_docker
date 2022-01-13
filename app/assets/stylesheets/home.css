@@ -1106,22 +1106,6 @@ header .global-menu ul a:hover {
   background: #d4599f;
 }
 
-footer {
-  height: 500px;
-  background: #4b9a27;
-  text-align: center;
-  padding: 10px;
-}
-
-footer :first-child {
-  margin-top: 100px;
-  font-size: 50px;
-}
-
-footer .copy-write {
-  margin-top: 100px;
-}
-
 .about-top-section {
   background-color: #4b9a27;
   position: relative;
@@ -1409,5 +1393,21 @@ footer .copy-write {
 
 .content {
   display: none;
+}
+
+footer {
+  height: 431px;
+  background: #4b9a27;
+  text-align: center;
+  padding: 10px;
+}
+
+footer :first-child {
+  margin-top: 100px;
+  font-size: 50px;
+}
+
+footer .copy-write {
+  margin-top: 100px;
 }
 /*# sourceMappingURL=home.css.map */

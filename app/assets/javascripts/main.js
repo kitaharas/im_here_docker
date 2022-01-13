@@ -3,12 +3,12 @@ $(document).on('turbolinks:load', function() {
   const mask = document.getElementById('mask');
   const modal = document.getElementById('modal');
   
-  close.addEventListener('click', ()=>{
-    modal.classList.add('hidden');
-    mask.classList.add('hidden');
-    currentIndex = 0;
-    moveSlides();
-  });
+  // close.addEventListener('click', ()=>{
+  //   modal.classList.add('hidden');
+  //   mask.classList.add('hidden');
+  //   currentIndex = 0;
+  //   moveSlides();
+  // });
 
 
 
@@ -63,6 +63,7 @@ function SignUpGaid(){
   currentIndex = 1;
   updateButtons();
   moveSlides();
+  notScroll();
 }
 
 //  モーダルカルーセル
@@ -108,36 +109,61 @@ function moveSlides(){
 //   mask.classList.add('hidden');
 // }
 
+// スクロール防止パーツ
+function notScroll(){
+  posi = $(window).scrollTop();
+  $('body').css({
+    position: 'fixed',
+    top: -1 * posi ,
+    left: 0 ,
+    right: 0 ,
+    'padding-right': '15px'
+  });
+  $('header').css({
+    width:'calc(100vw - 15px)'
+  });
+}
 
 $(function(){
-  $('[data-modal="overlay"], [data-modal="content"]').hide();
   
+  // イベントモーダルスクロール防止
   $('#eventModalUp').on('click', function(){
-    console.log("unpoko");
-    posi = $(window).scrollTop();
-    $('body').css({
-      position: 'fixed',
-      top: -1 * posi ,
-      left: 0 ,
-      right: 0 ,
-      'padding-right': '15px'
-    });
-    $('#status_bar_right').css({
-      'padding-right':'15px'
-    });
-    $('#global-menu').css({
-      'padding-right':'15px'
-    });
-    $('[data-modal="overlay"], [data-modal="content"]').fadeIn();
+     // $('[data-modal="overlay"], [data-modal="content"]').addClass("hidden");
+    notScroll();
+    $('[data-modal="overlay"], [data-modal="content"]').removeClass("hidden");
   });
   
+  // イベントクローズ
   $('#event-close').on('click', function(){
     $('body').attr('style', '');
-    $('#status_bar_right').attr('style', '');
-    $('#global-menu').attr('style', '');
+    $('header').attr('style', '');
     $('html, body').prop({scrollTop: posi});
-    $('[data-modal="overlay"], [data-modal="content"]').fadeOut();
+    $('[data-modal="overlay"], [data-modal="content"]').addClass("hidden");
   });
+
+  // サインアップモーダルスクロール防止
+  $('#signup').on('click',function(){
+    notScroll();
+    SignUpPage();
+  });
+
+  // ログインモーダルスクロール防止
+  $('#acount-logo, #loginout, #load').on('click',function(){
+    notScroll();
+    LoginPage();
+  });
+  
+  // モーダルクローズ
+  $('#close').on('click', function(){
+    $('body').attr('style', '');
+    $('header').attr('style', '');
+    $('html, body').prop({scrollTop: posi});
+    $('#modal, #mask').addClass("hidden");
+    currentIndex = 0;
+    moveSlides();
+  });
+
+
 });
 // ゴーイベント
 

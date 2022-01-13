@@ -981,19 +981,6 @@ header{
   }
 }
 
-footer{
-  height: 500px;
-  background: $green;
-  text-align: center;
-  padding: 10px;
-  & :first-child{
-    margin-top: 100px;
-    font-size:50px;
-  }
-  & .copy-write{
-    margin-top: 100px;
-  }
-}
 
 // aboutページ
 
@@ -1256,7 +1243,6 @@ footer{
 
 
 .content.active{
-  // background: #CCC;
   display: block;
   min-height: 150px;
   padding: 12px;
@@ -1267,3 +1253,26 @@ footer{
   display: none;
 }
     
+
+
+
+
+
+
+
+
+
+// フッター
+footer{
+  height: 431px;
+  background: $green;
+  text-align: center;
+  padding: 10px;
+  & :first-child{
+    margin-top: 100px;
+    font-size:50px;
+  }
+  & .copy-write{
+    margin-top: 100px;
+  }
+}

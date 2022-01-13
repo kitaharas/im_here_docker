@@ -1,20 +1,18 @@
 class HomeController < EventsController
+
+  before_action :set_user_new,only: %i[index about feel genre]
+
   def index
     p "-------------------"
     p params
     p session[:user_id]
     p "-------------------"
-    @user = User.new
   end
   
-  
-  
   def about
-    @user = User.new
   end
   
   def feel
-    @user = User.new
     public_method(:feel).super_method.call
   end
   
@@ -24,7 +22,6 @@ class HomeController < EventsController
   end
 
   def genre
-    @user = User.new
     # 親のindexを呼び出す
     public_method(:genre).super_method.call
   end
@@ -53,7 +50,10 @@ class HomeController < EventsController
     end
   end
 
-
+  private
+    def set_user_new
+      @user = User.new
+    end
 
 
 end

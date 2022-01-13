@@ -69,7 +69,7 @@
   <div id="mask" class="hidden" data-modal="overlay"></div>
   
   <div class="status_bar">
-    <form method="get" action="#" class="search_container">
+    <form method="get" action="#" class="search_container" id="search_container">
       <input type="text" size="25" placeholder="キーワード検索">
       <input type="submit"  value="&#xf002">
     </form>
@@ -77,12 +77,16 @@
       <% if logged_in? %>
         <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
       <% else %>
-        <div class="acount-logo" onclick="LoginPage()" data-turbolinks="false" ><%= image_tag("/assets/login.png") %></div>
+        <div class="acount-logo" id="acount-logo" 
+        <%# onclick="LoginPage()" %>
+         data-turbolinks="false" ><%= image_tag("/assets/login.png") %></div>
       <% end %>
       <% if logged_in? %>
         <span><%= link_to "Log out", logout_path, method: :delete ,class:"loginout" %></span>
       <% else %>
-        <span onclick="LoginPage()" data-turbolinks="false"><a class="loginout">Log in</a></span>
+        <span id="loginout" 
+        <%# onclick="LoginPage()"  %>
+        data-turbolinks="false"><a class="loginout">Log in</a></span>
       <% end %>
       <ul>
         <li><%= link_to image_tag("/assets/facebook.png"),'https://www.facebook.com/' %></li>
@@ -108,13 +112,15 @@
             </ul>
           </li>
         <% else %>
-          <li id="signup-btn" onclick="SignUpPage()"><a id="signup">新規登録</a></li>
+          <li id="signup-btn" 
+          <%# onclick="SignUpPage()" %>
+          ><a id="signup">新規登録</a></li>
         <% end %>
       </ul>
     </div>
   </div>
 
-  <div class="event-modal" id="event-modal" data-modal="content">
+  <div class="event-modal hidden" id="event-modal" data-modal="content">
     <h3>イベント情報入力</h3>
       <%= form_with url: event_confirm_path ,class: "event_container" do |f| %>
         <div class="err_text" id="err_textbox"></div>
@@ -239,10 +245,8 @@
     $("#err_textbox p").remove();
     let _result = true;
     let _e_title = $.trim(str);
-    console.log("unko");
     if(_e_title.match(/^[ \r\n\t]*$/)){
       $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルを入力してください。</p>");
-      console.log("tinko");
       _result = false;
     }else if(_e_title.length > 50){
       $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルは50文字以内で入力してください。</p>");
@@ -286,7 +290,7 @@
     let at_date = $('#created_at_date').val();
     let at_time = $('#created_at_time').val();
     let modal = $('#confi-modal');
-
+    console.log(at_date,at_time);
     if(_type == undefined || !_type.match(/^[0]+$/)){
       if(at_date.length == 0 || at_time.length == 0 ){
         $("#err_radio_item").append("<p><i class=\"fa fa-exclamation-triangle\"></i>日付・時刻を入力してください</p>");
@@ -330,14 +334,12 @@
     $("#err_people p").remove();
     let _result = true;
     let _int = int;
-    console.log(_int);
     if(_int.length != 0 && !_int.match(/^[0-9]+$/)){
       $("#err_people").append("<p><i class=\"fa fa-exclamation-triangle\"></i>半角数字で入力してください。</p>");
       _result = false;
     }
     return _result;
   }
-
 
   function do_check() {
     let result = true;
@@ -446,8 +448,9 @@
 			let dd = createdDate.getDate().toString();
 			let yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
       const createdTime = $('#created_at_time').val();
+      console.log(yyyymmdd + '  ' + createdTime);
       const people = $('#people').val();
-      // const genre = $('#genre_id').val();
+      
       const genreText = $('#genre_id option:selected').text();
       const feel = $('#feel_id').val();
       
@@ -469,6 +472,7 @@
       
 
     });
+  
   });
   
   // イベント登録
@@ -477,14 +481,19 @@
     const eveContent = $("#modalBody").text();
     const eveGenre = $('#genre_id').val();
     const eveFeel = $('#feel_id').val();
-    // 日程どうする
+    const createdDate = new Date($('#created_at_date').val());
+      let year = createdDate.getFullYear().toString();
+			let mm = (createdDate.getMonth() + 1).toString();
+			let dd = createdDate.getDate().toString();
+			let yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
+    const createdTime = $('#created_at_time').val();
+    const eveDate = yyyymmdd + '  ' + createdTime;
     const evePlace = $('#modalPlace').text();
     const evePeople = $("#modalPeople").text();
-    console.log(evePeople); 
     $.ajax({
       type: 'POST',
       url: "/events/create",
-      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople},
+      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople,date: eveDate},
       dataType: "json",
       beforeSend: function(xhr) {
         xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
@@ -493,6 +502,7 @@
       console.log(data);
     });
   });
+  
 
 
   $("#btn_submit").click(function(){
