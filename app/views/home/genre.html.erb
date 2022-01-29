@@ -9,8 +9,8 @@
       <%= link_to ">>",genre_page_path(g) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">
         <ul class="swiper-wrapper swipes">
-          <% @event.where(genre_id: g).order("RANDOM()").limit(6).each do |event| %>
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+          <% g.events.order("RANDOM()").limit(6).each do |event| %>
+          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %><%= event.user.name %></li>
           <% end %>
         </ul>
       </div>

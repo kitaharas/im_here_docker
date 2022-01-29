@@ -10,18 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_11_144417) do
+ActiveRecord::Schema.define(version: 2022_01_01_113732) do
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "event_title"
+    t.integer "user_id"
     t.integer "genre_id"
     t.integer "feel_id"
     t.string "date"
     t.text "content"
     t.string "place"
     t.integer "people"
+    t.string "event_image_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feels", force: :cascade do |t|
@@ -46,11 +48,11 @@ ActiveRecord::Schema.define(version: 2022_01_11_144417) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "password_digest"
     t.text "comment"
     t.string "image_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

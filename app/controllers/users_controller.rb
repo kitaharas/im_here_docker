@@ -24,19 +24,9 @@ class UsersController < ApplicationController
     @followers = @user.follower_user.where.not(id: current_user.id)
   end
 
-  # def new
-  #   @user = User.new
-  # end
-
   def create
-    p "-------------------"
-    p params
-    p "-------------------"
     @user = User.new(user_params)
-    @user.image_name = "default_user.jpg"
-    p "-------------------"
-    p @user
-    p "-------------------"
+    # @user.image_name = "default_user.jpg"
     respond_result(@user)
   end
 
@@ -44,23 +34,13 @@ class UsersController < ApplicationController
     redirect_to root_path unless current_user.id == @user.id
   end
 
+
   def update
-    p "------"
-    p @user
-    p "------"
-    if params[:user][:image_name]
-      p "------"
-      p "TEST"
-      p "------"
-      @user.image_name="#{@user.id}.jpg"
-      image = params[:user][:image_name]
-      File.binwrite("public/user_images/#{@user.image_name}", image.read)
-    end
     redirect_to root_path unless current_user.id == @user.id
     p "------"
     p @user
     p "------"
-    if @user.update(params.require(:user).permit(:comment))
+    if @user.update(update_params)
     p "------"
     p @user
     p "------"
@@ -79,6 +59,10 @@ class UsersController < ApplicationController
                                   :password_confirmation)
     end
 
+    def update_params
+      params.require(:user).permit(:comment, :image_name)
+    end
+
     def user_comment
       params.require(:user).permit(:comment)
     end
@@ -86,6 +70,5 @@ class UsersController < ApplicationController
     def set_user_params
       @user = User.find(params[:id])
     end
-
 
 end

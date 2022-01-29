@@ -93,9 +93,6 @@ function moveSlides(){
   ul.style.transform = `translateX(${-1 * slideWidth * currentIndex}px)`;
 }
 
-// window.addEventListener('resize',() => {
-//   moveSlides();
-// });
 
 
 // イベントモーダル
@@ -126,12 +123,15 @@ function notScroll(){
 
 $(function(){
   
+  
+
   // イベントモーダルスクロール防止
   $('#eventModalUp').on('click', function(){
-     // $('[data-modal="overlay"], [data-modal="content"]').addClass("hidden");
     notScroll();
     $('[data-modal="overlay"], [data-modal="content"]').removeClass("hidden");
   });
+      
+  
   
   // イベントクローズ
   $('#event-close').on('click', function(){

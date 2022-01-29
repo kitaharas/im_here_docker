@@ -9,8 +9,8 @@
        <%= link_to ">>",feel_page_path(f) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">
         <ul class="swiper-wrapper swipes">
-          <% @event.where(feel_id: f).order("RANDOM()").limit(6).each do |event| %>
-          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %></li>
+          <% f.events.order("RANDOM()").limit(6).each do |event| %>
+          <li class="swiper-slide" alt=""><img src="assets/catmovie.png"><%= event.event_title %><%= event.user.name %></li>
           <% end %>
         </ul>
       </div>

@@ -1,0 +1,26 @@
+<% provide(:title, "Search") %>
+<%# <%= javascript_include_tag "slider.js" %>  
+
+
+
+<div class="search-top-section">
+  <p>検索結果<%= @events.count %>件</p>
+  <div class="search-container">
+        <ul class=""> 
+    <% @events.each_with_index do |e| %>
+    <%# <div class="search-content" data-turbolinks="false">  %>
+      
+          <%# <% g.events.order("RANDOM()").limit(6).each do |event|  %>
+         
+           <li class="swiper-slide" alt="">
+            
+            <img src="/assets/catmovie.png">
+            <p><%= e.event_title %></p>
+            <p><%= e.user.name %></p>
+           </li>
+         
+    
+    <% end %>
+        </ul>
+  <%# </div>  %>
+</div>

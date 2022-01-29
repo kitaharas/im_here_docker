@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  get 'home/zoom', to: 'home#zoom', as: 'zoom'
+  
+  get 'events/search', to: 'events#search' , as: 'search_path'
   post 'follow/:id', to: 'relationships#follow', as: 'follow'
   post 'unfollow/:id', to: 'relationships#unfollow', as: 'unfollow'
   get 'users/following/:user_id', to: 'users#following', as:'users_following'
@@ -22,6 +25,9 @@ Rails.application.routes.draw do
   get 'login',   to: 'sessions#new'
   post 'events/new', to: 'events#new', as:'event_new'
   post 'events/confirm', to: 'events#confirm', as:'event_confirm'
+  get 'events/:id/edit', to:'events#edit', as: :edit_event
+  patch 'events/:id/edit', to: 'events#update', as: :update_event
+  get 'events/:id', to: 'events#show', as: 'eventpage'
   post 'events/create', to: 'events#create', as:'event_create'
   post 'sessions/create',   to: 'sessions#create'
   delete 'logout',  to: 'sessions#destroy'

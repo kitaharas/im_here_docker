@@ -30,14 +30,14 @@
         <li id="signup-about">
           <div class="list-area">
             <h2><img src="/assets/logo.png"></h2>
-            <p>は誰でも&nbsp;誰とでも繋がれるコミュニティツールです!</p>
+            <p>は誰でも&nbsp;誰とでも繋がれるマッチングツールです!</p>
           </div>
         </li>
         <li id="signup-about2">
           <div class="list-area2">
             <h2><img src="/assets/logo.png"></h2>
-            <p>を使って、レッスンに参加したり、<br>
-              自分の演奏を披露したりすることが出来ます。
+            <p>を使って、イベントを告知したり、<br>
+              自分のスキルを求めている人と接点を持つ事ができます。
             </p>
             <p>
               また、新たなコミュニティを通じて自身の可能性を<br>
@@ -69,10 +69,16 @@
   <div id="mask" class="hidden" data-modal="overlay"></div>
   
   <div class="status_bar">
-    <form method="get" action="#" class="search_container" id="search_container">
-      <input type="text" size="25" placeholder="キーワード検索">
+    <%= form_tag(search_path_url,:method => 'get',class:"search_container",id:"search_container") do %>
+      <%= text_field_tag :search ,'',size:25, placeholder:"キーワード検索" %>
       <input type="submit"  value="&#xf002">
-    </form>
+      <%# <%= submit_tag '&#xf002', :name => nil %> 
+    <% end %>
+
+    <%# <form method="get" action="search_path" class="search_container" id="search_container">
+      <input type="text" name="session[email]" size="25" placeholder="キーワード検索">
+      <input type="submit"  value="&#xf002">
+    </form> %>
     <div class="status_bar_right" id="status_bar_right">
       <% if logged_in? %>
         <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
@@ -85,7 +91,6 @@
         <span><%= link_to "Log out", logout_path, method: :delete ,class:"loginout" %></span>
       <% else %>
         <span id="loginout" 
-        <%# onclick="LoginPage()"  %>
         data-turbolinks="false"><a class="loginout">Log in</a></span>
       <% end %>
       <ul>
@@ -178,15 +183,13 @@
         </div> %>
         <input type="submit" value="イベント登録" onclick="do_submit(this);return false;" id="event_confirm">
       <% end %>
-        <%# <div>
-        <label for="regularly">定期開催</label>
-        <input id="regularly" type="checkbox">
-      </div> %>
     </form>
     <div id="event-close">
       閉じる
     </div>
   </div>
+
+
 
 
 
@@ -216,7 +219,7 @@
           <p class="px-2" id="modalFeel"></p>
         </div>
         <div>
-          <p class="text-muted">日にち</p>
+          <p class="text-muted">日時</p>
           <p class="px-2" id="modalDate"></p>
           <div class="px-2" id="modalDateContent">
           <p id="modalFullDate"></p>
@@ -238,333 +241,6 @@
   <div id="confi-mask" class="hidden"></div>
 </header>
 
-<script>
-
-  // イベントタイトルチェック
-  function check_e_title(str){
-    $("#err_textbox p").remove();
-    let _result = true;
-    let _e_title = $.trim(str);
-    if(_e_title.match(/^[ \r\n\t]*$/)){
-      $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルを入力してください。</p>");
-      _result = false;
-    }else if(_e_title.length > 50){
-      $("#err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>タイトルは50文字以内で入力してください。</p>");
-      _result = false;
-    }
-    return _result;
-  }
-
-  // イベントコンテントチェック
-  function check_e_memo(str){
-    $("#err_textarea p").remove();
-    let _result = true;
-    let _e_memo = $.trim(str);
-    if(_e_memo.length == 0){
-      $("#err_textarea").append("<p><i class=\"fa fa-exclamation-triangle\"></i>テキストエリアを入力してください。</p>");
-      _result = false;
-    }else if(_e_memo.length > 1000){
-      $("#err_textarea").append("<p><i class=\"fa fa-exclamation-triangle\"></i>テキストエリアは1000文字以内で入力してください。</p>");
-      _result = false;
-    }
-    return _result;
-  }
-
-  // ジャンルセレクトチェック
-  function check_genre_id(id){
-    $("#err_category p").remove();
-    let _result = true;
-    let _id = id;
-    if(!_id.match(/^[0-9]+$/)){
-      $("#err_category").append("<p><i class=\"fa fa-exclamation-triangle\"></i>ジャンルを選択してください。</p>");
-      _result = false;
-    }
-    return _result;
-  }
-
-  // 日時指定チェック
-  function check_radio_item(type){
-    $("#err_radio_item p").remove();
-    let _result = true;
-    let _type = type;
-    let at_date = $('#created_at_date').val();
-    let at_time = $('#created_at_time').val();
-    let modal = $('#confi-modal');
-    console.log(at_date,at_time);
-    if(_type == undefined || !_type.match(/^[0]+$/)){
-      if(at_date.length == 0 || at_time.length == 0 ){
-        $("#err_radio_item").append("<p><i class=\"fa fa-exclamation-triangle\"></i>日付・時刻を入力してください</p>");
-        _result = false;
-      }
-      modal.find('#modalDate').css("display", "none");
-      modal.find('#modalDateContent').css("display", "flex");
-    } else {
-      const date = "今すぐ";
-      modal.find('#modalDate').text(date);
-      modal.find('#modalDate').css("display", "block");
-      modal.find('#modalDateContent').css("display", "none");
-    }
-    return _result;
-  }
-
-  // 方法チェック
-  function check_radio_item2(type){
-    $("#err_radio_item2 p").remove();
-    let _result = true;
-    let _type = type;
-    let at_place = $('#place').val();
-    let modal = $('#confi-modal');
-
-    if(_type == undefined || !_type.match(/^[0]+$/)){
-      if(at_place.length == 0 ){
-        $("#err_radio_item2").append("<p><i class=\"fa fa-exclamation-triangle\"></i>場所を入力してください</p>");
-        _result = false;
-      }
-      const place = $('#place').val();
-      modal.find('#modalPlace').text(place);
-    } else {
-      const place = "オンライン";
-      modal.find('#modalPlace').text(place);
-    }
-    return _result;
-  }
-
-  // 人数半角数字チェック
-  function check_people(int){
-    $("#err_people p").remove();
-    let _result = true;
-    let _int = int;
-    if(_int.length != 0 && !_int.match(/^[0-9]+$/)){
-      $("#err_people").append("<p><i class=\"fa fa-exclamation-triangle\"></i>半角数字で入力してください。</p>");
-      _result = false;
-    }
-    return _result;
-  }
-
-  function do_check() {
-    let result = true;
-    let check_result = true;
-
-    // エラーメッセージ初期化
-    $(".err_text").empty();
-
-    // テキストボックス
-    let _e_title = $("#e_title").val();
-    console.log(_e_title);
-    result = check_e_title(_e_title);
-    if(!result){
-      check_result = result;
-    }
-
-    // セレクトボックス
-    let _genre_id = $("#genre_id").val();
-    result = check_genre_id(_genre_id);
-    if(!result){
-      check_result = result;
-    }
-
-    // 人数
-    let _people = $("#people").val();
-    result = check_people(_people);
-    if(!result){
-      check_result = result;
-    }
-
-    // ラジオボタン
-    let _radio_item = $("input[name='date']:checked").val();
-    result = check_radio_item(_radio_item);
-    if(!result){
-      check_result = result;
-    }
-    // ラジオボタン方法
-    let _radio_item2 = $("input[name='line']:checked").val();
-    result = check_radio_item2(_radio_item2);
-    if(!result){
-      check_result = result;
-    }
-
-    // テキストエリア
-    let _e_memo = $("#e_memo").val();
-    result = check_e_memo(_e_memo);
-    if(!result){
-      check_result = result;
-    }
-
-    if(!result){
-      check_result = result;
-    }
-
-    return check_result;
-  }
-
-  function do_submit(btn){
-    $(btn).css("pointer-events", "none");
-    let result = do_check();
-
-    if(result){
-      goEvent();
-      $(btn).css("pointer-events", "inherit");
-    }else{
-      $(btn).css("pointer-events", "inherit");
-    }
-  }
 
 
-
-
-  $(function(){
-    $( 'input[name="date"]:radio').change(function(){
-      let radioval = $(this).val();
-      if(radioval == 1){
-        $('#created_at_date').removeAttr('disabled');
-        $('#created_at_time').removeAttr('disabled');
-      } else {
-        $('#created_at_date').attr('disabled','disabled');
-        $('#created_at_time').attr('disabled','disabled');
-      }
-    });
-  });
-
-  $(function(){
-    $( 'input[name="line"]:radio').change(function(){
-      let radioval = $(this).val();
-      if(radioval == 1){
-        $('#place').removeAttr('disabled');
-      } else {
-        $('#place').attr('disabled','disabled');
-      }
-    });
-  });
-
-  $(function(){
-    $('#event_confirm').on('click',function(){
-      let title = $('#e_title').val();
-      let body = $('#e_memo').val();
-      let modal = $('#confi-modal');
-
-      const createdDate = new Date($('#created_at_date').val());
-      let year = createdDate.getFullYear().toString();
-			let mm = (createdDate.getMonth() + 1).toString();
-			let dd = createdDate.getDate().toString();
-			let yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
-      const createdTime = $('#created_at_time').val();
-      console.log(yyyymmdd + '  ' + createdTime);
-      const people = $('#people').val();
-      
-      const genreText = $('#genre_id option:selected').text();
-      const feel = $('#feel_id').val();
-      
-      if (feel.length == 0){
-        const feelText = "指定なし";
-        modal.find('#modalFeel').text(feelText);
-      } else {
-        const feelText = $('#feel_id option:selected').text();
-        modal.find('#modalFeel').text(feelText);
-      }
-        
-
-      modal.find('#modalTitle').text(title);
-      modal.find('#modalBody').text(body);
-      modal.find('#modalFullDate').text(yyyymmdd);
-      modal.find('#modalTime').text(createdTime);
-      modal.find('#modalPeople').text(people);
-      modal.find('#modalGenre').text(genreText);
-      
-
-    });
-  
-  });
-  
-  // イベント登録
-  $("#event_create").click(function(){
-    const eveTitle = $("#modalTitle").text();
-    const eveContent = $("#modalBody").text();
-    const eveGenre = $('#genre_id').val();
-    const eveFeel = $('#feel_id').val();
-    const createdDate = new Date($('#created_at_date').val());
-      let year = createdDate.getFullYear().toString();
-			let mm = (createdDate.getMonth() + 1).toString();
-			let dd = createdDate.getDate().toString();
-			let yyyymmdd = year + '年' + (mm[1]?mm:"0"+mm[0]) + '月' + (dd[1]?dd:"0"+dd[0]) + '日';
-    const createdTime = $('#created_at_time').val();
-    const eveDate = yyyymmdd + '  ' + createdTime;
-    const evePlace = $('#modalPlace').text();
-    const evePeople = $("#modalPeople").text();
-    $.ajax({
-      type: 'POST',
-      url: "/events/create",
-      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople,date: eveDate},
-      dataType: "json",
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
-      },
-    }).done(function(data){
-      console.log(data);
-    });
-  });
-  
-
-
-  $("#btn_submit").click(function(){
-    const email = $("#user_email").val();
-    const password = $("#user_password").val();
-    $.ajax({
-      type: 'POST', //post,get
-      url: "/sessions/create",
-      data: {email: email, password: password},//user[name]
-      dataType: "json",
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
-      },
-    }).done(function(data){
-      console.log(data.error);
-      if (data.message === "error"){
-        console.log("komatta");
-        $(".form-error").addClass('error-message');
-      } else if (data.message === "success"){
-        window.location.replace('<%= root_path %>');
-      } 
-    });
-      // console.log($("#user_name").val());
-  });
-
-
-
-  $("#signup-btn").click(function(){
-    const name = $("#user_new_name").val();
-    const email = $("#user_new_email").val();
-    const password = $("#user_new_password").val();
-    const passconfi = $("#user_new_passconfi").val();
-    $.ajax({
-      type: 'POST', //post,get
-      url: "/users/create",
-      data: {name: name, email: email, password: password, password_confirmation: passconfi},//user[name]
-      dataType: "json",
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
-      },
-    }).done(function(data){
-      if (data.message === "success"){
-        // console.log(data);
-        sessionStorage.setItem('occupation','new_login');
-        
-        window.location.replace('<%= root_path %>');
-       
-        
-      } else {
-        console.log(data);
-        alert(data.error);
-      } 
-      //alert(data.user.name + "で登録されました！")
-    });
-    // console.log($("#user_name").val());
-
-  });
-  window.addEventListener('load',()=>{
-    if (sessionStorage.getItem('occupation') === 'new_login'){
-      ModalApp();
-      SignUpGaid();
-      sessionStorage.removeItem('occupation')
-    }
-  });
-</script>
+<%= render 'layouts/headerjs' %>

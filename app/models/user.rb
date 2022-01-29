@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-
+  mount_uploader :image_name, ImageUploader
 
 
   # フォローした時の処理

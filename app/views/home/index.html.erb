@@ -1,11 +1,24 @@
 
+
 <div class="top-section">
+
+<%= link_to  "go!",@REQUESTURI %>
+<%= link_to  "go!!!!!!",@REQUESTURI2 %>
+  <% if params[:code] %>
+    <%= params[:code] %>
+  <% end %>
+  <% if params[:authorization_code] %>
+    <%= params[:authorization_code] %>
+  <% end %>
+  
   <div class="content-text">
+
+
     <p><span style=
       "font-family: 'Chewy', cursive;
         color:white">I'm here!</span>&nbsp;は&nbsp;<span style="color: yellow;">誰でも</span></p>
     <p><span style="color: yellow;">誰とでも</span>繋がれる</p>
-    <p><span>コミュニティ</span>ツールです。</p>
+    <p><span>マッチング</span>ツールです。</p>
   </div>
   <div class="top-img">
     <img src="/assets/pc-woman.jpg">

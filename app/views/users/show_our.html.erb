@@ -4,10 +4,10 @@
 <div class="my-page-section">
   <div class="profile">
     <div class="profile-img">
-      <% if @user.image_name == "default_user.jpg"%>
-        <img src="/assets/catman">
+      <% if @user.image_name.size == 0 %>
+        <%= image_tag "/assets/catman" %>
       <% else %>
-        <img src="<%= "/user_images/#{@user.image_name}"%>" >
+        <%= image_tag @user.image_name.url %>
       <% end %>
     </div>
     <p><%= @user.name %></p>
@@ -140,18 +140,25 @@
 
       follow_btn.addEventListener('click',()=>{
         if (follow_btn.classList.contains('unlock')){
+          notScroll();
           f.querySelector('.follow-modal').classList.remove('hidden');
           document.getElementById('mask').classList.remove('hidden');
         } 
 
       })
       cancel.addEventListener('click', ()=>{
+        $('body').attr('style', '');
+        $('header').attr('style', '');
+        $('html, body').prop({scrollTop: posi});
         f.querySelector('.follow-modal').classList.add('hidden');
         document.getElementById('mask').classList.add('hidden');
         
       });
     })
-    
+
+
+
+
 
     $("#follow-button_<%= @user.id %>").html("<%= j(render 'users/follow-button', user: @user) %>");
     $("#follow-button_<%= @user.id %>").html("<%= j(render 'users/follow-button', user: @user) %>");

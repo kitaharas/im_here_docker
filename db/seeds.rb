@@ -19,12 +19,23 @@ end
 end
 
 (1..50).each do |n|
+  User.create!(
+    name: "test#{n}",
+    email: "test#{n}@test.com",
+    password: "test#{n}@test.com",
+    password_confirmation: "test#{n}@test.com"
+  )
+end
+
+(1..50).each do |n|
   Event.create!(
     event_title: "event#{n}",
     genre_id: (n % 6) + 1,
-    feel_id: (n % 6) + 1
+    feel_id: (n % 6) + 1,
+    user_id: (n % 6) + 1
   )
 end
+
 
 
 

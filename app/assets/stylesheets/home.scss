@@ -614,7 +614,7 @@ header{
     .status_bar_right{
       height: 60px;
       margin-left:auto;
-      width: 330px;
+      width: 340px;
       display: flex;
       flex-wrap:wrap;
       align-items: center;
@@ -725,7 +725,7 @@ header{
   .content-text{
     font-size: 40px;
     position: absolute;
-    top: 235px;
+    top: 196px;
     max-width: 1358px;
     left: 11.63%;
     color: white;
@@ -982,12 +982,42 @@ header{
 }
 
 
+// searchページ
+.search-top-section{
+  padding-top:20px;
+  background-color: $green;
+  position: relative;
+  height: 2000px;
+  p {
+    margin-left: 20px;
+  }
+  .search-container{
+    
+    & ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      & li {
+        width :30%;
+        text-align: center;
+        margin: 0 5px 10px 5px;
+        max-height: 230px;
+        max-width: 230px;
+        & img {
+          max-height: 170px;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
+
 // aboutページ
 
 .about-top-section{
   background-color: $green;
   position: relative;
-  height: 610px;
+  height: 800px;
   .about-content-text{
     text-align: center;
     font-size: 24px;
@@ -1007,7 +1037,7 @@ header{
   .videochat2{
     width:220px;
     position: absolute;
-    top: 67%;
+    top: 71%;
     left: 30%;
   }
 }
@@ -1018,7 +1048,7 @@ header{
   padding-top:20px;
   background-color: $green;
   position: relative;
-  height: 610px;
+  // height: 2000px;
   h3{
     margin: 20px 0 0 0;
   }
@@ -1082,10 +1112,10 @@ header{
 
 
 .edit-page-section{
-  height: 610px;
+  height: 750px;
   & .profile{
     & .profile-img{
-      
+      margin: 20px auto 10px;
       // display: flex;
       // align-items: flex-end;
       width:245px;
@@ -1157,7 +1187,7 @@ header{
   }
   & .profile-coment{
     overflow-wrap: anywhere;
-    width:300px;
+    width:340px;
     margin: 0 auto 20px;
     & .edit-error{
       color:red;

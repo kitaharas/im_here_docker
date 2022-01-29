@@ -658,7 +658,7 @@ header .status_bar .search_container input[type="submit"]:hover {
 header .status_bar .status_bar_right {
   height: 60px;
   margin-left: auto;
-  width: 330px;
+  width: 340px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -792,7 +792,7 @@ header .global-menu ul a:hover {
 .top-section .content-text {
   font-size: 40px;
   position: absolute;
-  top: 235px;
+  top: 196px;
   max-width: 1358px;
   left: 11.63%;
   color: white;
@@ -1106,10 +1106,46 @@ header .global-menu ul a:hover {
   background: #d4599f;
 }
 
+.search-top-section {
+  padding-top: 20px;
+  background-color: #4b9a27;
+  position: relative;
+  height: 2000px;
+}
+
+.search-top-section p {
+  margin-left: 20px;
+}
+
+.search-top-section .search-container ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.search-top-section .search-container ul li {
+  width: 30%;
+  text-align: center;
+  margin: 0 5px 10px 5px;
+  max-height: 230px;
+  max-width: 230px;
+}
+
+.search-top-section .search-container ul li img {
+  max-height: 170px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .about-top-section {
   background-color: #4b9a27;
   position: relative;
-  height: 610px;
+  height: 800px;
 }
 
 .about-top-section .about-content-text {
@@ -1133,7 +1169,7 @@ header .global-menu ul a:hover {
 .about-top-section .videochat2 {
   width: 220px;
   position: absolute;
-  top: 67%;
+  top: 71%;
   left: 30%;
 }
 
@@ -1141,7 +1177,6 @@ header .global-menu ul a:hover {
   padding-top: 20px;
   background-color: #4b9a27;
   position: relative;
-  height: 610px;
 }
 
 .genre-top-section h3 {
@@ -1209,10 +1244,11 @@ header .global-menu ul a:hover {
 }
 
 .edit-page-section {
-  height: 610px;
+  height: 750px;
 }
 
 .edit-page-section .profile .profile-img {
+  margin: 20px auto 10px;
   width: 245px;
 }
 
@@ -1287,7 +1323,7 @@ header .global-menu ul a:hover {
 
 .profile .profile-coment {
   overflow-wrap: anywhere;
-  width: 300px;
+  width: 340px;
   margin: 0 auto 20px;
 }
 

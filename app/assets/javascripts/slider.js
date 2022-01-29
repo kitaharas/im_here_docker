@@ -10,7 +10,7 @@ $(document).on('turbolinks:load', function() {
         loop: true,
         grabCursor: true,
         effect: 'slide',
-        slidesPerView: 3.5,
+        slidesPerView: 4.5,
         spaceBetween: 10,
         speed: 1000,
       });

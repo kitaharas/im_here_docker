@@ -4,10 +4,10 @@
 <div class="my-page-section">
   <div class="profile">
     <div class="profile-img">
-      <% if @user.image_name == "default_user.jpg"%>
-        <img src="/assets/catman">
+      <% if @user.image_name.size == 0 %>
+        <%= image_tag "/assets/catman" %>
       <% else %>
-        <img src="<%= "/user_images/#{@user.image_name}"%>" >
+        <%= image_tag @user.image_name.url %>
       <% end %>
     </div>
     <p><%= @user.name %></p>
