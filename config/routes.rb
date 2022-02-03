@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   post '/', to: 'home#index'
   get 'users/:id/edit', to: 'users#edit' , as: :edit_user
   patch 'users/:id/edit', to: 'users#update', as: :update_user
-  get 'users/:id', to: 'users#show', as: 'mypage'
   get 'users/:id/our', to: 'users#show_our', as: 'show_our'
+  get 'users/:id/view', to: 'users#show_view', as: 'userpage'
+  get 'users/:id', to: 'users#show', as: 'mypage'
   get 'login',   to: 'sessions#new'
   post 'events/new', to: 'events#new', as:'event_new'
   post 'events/confirm', to: 'events#confirm', as:'event_confirm'

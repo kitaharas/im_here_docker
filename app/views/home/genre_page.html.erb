@@ -12,11 +12,11 @@
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |e| %>
+          <% @event[0..5].each do |event| %>
             <li class="swiper-slide" alt="">
             <img src="/assets/catmovie.png">
-            <%= e.event_title %>
-            <%= e.user.name %>
+            <%= link_to event.event_title , "/events/#{event.id}" %>
+            <%= event.user.name %>
           </li>
           <% end %>
         </ul>
@@ -27,9 +27,10 @@
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |e| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %>
-          <%= e.user.name %>
+          <% @event[0..5].each do |event| %>
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
+          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= event.user.name %>
           </li>
           <% end %>
         </ul>
@@ -38,9 +39,10 @@
     <div class="hero">
       <div class="swiper" id="swiper1">
         <ul class="swiper-wrapper swipes">
-          <% @event[6..11].each do |e| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %>
-          <%= e.user.name %>
+          <% @event[6..11].each do |event| %>
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
+          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= event.user.name %>
           </li>
           <% end %>
         </ul>
@@ -51,9 +53,10 @@
     <div class="hero">
       <div class="swiper" id="swiper0">
         <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |e| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %>
-          <%= e.user.name %>
+          <% @event[0..5].each do |event| %>
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
+          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= event.user.name %>
           </li>
           <% end %>
         </ul>
@@ -62,9 +65,10 @@
     <div class="hero">
       <div class="swiper" id="swiper1">
         <ul class="swiper-wrapper swipes">
-          <% @event[6..11].each do |e| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %>
-          <%= e.user.name %>
+          <% @event[6..11].each do |event| %>
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
+          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= event.user.name %>
           </li>
           <% end %>
         </ul>
@@ -73,9 +77,10 @@
     <div class="hero">
       <div class="swiper" id="swiper2">
         <ul class="swiper-wrapper swipes">
-          <% @event[12..17].each do |e| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png"><%= e.event_title %>
-          <%= e.user.name %>
+          <% @event[12..17].each do |event| %>
+          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
+          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= event.user.name %>
           </li>
           <% end %>
         </ul>

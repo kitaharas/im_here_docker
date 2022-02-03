@@ -202,19 +202,6 @@
       let body = $('#e_memo').val();
       let modal = $('#confi-modal');
 
-      // const d = new Date();
-      // let y = d.getFullYear().toString();
-      // let m = (d.getMonth() + 1).toString();
-      // let da = d.getDate().toString();
-      // let ymd = y + '年' + (m[1]?m:"0"+m[0]) + '月' + (da[1]?da:"0"+da[0]) + '日';
-      
-      // let h = d.getHours().toString();
-      // let mi = d.getMinutes().toString();
-      // let hmi = (h[1]?h:"0"+h[0]) + ':' + (mi[1]?mi:"0"+mi[0]);
-      // let ymdhmi = ymd + "  " + hmi;
-      
-      // console.log(ymdhmi);
-
 
 
 
@@ -285,17 +272,22 @@
 
     const evePlace = $('#modalPlace').text();
     const evePeople = $("#modalPeople").text();
-    const userId = <%= current_user.id %>
     $.ajax({
       type: 'POST',
       url: "/events/create",
-      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople,date: eveDate,user_id: userId},
+      data: {event_title: eveTitle, content: eveContent, genre_id: eveGenre, feel_id: eveFeel, place: evePlace,people: evePeople,date: eveDate},
       dataType: "json",
       beforeSend: function(xhr) {
         xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'))
       },
     }).done(function(data){
       console.log(data);
+      if (data.message === "success"){
+        window.location.replace(`/events/${data.id}`);
+      } else {
+        console.log(data);
+        alert(data.error);
+      } 
     });
   });
   

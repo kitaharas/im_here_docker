@@ -20,11 +20,10 @@ class EventsController < ApplicationController
   # end
 
   def create
-    # @event = current_user.event.build(event_params)
-    @event = Event.new(event_params)
+    @event = current_user.events.build(event_params)
     if @event.save
       respond_to do |format|
-        format.json { render json: {message: "success"} }
+        format.json { render json: {message: "success", id:@event.id } }
       end
     else
       respond_to do |format|
@@ -45,15 +44,16 @@ class EventsController < ApplicationController
   end
 
   def update
-    redirect_to root_path unless current_user.id == @user.id
+    # redirect_to root_path unless current_user.id == @user.id
+    @event = Event.find(params[:id])
     p "------"
-    p @user
+    p @event
     p "------"
-    if @user.update(update_params)
+    if @event.update(update_params)
     p "------"
-    p @user
+    p @event
     p "------"
-    redirect_to mypage_path
+    redirect_to eventpage_path
     else
     render("events/edit")
     end
@@ -65,11 +65,11 @@ class EventsController < ApplicationController
 
   private
     def event_params
-      params.permit(:event_title,:genre_id,:feel_id,:date,:content,:place,:people,:user_id)
+      params.permit(:event_title,:genre_id,:feel_id,:date,:content,:place,:people)
     end
 
     def update_params
-      params.require(:event).permit(:image_name)
+      params.fetch(:event,{}).permit(:event_image_name,:content,:event_title)
     end
 
 

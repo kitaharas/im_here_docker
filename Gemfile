@@ -35,8 +35,8 @@ gem 'jquery-ui-rails'
 gem 'jwt'
 gem 'openssl'
 gem 'dotenv-rails'
-
-
+gem 'pry-rails'
+gem 'active_hash'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

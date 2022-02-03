@@ -13,9 +13,6 @@
     <p><%= @user.name %></p>
     <div >
       <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
-      <%= link_to show_our_path do %>
-        <button class="follow_viewer">一覧</button>
-      <% end %>
     </div>
     <div class="profile-coment">
       <% if @user.comment == nil || @user.comment == "" %>
@@ -30,33 +27,26 @@
   <div class="event-display">
     <div class="event-container">
       <ul class="tab-menu">
-        <li><a class="active" data-id="event">フォロー開催中</a></li>
-        <li><a data-id="schedule">スケジュール</a></li>
+        <%# <li><a class="active" data-id="event">フォロー開催中</a></li> %>
+        <li><a data-id="schedule">開催イベント</a></li>
       </ul>
-      <section class="content active" id="event">
+      <%# <section class="content active" id="event">
         開催中のイベントはありません
-      </section>
-      <section class="content" id="schedule">
+      </section> %>
+      <section class="content active" id="schedule">
         <% if @user.events.count == 0 %>
           登録されているスケジュールはありません
         <% else %>
           <% @user.events.each do |e| %>
             <div class="follower_view">
-                <div class="follower">
-                  <%= link_to "/events/#{e.id}" do %>
-                    <p><%= e.event_title %></p>
-                    <p><%= e.date %></p>
-                  <% end %>
-             
-                </div>
-                <div class="follow-modal hidden">
-                  
-                 
-                    <div class="unlock-btn">フォロー解除</div>
-                 
-                  <div class="unlock-btn cancel">キャンセル</div>
-                </div>
+              <div class="follower">
+                <%= link_to "/events/#{e.id}" do %>
+                  <p><%= e.event_title %></p>
+                  <p><%= e.date %></p>
+                <% end %>
+            
               </div>
+            </div>
             <% end %>
           <% end %>
       </section>
@@ -64,7 +54,7 @@
   </div>
 </div>
 
-<script>
+<%# <script>
 // タブメニュー
 $(document).on('turbolinks:load', function() { 
   const menuItems = document.querySelectorAll('.tab-menu li a');
@@ -88,4 +78,4 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-</script>
+</script> %>

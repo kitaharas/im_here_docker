@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 2022_01_01_113732) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.string "genre_title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  # create_table "genres", force: :cascade do |t|
+  #   t.string "genre_title"
+  #   t.datetime "created_at", null: false
+  #   t.datetime "updated_at", null: false
+  # end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"

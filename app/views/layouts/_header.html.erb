@@ -75,16 +75,13 @@
       <%# <%= submit_tag '&#xf002', :name => nil %> 
     <% end %>
 
-    <%# <form method="get" action="search_path" class="search_container" id="search_container">
-      <input type="text" name="session[email]" size="25" placeholder="キーワード検索">
-      <input type="submit"  value="&#xf002">
-    </form> %>
+
     <div class="status_bar_right" id="status_bar_right">
       <% if logged_in? %>
         <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
       <% else %>
         <div class="acount-logo" id="acount-logo" 
-        <%# onclick="LoginPage()" %>
+ 
          data-turbolinks="false" ><%= image_tag("/assets/login.png") %></div>
       <% end %>
       <% if logged_in? %>
@@ -199,7 +196,7 @@
         よろしいですか？
       </p>
     </div>
-    <button id="event_create"></button>
+    <button id="event_create">登録</button>
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-body">
         <div>

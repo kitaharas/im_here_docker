@@ -83,6 +83,11 @@ button {
   }
 }
 
+.edit-error{
+  color:red;
+  font-size: 14px;
+}
+
 .space{
   margin-right: 10px;
 }
@@ -494,6 +499,13 @@ button {
   pointer-events:painted;
   display: block;
   height: 602px;
+  & #event_create{
+    position: absolute;
+    right: 121px;
+    top: 27px;
+    width: 136px;
+    background-color:$ruby;
+  }
 }
 .modal-body{
   margin: 30px 50px;
@@ -1084,6 +1096,7 @@ header{
     object-fit: cover;
     object-position: 50% 20%;
     transition: transform 1.9s ease;
+    position: relative;
   }
 
   &::after{
@@ -1094,6 +1107,7 @@ header{
     width:100%;
     height:100%;
     background-color: rgba(0,61,125,0.1);
+    z-index: -1;
   }
 
   &-active{
@@ -1105,7 +1119,7 @@ header{
 
 .my-page-section{
   display: flex;
-  height: 610px;
+  min-height: 610px;
 }
 
 // editページ
@@ -1189,10 +1203,7 @@ header{
     overflow-wrap: anywhere;
     width:340px;
     margin: 0 auto 20px;
-    & .edit-error{
-      color:red;
-      font-size: 14px;
-    }
+    
     & .profile-comment-text{
       text-align: left;
     }
@@ -1256,6 +1267,17 @@ header{
     display: inline-block;
     line-height: 50px;
   }
+  a {
+    line-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    & p:first-child{
+      width: 60%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
   & .follow-btn{
     border:solid 1px black;
     border-radius: 15px;
@@ -1284,7 +1306,248 @@ header{
 }
     
 
+// イベントページ
+.event-title-bar{
+  display: flex;
+  justify-content: space-between;
+  height: 180px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  p {
+    padding: 20px 0 0 0;
+    color: grey;
+  }
+  h2{
+    margin: 0;
+    padding: 0 0 20px 0;
+  }
+  button{
+    width: 100px;
+    border-radius: 18px;
+    height: 44px;
+    border: 1px solid black;
+    color:black;
+  }
+  button.btn-edit{
+    background-color:yellow;
+    margin-right: 30px;
+  }
+  button.btn-pub{
+    background-color: orange;
+    
+  }
+  
+  .event-title-right{
+    display: flex;
+    align-items: center;
+  }
 
+}
+#fixed-navbar{
+  width:100vw;
+  background-color: white;
+  position: fixed;
+  z-index: 20;
+  top:122px;
+  opacity: 0;
+  transition: .3s;
+  pointer-events: none;
+  .event-navbar{
+    max-width: 1100px;
+    margin:0 auto;
+    display:flex;
+    justify-content: space-between;
+    .edit-link{
+      padding:17px 0;
+      a{
+        display: inline-block;
+        margin-right: 30px;
+      }
+    }
+    h2{
+      margin: 0;
+    }
+    p{
+      color:grey;
+    }
+    button{
+      width: 87px;
+      border-radius: 8px;
+      height: 30px;
+      border: 1px solid black;
+      color:black;
+     
+  
+    }
+    button.btn-edit{
+      background-color:yellow;
+   
+    
+    }
+    button.btn-pub{
+      background-color: orange;
+     
+    }
+  } 
+}
+#fixed-navbar.varopen{
+  opacity: 1;
+  box-shadow:0 1px 3px 0 gray ;
+  pointer-events: visible;
+}
+.event-user-plofile{
+  display: flex;
+  
+  & p {
+    line-height: 50px;
+    padding: 0 0 0 20px;
+  }
+}
+.event-plofile-img{
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.event-contents-section{
+  border-top:solid 1px rgb(116, 117, 115);
+  background-color: rgba(239, 241, 239, 0.663);
+}
+.event-top-section{
+  margin: 0 auto;
+  max-width: 1100px;
+  // border: 30px solid $green;
+  display: flex;
+  padding-top: 40px;
+  position: relative;
+  .event-content-left{
+    flex:1.7;
+    .event-image{
+      height: 200px;
+      display: block;
+      width: 500px;
+      & img{
+      height:200px;
+      object-fit: cover;
+      }
+    }
+    .event-title{
+      width: 80%;
+      border-bottom:2px solid black ;
+      padding-left: 5px;
+      word-break: break-all;
+
+      h2{
+        margin: 0;
+      }
+      .event-title-form{
+        line-height: 32px;
+        font-size: 1em;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    .event-text{
+      
+      padding:5px;
+      width: 80%;
+      overflow-wrap: break-word;
+      margin-bottom:80px;
+      .event-content-text{
+        font-size: 1em;
+        width: 100%;
+        box-sizing: border-box;
+        
+        
+      }
+    }
+  }
+  #event-nav-right{
+    
+    flex:1;
+    position: relative;
+    width: 360px;
+    outline: solid;
+  }
+  .event-content-right{
+    
+    position: sticky;
+    top:200px;
+    .event-user-block{
+      background-color: white;
+      width: 360px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      & .event-user-plofile {
+        padding: 30px;
+      }
+    }
+    .event-data-block{
+      background-color: white;
+      width: 360px;
+      border-radius: 8px;
+      padding: 60px 0;
+    }
+    span {
+      position: absolute;
+      font-size: 14px;
+      color: grey;
+      left:50%;
+      transform: translateX(-50%);
+    }
+    .event-thumbnail{
+      width: 300px;
+      margin: 20px auto 0;
+      height: 290px;
+      border: 2px solid grey;
+      border-radius: 6px;
+      overflow: hidden;
+      .event-thumb-image{
+        padding: 10px;
+        img{
+          object-fit: cover;
+          height: 116px;
+          width: 254px;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      .event-thumb-text{
+        padding:0 20px;
+        h3{
+          margin:0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        p {
+          overflow: hidden;
+          overflow-wrap: break-word;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }  
+      }
+      .event-edit-image{
+        padding: 10px;
+        & img{
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+    input[type="file"]{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-25%)
+    }
+    
+  }
+}
 
 
 

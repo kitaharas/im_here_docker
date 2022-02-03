@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
   mount_uploader :image_name, ImageUploader
 
+  has_many :events, class_name: "Event"
 
   # フォローした時の処理
   def follow(user_id)

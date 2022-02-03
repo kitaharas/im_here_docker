@@ -1,5 +1,12 @@
 class Event < ApplicationRecord
-  belongs_to :genre
+
+  validates :event_title, length: {maximum: 50}
+
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :genre
+
+
   belongs_to :feel, optional: true
   belongs_to :user, class_name: "User", foreign_key: "user_id"
 

@@ -15,6 +15,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show_view
+    @user = User.find(params[:id])
+    if current_user.id == @user.id
+      redirect_to mypage_path
+    end
+  end
+
   def following
     @followings = @user.following_user.where.not(id: current_user.id)
   end

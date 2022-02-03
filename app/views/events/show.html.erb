@@ -1,6 +1,137 @@
-<div class="genre-top-section">
-  <%= @event.event_title %>
+<div class="event-title-bar">
+  <div>
+    <p><%= @event.date %></p>
+    <h2><%= @event.event_title %></h2>
+    <%= link_to "/users/#{@event.id}" do %>
+      <div class="event-user-plofile">
+        <% if @event.event_image_name.size == 0 %>
+          <img src="/assets/catman" class="event-plofile-img">
+        <% else %>
+          <img src="<%= @event.user.image_name %>" class="event-plofile-img">
+        <% end %>
+        <p><%= @event.user.name %></p>
+      </div>
+    <% end %>
+  </div>
+  <div class="event-title-right">
+    <%= link_to update_event_path do %>
+      <button class="btn-edit">編集</button>
+    <% end %>
+    <button class="btn-pul">取下げ</button>
+  </div>
 </div>
-<%= link_to update_event_path do %>
-  <button class="follow_viewer" style="background-color:green;">編集</button>
-<% end %>
+<div id="fixed-navbar">
+  <div class="event-navbar">
+    <div>
+      <h2><%= @event.event_title %></h2>
+      <p><%= @event.date %></p>
+    </div>
+    <div class="edit-link">
+      <%= link_to update_event_path do %>
+        <button class="btn-edit">編集</button>
+      <% end %>
+      <button class="btn-pul">取下げ</button>
+    </div>
+  </div>
+  <div class="event-title-right">
+  </div>
+</div>
+<div class="event-contents-section">
+  <div class="event-top-section">
+    <div class="event-content-left">
+      <div class="event-image">
+        <% if @event.event_image_name.size == 0 %>
+          <%= image_tag "/assets/catman" %>
+        <% else %>
+          <%= image_tag @event.event_image_name.url %>
+        <% end %>
+      </div>
+      <%# <div class="event-title">
+        <h2><%= @event.event_title %.
+        ></h2>
+      </div> %>
+      <div class="event-text">
+        <h3>詳細</h3>
+        <p><%= safe_join(@event.content.to_s.split("\n"),tag(:br)) %></p>
+      </div>
+      <div>
+        参加者一覧
+        レター機能
+        主とやりとりできる。
+        レターの中に何を込めるかは自由
+
+        <p><%= @event.genre.genre_title %></p>
+        <p><%= @event.date %></p>
+        <p><%= @event.user.name %></p>
+      </div>
+    </div>
+    <div id="event-nav-right">
+      <div class="event-content-right">
+        <div class="event-user-block">
+          <div class="event-user-plofile">
+            <% if @event.event_image_name.size == 0 %>
+              <img src="/assets/catman" class="event-plofile-img">
+            <% else %>
+              <img src="<%= @event.user.image_name %>" class="event-plofile-img">
+            <% end %>
+            <p><%= @event.user.name %></p>
+          </div>
+        </div>
+        <div class="event-data-block">
+          日時
+          場所
+        </div>
+        <%# <span>サムネイルプレビュー</span>
+        <div class="event-thumbnail">
+          <div class="event-thumb-image">
+            <% if @event.event_image_name.size == 0 %/>
+              <%= image_tag "/assets/catman" %/>
+            <% else %/>
+              <%= image_tag @event.event_image_name.url %/>
+            <% end %/>
+          </div>
+          <div class="event-thumb-text">
+            <h3><%= @event.event_title %/></h2>
+            <p><%= @event.content %/></p>
+          </div>
+        </div>  %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+function FixedVar() {
+  let scroll = $(window).scrollTop();
+  console.log(scroll);
+  if (scroll >= 180){//headerの高さ以上になったら
+      $('#fixed-navbar').addClass('varopen');
+      // $('.event-content-right').addClass('fixed');
+    }else{//それ以外は
+      $('#fixed-navbar').removeClass('varopen');
+      
+    }
+  // if (scroll >= 140 && scroll < 400){
+  //   $('.event-content-right').addClass('fixed');
+  // }else if(scroll >= 400){
+  //   $('.event-content-right').removeClass('fixed');
+  //   $('.event-content-right').css({'position':'absolute','top':'400px'});
+  // }else{
+  //   $('.event-content-right').removeClass('fixed');
+  // }
+}
+$(window).scroll(function () {
+  FixedVar();/* スクロール途中からヘッダーを出現させる関数を呼ぶ*/
+});
+
+// ページが読み込まれたらすぐに動かしたい場合の記述
+$(window).on('load', function () {
+  FixedVar();/* スクロール途中からヘッダーを出現させる関数を呼ぶ*/
+});
+
+
+</script>
