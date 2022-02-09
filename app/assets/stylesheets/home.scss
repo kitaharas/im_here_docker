@@ -1084,8 +1084,52 @@ header{
   }
   li{
     height: 100%;
-    text-align: center;
+    background: #f0f3f0;
+
+    // text-align: center;
+    .event-thumbnail{
+      // width: 300px;
+      margin: 20px auto 0;
+      height: 290px;
+      // border: 2px solid grey;
+      border-radius: 6px;
+      overflow: hidden;
+      .event-thumb-image{
+        padding: 10px;
+        img{
+          object-fit: cover;
+          height: 116px;
+          width: 254px;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      .event-thumb-text{
+        padding:0 20px;
+        h3{
+          margin:0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        p {
+          overflow: hidden;
+          overflow-wrap: break-word;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }  
+      }
+      .event-edit-image{
+        padding: 10px;
+        & img{
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
     & a{
+      color: black;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -1284,25 +1328,36 @@ header{
   margin-top: 10px;
   padding:5px 10px;
   position: relative;
-  & p{
-    display: inline-block;
-    line-height: 50px;
-    color:black;
-  }
   a {
-    line-height: 50px;
     display: flex;
     justify-content: space-between;
-    & p:first-child{
-      width: 60%;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+    align-items: center;
+    color: black;
+    .title_date{
+      width: 50%;
+      & p:first-child{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .follower-date{
+        line-height: 25px;
+        font-size: 0.7em;
+        color: grey;
+      }
+
     }
-  }
-  img{
-    width:55px;
-    display: block;
+    .follower-plofile{
+      display: flex;
+      img{
+        width:55px;
+        display: block;
+      }
+      .follower-name{
+        line-height: 50px;
+        color:black;
+      }
+    }
   }
   & .follow-btn{
     border:solid 1px black;
@@ -1577,17 +1632,18 @@ header{
       border-radius: 8px;
       padding: 30px;
       p{
-        color: gray;
       }
       p.genre_name{
         margin-right: 20px;
         display: inline-block;
         font-size: .8em;
+        color: gray;
       }
       p.feel_name{
         padding: 0;
         display: inline-block;
         font-size: .8em;
+        color: gray;
       }
     }
     span {
@@ -1665,6 +1721,11 @@ header{
     .scheduling_users{
       display: flex;
       flex-wrap: wrap;
+      .notgest {
+        font-size: .8em;
+        padding: 10px;
+        color:grey;
+      }
       .scheduling_user{
         width: 158px;
         background: white;
@@ -1702,8 +1763,8 @@ header{
   height: 178px;
   background: #fff;
   left:50%;
-  top:-110px;
-  transform:translateX(-50%);
+  top:50%;
+  transform:translate(-50%,-50%);
   p {
     margin-top: 10px;
     margin-bottom: 30px;

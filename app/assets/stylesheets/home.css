@@ -1225,10 +1225,59 @@ header .global-menu ul a:hover {
 
 .genre-top-section li {
   height: 100%;
-  text-align: center;
+  background: #f0f3f0;
+}
+
+.genre-top-section li .event-thumbnail {
+  margin: 20px auto 0;
+  height: 290px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.genre-top-section li .event-thumbnail .event-thumb-image {
+  padding: 10px;
+}
+
+.genre-top-section li .event-thumbnail .event-thumb-image img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 116px;
+  width: 254px;
+  display: block;
+  margin: 0 auto;
+}
+
+.genre-top-section li .event-thumbnail .event-thumb-text {
+  padding: 0 20px;
+}
+
+.genre-top-section li .event-thumbnail .event-thumb-text h3 {
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.genre-top-section li .event-thumbnail .event-thumb-text p {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.genre-top-section li .event-thumbnail .event-edit-image {
+  padding: 10px;
+}
+
+.genre-top-section li .event-thumbnail .event-edit-image img {
+  display: block;
+  margin: 0 auto;
 }
 
 .genre-top-section li a {
+  color: black;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1444,32 +1493,49 @@ header .global-menu ul a:hover {
   position: relative;
 }
 
-.follower p {
-  display: inline-block;
-  line-height: 50px;
-  color: black;
-}
-
 .follower a {
-  line-height: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
 }
 
-.follower a p:first-child {
-  width: 60%;
+.follower a .title_date {
+  width: 50%;
+}
+
+.follower a .title_date p:first-child {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.follower img {
+.follower a .title_date .follower-date {
+  line-height: 25px;
+  font-size: 0.7em;
+  color: grey;
+}
+
+.follower a .follower-plofile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.follower a .follower-plofile img {
   width: 55px;
   display: block;
+}
+
+.follower a .follower-plofile .follower-name {
+  line-height: 50px;
+  color: black;
 }
 
 .follower .follow-btn {
@@ -1795,20 +1861,18 @@ header .global-menu ul a:hover {
   padding: 30px;
 }
 
-.event-top-section .event-content-right .event-data-block p {
-  color: gray;
-}
-
 .event-top-section .event-content-right .event-data-block p.genre_name {
   margin-right: 20px;
   display: inline-block;
   font-size: .8em;
+  color: gray;
 }
 
 .event-top-section .event-content-right .event-data-block p.feel_name {
   padding: 0;
   display: inline-block;
   font-size: .8em;
+  color: gray;
 }
 
 .event-top-section .event-content-right span {
@@ -1907,6 +1971,12 @@ header .global-menu ul a:hover {
       flex-wrap: wrap;
 }
 
+.event-body-section .schedule-section .scheduling_users .notgest {
+  font-size: .8em;
+  padding: 10px;
+  color: grey;
+}
+
 .event-body-section .schedule-section .scheduling_users .scheduling_user {
   width: 158px;
   background: white;
@@ -1942,9 +2012,9 @@ header .global-menu ul a:hover {
   height: 178px;
   background: #fff;
   left: 50%;
-  top: -110px;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 #event-delete-modal p {

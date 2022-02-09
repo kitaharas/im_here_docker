@@ -15,7 +15,7 @@
           <% @event[0..5].each do |event| %>
             <li class="swiper-slide" alt="">
             <img src="/assets/catmovie.png">
-            <%= link_to event.event_title , "/events/#{event.id}" %>
+            <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
             <%= event.user.name %>
           </li>
           <% end %>
@@ -29,7 +29,7 @@
         <ul class="swiper-wrapper swipes">
           <% @event[0..5].each do |event| %>
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
           <%= event.user.name %>
           </li>
           <% end %>
@@ -41,7 +41,7 @@
         <ul class="swiper-wrapper swipes">
           <% @event[6..11].each do |event| %>
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
           <%= event.user.name %>
           </li>
           <% end %>
@@ -55,7 +55,7 @@
         <ul class="swiper-wrapper swipes">
           <% @event[0..5].each do |event| %>
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
           <%= event.user.name %>
           </li>
           <% end %>
@@ -67,7 +67,7 @@
         <ul class="swiper-wrapper swipes">
           <% @event[6..11].each do |event| %>
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
           <%= event.user.name %>
           </li>
           <% end %>
@@ -79,7 +79,7 @@
         <ul class="swiper-wrapper swipes">
           <% @event[12..17].each do |event| %>
           <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}" %>
+          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
           <%= event.user.name %>
           </li>
           <% end %>
