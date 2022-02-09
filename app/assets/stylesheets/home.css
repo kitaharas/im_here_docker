@@ -393,12 +393,39 @@ button:hover {
   color: black;
 }
 
+#emask {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+}
+
+#emask .follow-modal {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#emask .follow-modal .modal-btn {
+  border: solid 1px black;
+  width: 150px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto 20px;
+  color: black;
+}
+
 .event-modal {
   background: #fff;
   width: 600px;
   padding: 20px;
   position: absolute;
-  top: 129px;
+  top: 66px;
   right: 6%;
   margin: 0 auto;
   -webkit-transition: all 0.4s;
@@ -1201,6 +1228,12 @@ header .global-menu ul a:hover {
   text-align: center;
 }
 
+.genre-top-section li a {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .genre-top-section .g-page-title {
   margin: 0 0 10px 30px;
 }
@@ -1414,6 +1447,7 @@ header .global-menu ul a:hover {
 .follower p {
   display: inline-block;
   line-height: 50px;
+  color: black;
 }
 
 .follower a {
@@ -1433,6 +1467,11 @@ header .global-menu ul a:hover {
   overflow: hidden;
 }
 
+.follower img {
+  width: 55px;
+  display: block;
+}
+
 .follower .follow-btn {
   border: solid 1px black;
   border-radius: 15px;
@@ -1445,6 +1484,14 @@ header .global-menu ul a:hover {
   padding: 2px;
   color: black;
   cursor: pointer;
+}
+
+.self-event {
+  background-color: yellow;
+}
+
+.self-stand-event {
+  background-color: gainsboro;
 }
 
 .content.active {
@@ -1500,7 +1547,16 @@ header .global-menu ul a:hover {
   background-color: orange;
 }
 
+.event-title-bar button.btn-res {
+  background-color: orange;
+}
+
+.event-title-bar button.btn-res a {
+  color: black;
+}
+
 .event-title-bar .event-title-right {
+  margin-right: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1509,11 +1565,24 @@ header .global-menu ul a:hover {
           align-items: center;
 }
 
+.event-title-bar .event-title-right button.btn-tog {
+  background-color: #d4599f;
+}
+
+.event-title-bar .event-title-right button.btn-tog a {
+  color: black;
+  font-size: 14px;
+}
+
+.event-title-bar .event-title-right button.btn-tog a.schedule-del-btn {
+  color: antiquewhite;
+}
+
 #fixed-navbar {
   width: 100vw;
   background-color: white;
   position: fixed;
-  z-index: 20;
+  z-index: 10;
   top: 122px;
   opacity: 0;
   -webkit-transition: .3s;
@@ -1532,15 +1601,6 @@ header .global-menu ul a:hover {
           justify-content: space-between;
 }
 
-#fixed-navbar .event-navbar .edit-link {
-  padding: 17px 0;
-}
-
-#fixed-navbar .event-navbar .edit-link a {
-  display: inline-block;
-  margin-right: 30px;
-}
-
 #fixed-navbar .event-navbar h2 {
   margin: 0;
 }
@@ -1549,20 +1609,53 @@ header .global-menu ul a:hover {
   color: grey;
 }
 
-#fixed-navbar .event-navbar button {
+#fixed-navbar .event-navbar .edit-link {
+  padding: 17px 0;
+  margin-right: 60px;
+}
+
+#fixed-navbar .event-navbar .edit-link a {
+  display: inline-block;
+}
+
+#fixed-navbar .event-navbar .edit-link button.btn-edit {
+  background-color: yellow;
+  margin-right: 30px;
+}
+
+#fixed-navbar .event-navbar .edit-link button {
   width: 87px;
   border-radius: 8px;
-  height: 30px;
+  height: 33px;
   border: 1px solid black;
   color: black;
 }
 
-#fixed-navbar .event-navbar button.btn-edit {
-  background-color: yellow;
-}
-
 #fixed-navbar .event-navbar button.btn-pub {
   background-color: orange;
+}
+
+#fixed-navbar .event-navbar button.btn-res {
+  background-color: orange;
+}
+
+#fixed-navbar .event-navbar button.btn-res a {
+  color: black;
+  margin: 0;
+}
+
+#fixed-navbar .event-navbar button.btn-tog {
+  background-color: #d4599f;
+  padding: 0;
+}
+
+#fixed-navbar .event-navbar button.btn-tog a {
+  color: black;
+  font-size: 10px;
+}
+
+#fixed-navbar .event-navbar button.btn-tog a.schedule-del-btn {
+  color: antiquewhite;
 }
 
 #fixed-navbar.varopen {
@@ -1581,6 +1674,21 @@ header .global-menu ul a:hover {
 .event-user-plofile p {
   line-height: 50px;
   padding: 0 0 0 20px;
+}
+
+.event-user-plofile .unlock-btn,
+.event-user-plofile .follow-btn {
+  cursor: pointer;
+  line-height: 50px;
+  margin-left: 60px;
+  background: goldenrod;
+  color: white;
+  border-radius: 30px;
+  padding: 0 10px;
+}
+
+.event-user-plofile .follow-btn:hover {
+  opacity: .7;
 }
 
 .event-plofile-img {
@@ -1664,7 +1772,6 @@ header .global-menu ul a:hover {
           flex: 1;
   position: relative;
   width: 360px;
-  outline: solid;
 }
 
 .event-top-section .event-content-right {
@@ -1675,20 +1782,33 @@ header .global-menu ul a:hover {
 
 .event-top-section .event-content-right .event-user-block {
   background-color: white;
-  width: 360px;
+  width: 330px;
   margin-bottom: 20px;
   border-radius: 8px;
-}
-
-.event-top-section .event-content-right .event-user-block .event-user-plofile {
   padding: 30px;
 }
 
 .event-top-section .event-content-right .event-data-block {
   background-color: white;
-  width: 360px;
+  width: 330px;
   border-radius: 8px;
-  padding: 60px 0;
+  padding: 30px;
+}
+
+.event-top-section .event-content-right .event-data-block p {
+  color: gray;
+}
+
+.event-top-section .event-content-right .event-data-block p.genre_name {
+  margin-right: 20px;
+  display: inline-block;
+  font-size: .8em;
+}
+
+.event-top-section .event-content-right .event-data-block p.feel_name {
+  padding: 0;
+  display: inline-block;
+  font-size: .8em;
 }
 
 .event-top-section .event-content-right span {
@@ -1755,6 +1875,101 @@ header .global-menu ul a:hover {
   left: 50%;
   -webkit-transform: translateX(-25%);
           transform: translateX(-25%);
+}
+
+.event-body-section {
+  width: 1100px;
+  margin: 0 auto;
+  border-top: 2px solid #c1bfbb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.event-body-section button {
+  margin-left: auto;
+  display: block;
+  background-color: goldenrod;
+}
+
+.event-body-section .schedule-section {
+  margin-bottom: 26px;
+  -webkit-box-flex: 1.7;
+      -ms-flex: 1.7;
+          flex: 1.7;
+}
+
+.event-body-section .schedule-section .scheduling_users {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.event-body-section .schedule-section .scheduling_users .scheduling_user {
+  width: 158px;
+  background: white;
+  border-radius: 15px;
+  margin-right: 8px;
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.event-body-section .schedule-section .scheduling_users .scheduling_user img {
+  width: 90px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.event-body-section .schedule-section .scheduling_users .scheduling_user p {
+  margin-bottom: 10px;
+}
+
+.event-body-section .event-operation {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+#event-delete-modal {
+  width: 290px;
+  padding: 39px;
+  border-radius: 50px;
+  position: absolute;
+  z-index: 30;
+  height: 178px;
+  background: #fff;
+  left: 50%;
+  top: -110px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+#event-delete-modal p {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+#event-delete-modal button {
+  margin: 0 auto;
+  width: 151px;
+  height: 50px;
+}
+
+#event-delete-modal button#delete-modal-exit {
+  margin-top: 10px;
+}
+
+#delete-modal-mask {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
 }
 
 footer {

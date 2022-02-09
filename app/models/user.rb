@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   has_many :events, class_name: "Event"
 
+  has_many :schedules, dependent: :destroy
+
   # フォローした時の処理
   def follow(user_id)
     relationships.create(followed_id: user_id)

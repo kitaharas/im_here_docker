@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_01_113732) do
+ActiveRecord::Schema.define(version: 2022_02_05_142726) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_title"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_01_01_113732) do
     t.string "event_image_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "publish", default: false, null: false
   end
 
   create_table "feels", force: :cascade do |t|
@@ -32,17 +33,27 @@ ActiveRecord::Schema.define(version: 2022_01_01_113732) do
     t.datetime "updated_at", null: false
   end
 
-  # create_table "genres", force: :cascade do |t|
-  #   t.string "genre_title"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
-  # end
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_schedules_on_event_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

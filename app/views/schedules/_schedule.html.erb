@@ -1,0 +1,14 @@
+<%# <div id="<%= @event.id %/>schedule"></div>  %>
+  <% if !Schedule.exists?(user: current_user, event_id: @event.id) %>
+    <%= link_to event_schedules_path(@event), method: :post, remote: true, class: "schedule-btn schedule-event" do %>
+      <%# <div class="i far fa-thumbs-up"></div> %>
+        スケジュール<br>追加
+        <%# <%= @event.schedules.length %/> %>
+        <% end %>
+  <% else %>
+    <%= link_to event_schedules_path(@event), method: :delete, remote: true, class: "schedule-del-btn schedule-delete" do %>
+      <%# <div class="i far fa-thumbs-up"></div> %>
+      追加済み<br>解除
+      <%# <%= @event.schedules.length %/> %>
+      <% end %>
+  <% end %>

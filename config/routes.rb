@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'schedules/new'
   get 'home/zoom', to: 'home#zoom', as: 'zoom'
   
   get 'events/search', to: 'events#search' , as: 'search_path'
@@ -40,6 +41,14 @@ Rails.application.routes.draw do
     get 'folloeings', to: 'relationships#followings', as: 'followings'
     get 'followers', to: 'relationships#followers', as: 'followers'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
+
+  resources :users, only: [:show, :edit, :update] do
+    get :schedules, on: :collection
+  end
+
+  resources :events, expect: [:index] do
+    resource :schedules, only: [:create, :destroy]
   end
 
 

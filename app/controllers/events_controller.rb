@@ -5,6 +5,12 @@ class EventsController < ApplicationController
     @events = Event.search(params[:search])
   end
 
+  def scheduling
+    @event = Event.find(params[:id])
+    @scheduling = Schedule.where(event_id: @event.id).pluck(:user_id)
+    @schedules = User.find(@scheduling)
+  end
+
 
   def genre
     @genre = Genre.all
@@ -15,9 +21,6 @@ class EventsController < ApplicationController
     @feel = Feel.all
     @event = Event.all
   end
-
-  # def new
-  # end
 
   def create
     @event = current_user.events.build(event_params)
@@ -34,8 +37,15 @@ class EventsController < ApplicationController
   end
 
   def show
+    
     # redirect_to root_path unless current_user.id == @user.id
     @event = Event.find(params[:id])
+    @scheduling = Schedule.where(event_id: @event.id).pluck(:user_id)
+    @scheduling_users = User.find(@scheduling)
+    p "----------------"
+    p @scheduling
+    p @scheduling_users
+    p "----------------"
   end
 
   def edit
@@ -59,7 +69,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to mypage_path(id: current_user.id)
   end
 
 
@@ -69,7 +82,7 @@ class EventsController < ApplicationController
     end
 
     def update_params
-      params.fetch(:event,{}).permit(:event_image_name,:content,:event_title)
+      params.fetch(:event,{}).permit(:event_image_name,:content,:event_title,:publish)
     end
 
 

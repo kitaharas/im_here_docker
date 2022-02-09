@@ -95,17 +95,6 @@ function moveSlides(){
 
 
 
-// イベントモーダル
-// function eventModal(){
-//   document.querySelector('.event-modal').classList.remove('hidden');
-//   mask.classList.remove('hidden');
-// }
-
-// function eventClose(){
-//   document.querySelector('.event-modal').classList.add('hidden');
-//   mask.classList.add('hidden');
-// }
-
 // スクロール防止パーツ
 function notScroll(){
   posi = $(window).scrollTop();

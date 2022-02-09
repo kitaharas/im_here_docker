@@ -138,11 +138,25 @@
         <div class="err_text" id="err_category"></div>
         <div>
           <%= f.label :genre_id ,'ジャンル'%>
-          <%= f.select :genre_id, {'aaa':1,'bbb':2,'ccc':3,'ddd':4,'eee':5,'fff':6}, { include_blank: '選択してください'} %>
+          <%= f.select :genre_id, {
+            'Talk':1,
+            'Learning':2,
+            'Game':3,
+            'Music':4,
+            'Culture':5,
+            'Exercise':6},
+            { include_blank: '選択してください'} %>
         </div>
         <div>
           <%= f.label :feel_id ,'気分'%>
-          <%= f.select :feel_id, {'aaa':1,'bbb':2,'ccc':3,'ddd':4,'eee':5,'fff':6}, { include_blank: '選択してください'} %>
+          <%= f.select :feel_id, {
+            'わいわい楽しく':1,
+            '1 on 1':2,
+            'イージーリスニング':3,
+            '趣味を見つける':4,
+            '学びを深める':5,
+            '忍者モード':6 },
+            { include_blank: '選択してください'} %>
         </div>
         <div>
           <label>日時</label>

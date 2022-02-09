@@ -9,11 +9,11 @@
       <%= link_to ">>",genre_page_path(g) ,style: "display:inline-block; color:black;" %>
       <div class="swiper" id="swiper<%= index %>">
         <ul class="swiper-wrapper swipes">
-          <% g.events.order("RANDOM()").limit(6).each do |event| %>
+          <% g.events.where(publish: true).order("RANDOM()").limit(6).each do |event| %>
           <li class="swiper-slide" alt=""><img src="assets/catmovie.png">
           <%= link_to event.event_title , "/events/#{event.id}" %>
           
-          <%= event.event_title %><%= event.user.name %></li>
+         <%= event.user.name %></li>
           <% end %>
         </ul>
       </div>

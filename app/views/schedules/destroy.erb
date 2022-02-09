@@ -1,0 +1,1 @@
+$("#schedule_<%= @event.id %>").html("<%= j(render partial: 'schedules/schedule', locals: { event: @event }) %>");

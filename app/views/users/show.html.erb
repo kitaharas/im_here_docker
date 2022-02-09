@@ -34,35 +34,90 @@
         <li><a data-id="schedule">スケジュール</a></li>
       </ul>
       <section class="content active" id="event">
-        開催中のイベントはありません
+        <% if @f_event_pubs.count == 0 %>
+          開催中のイベントはありません
+        <% else %>
+          <% @f_event_pubs.each do |e|%>
+            <div class="follower_view">
+              <div class="follower">
+                <%= link_to "/events/#{e.id}" do %>
+                  <p><%= e.event_title %></p>
+                  <p><%= e.date %></p>
+                  <% if e.user.image_name.size == 0 %>
+                    <%= image_tag "/assets/catman" %>
+                  <% else %>
+                    <p><%= e.user.image_name %></p>
+                  <% end %>
+                  <p><%= e.user.name %></p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </section>
       <section class="content" id="schedule">
-        <% if @user.events.count == 0 %>
+        <% if @events.count == 0 && @schedule_list.count == 0 %>
           登録されているスケジュールはありません
         <% else %>
-          <% @user.events.each do |e| %>
+          <% @events_pub.each do |e| %>
             <div class="follower_view">
+              <div class="follower self-event">
+                <%= link_to "/events/#{e.id}" do %>
+                  <p><%= e.event_title %></p>
+                  <p><%= e.date %></p>
+                    <% if e.user.image_name.size == 0 %>
+                      <%= image_tag "/assets/catman" %>
+                    <% else %>
+                      <p><%= e.user.image_name %></p>
+                    <% end %>
+                  <p><%= e.user.name %></p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <% @events_notpub.each do |e| %>
+            <div class="follower_view">
+              <div class="follower self-stand-event">
+                <%= link_to "/events/#{e.id}" do %>
+                  <p><%= e.event_title %></p>
+                  <p><%= e.date %></p>
+                    <% if e.user.image_name.size == 0 %>
+                      <%= image_tag "/assets/catman" %>
+                    <% else %>
+                      <p><%= e.user.image_name %></p>
+                    <% end %>
+                  <p><%= e.user.name %></p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @schedule_list.present? %>
+            <% @schedule_list.each do |e| %>
+              <div class="follower_view">
                 <div class="follower">
                   <%= link_to "/events/#{e.id}" do %>
                     <p><%= e.event_title %></p>
                     <p><%= e.date %></p>
+                    <% if e.user.image_name.size == 0 %>
+                      <%= image_tag "/assets/catman" %>
+                    <% else %>
+                      <p><%= e.user.image_name %></p>
+                    <% end %>
+                    <p><%= e.user.name %></p>
                   <% end %>
-             
-                </div>
-                <div class="follow-modal hidden">
-                  
-                 
-                    <div class="unlock-btn">フォロー解除</div>
-                 
-                  <div class="unlock-btn cancel">キャンセル</div>
                 </div>
               </div>
             <% end %>
           <% end %>
+
+        <% end %>
       </section>
     </div>
   </div>
 </div>
+
+
 
 <script>
 // タブメニュー

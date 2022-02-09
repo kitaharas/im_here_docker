@@ -1,0 +1,8 @@
+<div class="scheduling_user">
+  <% if users.image_name.size == 0 %>
+    <%= image_tag "/assets/catman" %>
+  <% else %>
+    <%= image_tag users.image_name.url %>
+  <% end %>
+  <p><%= users.name %></p>
+</div>

@@ -8,6 +8,16 @@ class UsersController < ApplicationController
 
   def show
     redirect_to root_path unless current_user.id == @user.id
+    @user = User.find(params[:id])
+    @events = @user.events
+    @events_pub = @events.where(publish: true)
+    @events_notpub = @events.where(publish: false)
+
+    schedules = Schedule.where(user_id: current_user.id).pluck(:event_id)  # ログイン中のユーザーのお気に入りのpost_idカラムを取得
+    @schedule_list = Event.find(schedules)
+    
+    @f_event = Event.where(user_id: [*current_user.following_ids])
+    @f_event_pubs = @f_event.where(publish: true) 
   end
 
   def show_our
