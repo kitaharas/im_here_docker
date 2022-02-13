@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'users/:id/edit', to: 'users#edit' , as: :edit_user
   patch 'users/:id/edit', to: 'users#update', as: :update_user
   get 'users/:id/our', to: 'users#show_our', as: 'show_our'
-  get 'users/:id/view', to: 'users#show_view', as: 'userpage'
+  get 'users/:id/view', to: 'users#show_view', as: 'show_view'
   get 'users/:id', to: 'users#show', as: 'mypage'
   get 'login',   to: 'sessions#new'
   post 'events/new', to: 'events#new', as:'event_new'
@@ -35,6 +35,14 @@ Rails.application.routes.draw do
   delete 'logout',  to: 'sessions#destroy'
   resources :users, params: :id
 
+  get 'rooms/:current/:to_user', to: 'rooms#show', as: 'room' # 初回アクセス時
+  get 'rooms/:room_id', to: 'rooms#show', as: 'exist_room' # 初回アクセス時
+  post 'message/create', to: 'messages#create', as: 'message_create'
+
+  # resources :rooms, only: [:index,:new,:create]
+  resources :rooms do
+    resources :messages
+  end
 
   resources :users do
     resource :relationships, only: [:create, :destroy]

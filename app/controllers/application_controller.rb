@@ -36,5 +36,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def room_check(user, to)
+    exist_room = Room.find_by(user_id: user, to_user_id: to)
+    
+    
+    "こいつが元凶"
+    if !exist_room
+      exist_room = Room.find_by(user_id: to, to_user_id: user)
+    end
+
+    return exist_room
+  end
   
 end

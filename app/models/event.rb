@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
 
   validates :event_title, length: {maximum: 50}
+  validates :date, length: {maximum: 18}
 
 
   extend ActiveHash::Associations::ActiveRecordExtensions

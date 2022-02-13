@@ -42,9 +42,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @scheduling = Schedule.where(event_id: @event.id).pluck(:user_id)
     @scheduling_users = User.find(@scheduling)
+    @user = User.find(@event.user.id)
+    @user_events = Event.where(user_id: @user.id)
     p "----------------"
-    p @scheduling
-    p @scheduling_users
+    p @user_events
+  
     p "----------------"
   end
 
@@ -82,7 +84,7 @@ class EventsController < ApplicationController
     end
 
     def update_params
-      params.fetch(:event,{}).permit(:event_image_name,:content,:event_title,:publish)
+      params.fetch(:event,{}).permit(:event_image_name,:content,:event_title,:publish,:place,:people,:date)
     end
 
 

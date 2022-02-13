@@ -13,7 +13,7 @@
     <p><%= @user.name %></p>
     <div >
       <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
-      <%= link_to show_our_path do %>
+      <%= link_to show_our_path ,data: {"turbolinks"=>false} do %>
         <button class="follow_viewer">一覧</button>
       <% end %>
     </div>
@@ -42,7 +42,7 @@
           <% @f_event_pubs.each do |e|%>
             <div class="follower_view">
               <div class="follower">
-                <%= link_to "/events/#{e.id}" do %>
+                <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                   <div class="title_date">
                     <p><%= e.event_title %></p>
                     <p class="follower-date"><%= e.date %></p>
@@ -61,14 +61,19 @@
           <% end %>
         <% end %>
       </section>
+
+
       <section class="content" id="schedule">
         <% if @events.count == 0 && @schedule_list.count == 0 %>
           登録されているスケジュールはありません
         <% else %>
+        <button id="count-btn">全表示中</button>
+
+        <div id="pubEvent">
           <% @events_pub.each do |e| %>
             <div class="follower_view">
               <div class="follower self-event">
-                <%= link_to "/events/#{e.id}" do %>
+                <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                   <div class="title_date">
                     <p><%= e.event_title %></p>
                     <p class="follower-date"><%= e.date %></p>
@@ -85,10 +90,13 @@
               </div>
             </div>
           <% end %>
+          </div>
+
+          <div id="notPubEvent">
           <% @events_notpub.each do |e| %>
             <div class="follower_view">
               <div class="follower self-stand-event">
-                <%= link_to "/events/#{e.id}" do %>
+                <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                   <div class="title_date">
                     <p><%= e.event_title %></p>
                     <p class="follower-date"><%= e.date %></p>
@@ -105,12 +113,13 @@
               </div>
             </div>
           <% end %>
-
+          </div>
+          <div id="schedulingEvent">
           <% if @schedule_list.present? %>
             <% @schedule_list.each do |e| %>
               <div class="follower_view">
                 <div class="follower">
-                  <%= link_to "/events/#{e.id}" do %>
+                  <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                     <div class="title_date">
                       <p><%= e.event_title %></p>
                       <p class="follower-date"><%= e.date %></p>
@@ -128,7 +137,7 @@
               </div>
             <% end %>
           <% end %>
-
+          </div>
         <% end %>
       </section>
     </div>
@@ -159,6 +168,49 @@ $(document).on('turbolinks:load', function() {
       document.getElementById(clickedItem.dataset.id).classList.add('active');
     });
   });
+
+  const pubEvent = document.getElementById('pubEvent');
+  const notPubEvent = document.getElementById('notPubEvent');
+  const schedulingEvent = document.getElementById('schedulingEvent');
+  let count = 1;
+  const countBtn = document.getElementById('count-btn');
+
+  countBtn.addEventListener('click', function() {
+    count++;
+    if(count % 4 === 1 ){
+      console.log("unko1");
+      pubEvent.classList.remove("hidden")
+      notPubEvent.classList.remove("hidden")
+      schedulingEvent.classList.remove("hidden")
+      countBtn.innerHTML = "全表示中";
+    } else if(count % 4 === 2 ){
+      console.log("unko2");
+      pubEvent.classList.remove("hidden")
+      notPubEvent.classList.add("hidden")
+      schedulingEvent.classList.add("hidden")
+      countBtn.innerHTML = "掲載中";
+    } else if(count % 4 === 3 ){
+      pubEvent.classList.add("hidden")
+      notPubEvent.classList.remove("hidden")
+      schedulingEvent.classList.add("hidden")
+      console.log("unko3");
+      countBtn.innerHTML = "未掲載";
+    } else if(count % 4 === 0 ){
+      pubEvent.classList.add("hidden")
+      notPubEvent.classList.add("hidden")
+      schedulingEvent.classList.remove("hidden")
+      console.log("unko4");
+      countBtn.innerHTML = "参加予定";
+    }
+
+
+
+
+  });
+
+  
+
+
 });
 
 </script>

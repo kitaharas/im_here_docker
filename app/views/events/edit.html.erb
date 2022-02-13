@@ -1,54 +1,55 @@
 <% provide(:title, "EventPage:edit") %>
 
-  <%= form_for(@event, url:{controller: 'events',action: 'update', id: @event.id}) do |f| %>
-<div class="event-top-section">
-  <div class="event-content-left">
-      <% @event.errors.full_messages.each do |message| %>
-      <p class="edit-error">
-      <%= message %>
-      </p>
-      <% end %>
+<h1 class="event-edit-h1">イベント編集</h1>
+<%= form_for(@event, url:{controller: 'events',action: 'update', id: @event.id}) do |f| %>
+  <div class="event-edit-section">
+    <div class="event-content-left">
+      <%= render "events/error_messages", model: @event, attribute: :event_title %>
       <div class="event-title">
-        <%= f.text_field(:event_title,class:"event-title-form", size:"50") %>
-        
+        <%= f.text_field(:event_title,class:"event-title-form", placeholder: "タイトル",size:"50") %>
       </div>
       <div class="event-text">
         <% if @event.content.nil? %>
-          <%= f.text_area(:content, class: "event-content-text", placeholder: "イベント内容", size:"50x13") %>
+          <%= f.text_area(:content, class: "event-content-text", placeholder: "イベント詳細", size:"50x13") %>
         <% else %>
           <%= f.text_area(:content, class: "event-content-text", placeholder: :content, size:"50x13") %>
         <% end %>
-       
       </div>
       <div>
+        <p>開催場所</p>
+        <%= f.text_field(:place,class:"event-f_field", placeholder: "開催場所",size:"50") %>
+        
+        <p>開催日時</p>
+        <%= render "events/error_messages", model: @event, attribute: :date %>
+        <%= f.text_field(:date,class:"event-f_field", placeholder: "開催日時",size:"50") %>
+        
       </div>
-  </div>
-
-  <div class="event-content-right">
-    <span>イベント画像</span>
-    <div class="event-thumbnail">
-      <div class="event-edit-image">
-        <% if @event.event_image_name.size == 0 %>
-          <%= image_tag "/assets/catman" %>
-        <% else %>
-          <%= image_tag @event.event_image_name.url %>
-        <% end %>
-      </div>
-      
     </div>
 
-    
-  
-    <%= f.file_field :event_image_name %>
-   
+    <div class="event-content-right">
+      <span>イベント画像</span>
+      <div class="event-thumbnail">
+        <div class="event-edit-image">
+          <% if @event.event_image_name.size == 0 %>
+            <%= image_tag "/assets/catman" %>
+          <% else %>
+            <%= image_tag @event.event_image_name.url %>
+          <% end %>
+        </div>
+      </div>
 
-    <%= link_to eventpage_path do %>
-      <button class="btn-back">戻る</button>
-    <% end %>
 
-    <button class="btn-edit" type="submit">更新</button>
+      <%= f.file_field :event_image_name %>
+
+      <div class="btn-area">
+        <%= link_to eventpage_path do %>
+          <button class="btn-back">戻る</button>
+        <% end %>
+
+        <button class="btn-edit" type="submit">更新</button>
+      </div>
+    </div>
   </div>
-</div>
-    <% end %>
+<% end %>
 
 

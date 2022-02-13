@@ -1,4 +1,17 @@
-<% provide(:title, "MyPage") %>
+<%# <div class="rooms">
+  <% current_user.rooms.each do |room| % >
+    <div class="room">
+      <div class="room-name">
+        <% @another_user = (room.users.where.not(id: current_user.id).to_a)[0] %/>
+        <%= link_to @another_user.name, room_messages_path(room) %/>
+      </div>
+      <div class="delete-room">
+        <%= link_to "×", room_path(room), method: :delete %/>
+      </div>
+    </div>
+  <% end %/>
+
+</div> %>
 
 
 <div class="my-page-section">
@@ -28,54 +41,34 @@
     <div class="event-container">
       <ul class="tab-menu">
         <%# <li><a class="active" data-id="event">フォロー開催中</a></li> %>
-        <li><a data-id="schedule">開催イベント</a></li>
+        <li><a data-id="schedule">メッセージ</a></li>
       </ul>
       <%# <section class="content active" id="event">
         開催中のイベントはありません
       </section> %>
       <section class="content active" id="schedule">
-        <% if @user.events.count == 0 %>
+
+        <div class="messages">
+
+          <%= render partial: 'main_chat' %>
+
+        </div>
+        <%# <% if @user.events.count == 0 %　>
           登録されているスケジュールはありません
-        <% else %>
-          <% @user.events.each do |e| %>
+        <% else %　>
+          <% @user.events.each do |e| %　>
             <div class="follower_view">
               <div class="follower">
-                <%= link_to "/events/#{e.id}" do %>
-                  <p><%= e.event_title %></p>
-                  <p><%= e.date %></p>
-                <% end %>
+                <%= link_to "/events/#{e.id}" do %　>
+                  <p><%= e.event_title % ></p>
+                  <p><%= e.date % ></p>
+                <% end % >
             
               </div>
             </div>
-            <% end %>
-          <% end %>
+            <% end % >
+          <% end % > %>
       </section>
     </div>
   </div>
 </div>
-
-<%# <script>
-// タブメニュー
-$(document).on('turbolinks:load', function() { 
-  const menuItems = document.querySelectorAll('.tab-menu li a');
-  const contents = document.querySelectorAll('.content');
-
-  menuItems.forEach(clickedItem => {
-    clickedItem.addEventListener('click', e => {
-      e.preventDefault();
-
-      menuItems.forEach(item => {
-        item.classList.remove('active');
-      });
-      clickedItem.classList.add('active');
-
-      contents.forEach(content => {
-        content.classList.remove('active');
-      });
-
-      document.getElementById(clickedItem.dataset.id).classList.add('active');
-    });
-  });
-});
-
-</script> %>

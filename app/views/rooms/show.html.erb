@@ -1,0 +1,87 @@
+<% provide(:title, "MyPage") %>
+
+
+<div class="my-page-section">
+  <div class="profile">
+    <div class="profile-img">
+      <% if @to.image_name.size == 0 %>
+        <%= image_tag "/assets/catman" %>
+      <% else %>
+        <%= image_tag @to.image_name.url %>
+      <% end %>
+    </div>
+    <p><%= @to.name %>さん</p>
+    <div >
+      <p>フォロー数: <%= @to.followings.count %> フォロワー数: <%= @to.followers.count %></p>
+    </div>
+    <div class="profile-coment">
+      <% if @to.comment == nil || @to.comment == "" %>
+        <span>プロフィールコメント<span>
+      <% else %>
+        <p class="profile-comment-text">
+          <%= @to.comment %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div class="event-display">
+    <div class="event-container">
+      <ul class="tab-menu">
+        <li>
+          <a data-id="schedule">
+            <%= @to.name %>さんとのメッセージ
+          </a>
+        </li>
+      </ul>
+
+      <ul class="message-list">
+        <% @messages&.each do | message | %>
+          <% if message.user_id == session[:user_id] %>
+            <li style="margin-left:auto; width:fit-content">
+              <div class="message-right">
+                <p class="message"><%= safe_join(message.content.to_s.split("\n"),tag(:br)) %></p>
+              </div>
+              <p class="posting-time-right"><%= l message.created_at%></p>
+            </li>
+          <% else %>
+            <li>
+              <div class="message-left">
+                <p class="message"><%= safe_join(message.content.to_s.split("\n"),tag(:br)) %></p>
+              </div>
+              <p class="posting-time"><%= l message.created_at%></p>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+        
+
+      <%= form_for :message, url: message_create_path ,html: {class: "message-form"} do |f| %>
+        <%= f.text_area :content,placeholder: 'メッセージを入力してください' %>
+        <%# <label class="form-image">
+        <span class="image-file">画像</span>
+        <%= f.file_field :image % > %>
+
+        <% if @room %>
+          <input type="hidden" name="message[room]" value="<%= @room.id %>">
+          <input type="hidden" name="message[to_user_id]" value="<%= @to.id %>">
+        <% else %>
+          <input type="hidden" name="message[user_id]" value="<%= current_user.id %>">
+          <input type="hidden" name="message[to_user_id]" value="<%= @to.id %>">
+        <% end %>
+        <%= f.submit "送信する" %>
+      <% end %>
+      
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function() { 
+    let messageList = document.querySelector('.message-list');
+    messageList.scrollTop = messageList.scrollHeight;
+  });     
+
+
+</script>

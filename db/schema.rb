@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_142726) do
+ActiveRecord::Schema.define(version: 2022_02_12_092648) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_title"
@@ -39,12 +39,33 @@ ActiveRecord::Schema.define(version: 2022_02_05_142726) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "room_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  end
+
+  
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "to_user_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["to_user_id"], name: "index_rooms_on_to_user_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "schedules", force: :cascade do |t|

@@ -22,6 +22,13 @@ class User < ApplicationRecord
 
   has_many :schedules, dependent: :destroy
 
+  # has_many :room_users
+  # has_many :rooms, through: :room_users
+
+
+  has_many :rooms
+  has_many :messages
+
   # フォローした時の処理
   def follow(user_id)
     relationships.create(followed_id: user_id)

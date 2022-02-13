@@ -1,10 +1,15 @@
 <div class="event-title-bar">
+
+
+
+
   <div>
     <p><%= @event.date %></p>
     <h2><%= @event.event_title %></h2>
-    <%= link_to "/users/#{@event.id}" do %>
+    <%= link_to "/users/#{@event.user.id}" do %>
       <div class="event-user-plofile">
-        <% if @event.event_image_name.size == 0 %>
+        <%# <%= link_to show_view_path(id: user.id) ,data: {"turbolinks"=>false} do %/> %>
+        <% if @event.user.image_name.size == 0 %>
           <img src="/assets/catman" class="event-plofile-img">
         <% else %>
           <img src="<%= @event.user.image_name %>" class="event-plofile-img">
@@ -106,7 +111,7 @@
 
         <div class="event-user-block">
           <div class="event-user-plofile">
-            <% if @event.event_image_name.size == 0 %>
+            <% if @event.user.image_name.size == 0 %>
               <img src="/assets/catman" class="event-plofile-img">
             <% else %>
               <img src="<%= @event.user.image_name %>" class="event-plofile-img">
@@ -134,6 +139,7 @@
           </div>
           <p>日時:<%= @event.date %></p>
           <p>場所:<%= @event.place %></p>
+          <%= link_to "場所をgoogle mapで検索>>","https://www.google.co.jp/maps/search/#{@event.place}", target: :_blank, rel: "noopener noreferrer" %> 
         </div>
       </div>
     </div>
@@ -163,6 +169,28 @@
           <button id="delete-modal-exit">戻る</button>
         </div>
         <div id="delete-modal-mask" class="hidden"></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="event-bottom-section">
+    <p class="bottom-info">同じユーザーの他のイベント</p>
+    <div class="other-events">
+      <% @user_events.each do |e| %>
+        <div class="event-thumbnail">
+          <div class="event-thumb-image">
+            <% if e.event_image_name.size == 0 %>
+              <%= image_tag "/assets/catman" %>
+            <% else %>
+              <%= image_tag e.event_image_name.url %>
+            <% end %>
+          </div>
+          <%= link_to "/events/#{e.id}" do %>
+            <div class="event-thumb-text">
+              <h3><%= e.event_title %></h2>
+              <p><%= e.content %></p>
+            </div>
+          <% end %>
+        </div> 
       <% end %>
     </div>
   </div>
