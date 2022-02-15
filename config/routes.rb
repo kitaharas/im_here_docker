@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'rooms/:room_id', to: 'rooms#show', as: 'exist_room' # 初回アクセス時
   post 'message/create', to: 'messages#create', as: 'message_create'
 
+
   # resources :rooms, only: [:index,:new,:create]
   resources :rooms do
     resources :messages

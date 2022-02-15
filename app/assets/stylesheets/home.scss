@@ -2044,7 +2044,7 @@ header{
     display: flex;
     flex-wrap: wrap;
     .event-thumbnail{
-      width: 300px;
+      width: 270px;
       margin: 10px;
       height: 290px;
       border: 2px solid grey;
@@ -2122,7 +2122,6 @@ header{
       
 
 .message-list{
-  border-top: solid 2px rgb(171, 168, 168);
   height: 57vh;
   overflow-y: scroll;
   padding-right: 13px ;

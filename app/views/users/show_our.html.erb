@@ -41,8 +41,8 @@
             <div class="follower_view">
               <% unless user == current_user %>
                 <div class="follower">
-                  <%# <%= link_to show_view_path(id: user.id) ,data: {"turbolinks"=>false} do %/> %>
-                  <%= link_to room_path(current_user.id, user.id) do %>
+
+                  <%= link_to room_path(current_user.id, user.id),data: {"turbolinks"=>false} do %>
                     <p class="following-name"><%= user.name %></p><%= render 'users/follow-button', user: user %>
                   <% end %>
                 </div>
@@ -66,10 +66,11 @@
             <div class="follower_view">
               <% unless user == current_user %>
                 <div class="follower">
-                  <p><%= user.name %></p>
+                  <%= link_to room_path(current_user.id, user.id),data: {"turbolinks"=>false} do %>
+                    <p class="following-name"><%= user.name %></p>
                   
                     <%= render 'users/follow-button', user: user %>
-                  
+                  <% end %>
                 </div>
                 <div class="follow-modal hidden">
                   <p><%= user.name %>さんのフォローを解除しますか？</p>

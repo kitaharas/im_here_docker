@@ -72,7 +72,6 @@
     <%= form_tag(search_path_url,:method => 'get',class:"search_container",id:"search_container") do %>
       <%= text_field_tag :search ,'',size:25, placeholder:"キーワード検索" %>
       <input type="submit"  value="&#xf002">
-      <%# <%= submit_tag '&#xf002', :name => nil %> 
     <% end %>
 
 
@@ -114,9 +113,7 @@
             </ul>
           </li>
         <% else %>
-          <li id="signup-btn" 
-          <%# onclick="SignUpPage()" %>
-          ><a id="signup">新規登録</a></li>
+          <li id="signup-btn"><a id="signup">新規登録</a></li>
         <% end %>
       </ul>
     </div>

@@ -6,16 +6,28 @@
   <div>
     <p><%= @event.date %></p>
     <h2><%= @event.event_title %></h2>
-    <%= link_to "/users/#{@event.user.id}" do %>
-      <div class="event-user-plofile">
-        <%# <%= link_to show_view_path(id: user.id) ,data: {"turbolinks"=>false} do %/> %>
-        <% if @event.user.image_name.size == 0 %>
-          <img src="/assets/catman" class="event-plofile-img">
-        <% else %>
-          <img src="<%= @event.user.image_name %>" class="event-plofile-img">
-        <% end %>
-        <p><%= @event.user.name %></p>
-      </div>
+    <% if current_user.id == @event.user.id %>
+      <%= link_to "/users/#{@event.user.id}" do %>
+        <div class="event-user-plofile">
+          <% if @event.user.image_name.size == 0 %>
+            <img src="/assets/catman" class="event-plofile-img">
+          <% else %>
+            <img src="<%= @event.user.image_name %>" class="event-plofile-img">
+          <% end %>
+          <p><%= @event.user.name %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to room_path(current_user.id, @event.user.id) do %>
+        <div class="event-user-plofile">
+          <% if @event.user.image_name.size == 0 %>
+            <img src="/assets/catman" class="event-plofile-img">
+          <% else %>
+            <img src="<%= @event.user.image_name %>" class="event-plofile-img">
+          <% end %>
+          <p><%= @event.user.name %></p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
@@ -174,25 +186,25 @@
   </div>
   <div class="event-bottom-section">
     <p class="bottom-info">同じユーザーの他のイベント</p>
-    <div class="other-events">
-      <% @user_events.each do |e| %>
-        <div class="event-thumbnail">
-          <div class="event-thumb-image">
-            <% if e.event_image_name.size == 0 %>
-              <%= image_tag "/assets/catman" %>
-            <% else %>
-              <%= image_tag e.event_image_name.url %>
-            <% end %>
-          </div>
-          <%= link_to "/events/#{e.id}" do %>
-            <div class="event-thumb-text">
-              <h3><%= e.event_title %></h2>
-              <p><%= e.content %></p>
+      <div class="other-events">
+        <% @user_events.each do |e| %>
+          <div class="event-thumbnail">
+            <div class="event-thumb-image">
+              <% if e.event_image_name.size == 0 %>
+                <%= image_tag "/assets/catman" %>
+              <% else %>
+                <%= image_tag e.event_image_name.url %>
+              <% end %>
             </div>
-          <% end %>
-        </div> 
-      <% end %>
-    </div>
+            <%= link_to "/events/#{e.id}" do %>
+              <div class="event-thumb-text">
+                <h3><%= e.event_title %></h2>
+                <p><%= e.content %></p>
+              </div>
+            <% end %>
+          </div> 
+        <% end %>
+      </div>
   </div>
 </div>
 

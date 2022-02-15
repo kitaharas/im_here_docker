@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_092648) do
+ActiveRecord::Schema.define(version: 2022_02_12_092245) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_title"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_02_12_092648) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
+    t.string "image_name"
     t.integer "room_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -56,8 +57,6 @@ ActiveRecord::Schema.define(version: 2022_02_12_092648) do
     t.datetime "updated_at", null: false
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
-
-  
 
   create_table "rooms", force: :cascade do |t|
     t.integer "to_user_id"

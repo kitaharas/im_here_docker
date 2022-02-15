@@ -1,0 +1,16 @@
+
+<div class="hero">
+  <div class="swiper" id=<%= id %> >
+    <ul class="swiper-wrapper swipes" style="margin-bottom:20px">
+      <% event.each do |event| %>
+        <li class="swiper-slide" alt="">
+          <%= link_to "/events/#{event.id}",data: {"turbolinks"=>false} do %>
+            
+            <%= render 'home/event_thumbnail',event: event %>
+            
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

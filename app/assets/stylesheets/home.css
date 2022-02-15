@@ -2347,7 +2347,7 @@ header .global-menu ul a:hover {
 }
 
 .event-bottom-section .other-events .event-thumbnail {
-  width: 300px;
+  width: 270px;
   margin: 10px;
   height: 290px;
   border: 2px solid grey;
@@ -2431,7 +2431,6 @@ header .global-menu ul a:hover {
 }
 
 .message-list {
-  border-top: solid 2px #aba8a8;
   height: 57vh;
   overflow-y: scroll;
   padding-right: 13px;

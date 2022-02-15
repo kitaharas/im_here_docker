@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
 
   def search
-    #Viewのformで取得したパラメータをモデルに渡す
     @events = Event.search(params[:search])
   end
 
@@ -19,7 +18,7 @@ class EventsController < ApplicationController
 
   def feel
     @feel = Feel.all
-    @event = Event.all
+    # @event = Event.all
   end
 
   def create
@@ -37,8 +36,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    
-    # redirect_to root_path unless current_user.id == @user.id
     @event = Event.find(params[:id])
     @scheduling = Schedule.where(event_id: @event.id).pluck(:user_id)
     @scheduling_users = User.find(@scheduling)
@@ -58,13 +55,7 @@ class EventsController < ApplicationController
   def update
     # redirect_to root_path unless current_user.id == @user.id
     @event = Event.find(params[:id])
-    p "------"
-    p @event
-    p "------"
     if @event.update(update_params)
-    p "------"
-    p @event
-    p "------"
     redirect_to eventpage_path
     else
     render("events/edit")
@@ -86,7 +77,6 @@ class EventsController < ApplicationController
     def update_params
       params.fetch(:event,{}).permit(:event_image_name,:content,:event_title,:publish,:place,:people,:date)
     end
-
 
 end
 

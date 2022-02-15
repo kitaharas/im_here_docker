@@ -5,15 +5,13 @@ class MessagesController < ApplicationController
     @room = Room.find(params[:room_id])
     @messages = @room.messages.includes(:user)
     @user = (@room.users.where.not(id: current_user.id).to_a)[0]
-    p "---------------"
-    p @user
-    p "---------------"
   end
 
   def create
     p "-----------------"
-    p params
+    p params[:message][:to_user_id]
     p "-----------------"
+    # @to = User.find(params[:message][:to_user_id])
     if params[:message][:room]
       p "-----------------"
       p "ajapa"
@@ -42,35 +40,25 @@ class MessagesController < ApplicationController
         redirect_to exist_room_path(@room.id)
       end
     else
-      render "rooms/show"
+      @user = User.find(session[:user_id])
+      @to = User.find(params[:message][:to_user_id])
+      @room = room_check(@user, @to)
+      @messages = Message.where(room_id: @room.id)
+      p "-------------"
+      p @exist_room.id
+      p "これはルームid"
+      p "-------------"
+      render "rooms/show" 
     end
   end
 
   private
     def message_params
-      params.require(:message).permit(:content, :user_id)
+      params.require(:message).permit(:content, :user_id,:image_name)
     end
 
     def rooms_params
       params.require(:message).permit(:user_id, :to_user_id)
     end
-
-
-  # def create
-  #   @room = Room.find(params[:room_id])
-  #   @message = @room.messages.new(message_params)
-  #   if @message.save
-  #     redirect_to room_messages_path(@room)
-  #   else
-  #     @messages = @room.messages.includes(:user)
-  #     render :index
-  #   end
-  # end
-    
-  #   private
-    
-  #   def message_params
-  #     params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
-  #   end
 
 end

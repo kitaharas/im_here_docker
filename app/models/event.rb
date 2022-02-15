@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   belongs_to_active_hash :feel
 
 
-  # belongs_to :feel, optional: true
+
   belongs_to :user, class_name: "User", foreign_key: "user_id"
 
   belongs_to :user, optional: true

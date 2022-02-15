@@ -1,17 +1,17 @@
 class RoomsController < ApplicationController
 
-  def index
-  end
+  # def index
+  # end
 
-  def new
-  end
+  # def new
+  # end
 
   def show
-    
-
+    @message = Message.new
     @user = User.find(session[:user_id])
     p "------------------"
     p @user
+    p "unko"
     p "------------------"
     if params[:to_user]
       p "------------------"
@@ -39,7 +39,6 @@ class RoomsController < ApplicationController
         @to = User.find(id)
       end
       @messages = Message.where(room_id: @room.id)
-      # メッセージズが出てる
     end
   end
 

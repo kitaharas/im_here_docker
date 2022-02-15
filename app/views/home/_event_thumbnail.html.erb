@@ -1,0 +1,13 @@
+<div class="event-thumbnail">
+  <div class="event-thumb-image">
+    <% if event.event_image_name.size == 0 %>
+      <%= image_tag "/assets/catman" %>
+    <% else %>
+      <%= image_tag event.event_image_name.url %>
+    <% end %>
+  </div>
+  <div class="event-thumb-text">
+    <h3><%= event.event_title %></h2>
+    <p><%= event.content %></p>
+  </div>
+</div> 

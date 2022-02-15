@@ -1,6 +1,5 @@
 class SchedulesController < ApplicationController
   before_action :set_post
-  # before_action :authenticate_user!
   
   def create
     if @event.user_id != current_user.id   # 投稿者本人以外に限定

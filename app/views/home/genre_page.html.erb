@@ -1,7 +1,5 @@
 <% provide(:title, "Genre_page") %>
 
-
-
 <div class="genre-top-section">
   <h3 class="g-page-title"><%= @genre.genre_title %></h3>
 
@@ -9,83 +7,16 @@
     <p>No event</p>
   <% elsif @event.count <= 6 %>
     now less than 6
-    <div class="hero">
-      <div class="swiper" id="swiper0">
-        <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |event| %>
-            <li class="swiper-slide" alt="">
-            <img src="/assets/catmovie.png">
-            <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-            <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <%= render 'home/event', id: "swiper0",event: @event[0..5] %>
   <% elsif @event.count <= 12 %>
     now less than 12
-    <div class="hero">
-      <div class="swiper" id="swiper0">
-        <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |event| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-          <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <div class="swiper" id="swiper1">
-        <ul class="swiper-wrapper swipes">
-          <% @event[6..11].each do |event| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-          <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <%= render 'home/event', id: "swiper0",event: @event[0..5] %>
+    <%= render 'home/event', id: "swiper1",event: @event[6..11] %>
   <% else %>
     now is more than 12
-    <div class="hero">
-      <div class="swiper" id="swiper0">
-        <ul class="swiper-wrapper swipes">
-          <% @event[0..5].each do |event| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-          <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <div class="swiper" id="swiper1">
-        <ul class="swiper-wrapper swipes">
-          <% @event[6..11].each do |event| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-          <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="hero">
-      <div class="swiper" id="swiper2">
-        <ul class="swiper-wrapper swipes">
-          <% @event[12..17].each do |event| %>
-          <li class="swiper-slide" alt=""><img src="/assets/catmovie.png">
-          <%= link_to event.event_title , "/events/#{event.id}",data: {"turbolinks"=>false} %>
-          <%= event.user.name %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <%= render 'home/event', id: "swiper0",event: @event[0..5] %>
+    <%= render 'home/event', id: "swiper1",event: @event[6..11] %>
+    <%= render 'home/event', id: "swiper2",event: @event[12..17] %>
   <% end %>
 </div>
 
@@ -103,7 +34,7 @@
           loop: true,
           grabCursor: true,
           effect: 'slide',
-          slidesPerView: 3.5,
+          slidesPerView: 4.5,
           spaceBetween: 10,
           speed: 1000,
         });
@@ -121,7 +52,6 @@
     }
 
     let lesson = document.getElementsByClassName("hero");
-    console.log(lesson.length);
 
     if(lesson.length == 1){
       const hero0 = new HeroSliders('#swiper0');
@@ -140,12 +70,5 @@
       hero2.start();
     }
 
-  
-      // const hero0 = new HeroSliders('#swiper0');
-      // hero0.start();
-      // const hero1 = new HeroSliders('#swiper1');
-      // hero1.start();
-      // const hero2 = new HeroSliders('#swiper2');
-      // hero2.start();
   });
 </script>

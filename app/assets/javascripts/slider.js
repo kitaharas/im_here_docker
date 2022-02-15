@@ -2,7 +2,6 @@ $(document).on('turbolinks:load', function() {
   // const slidelength = $("#swiper0").querySelectorAll('.swiper-slide').length
   const swiper0 = document.querySelector('#swiper0');
   const slidelength0 = swiper0.querySelectorAll('.swiper-slide').length
-  console.log(slidelength0);
 
   class HeroSliders {
     constructor(el) {

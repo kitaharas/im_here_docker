@@ -11,21 +11,9 @@
         <ul class="swiper-wrapper swipes">
           <% g.events.where(publish: true).order("RANDOM()").limit(6).each do |event| %>
             <li class="swiper-slide" alt="">
-              <div class="event-thumbnail">
-                <div class="event-thumb-image">
-                  <% if event.event_image_name.size == 0 %>
-                    <%= image_tag "/assets/catman" %>
-                  <% else %>
-                    <%= image_tag event.event_image_name.url %>
-                  <% end %>
-                </div>
-                <div class="event-thumb-text">
-                  <%= link_to "/events/#{event.id}" do %>
-                    <h3><%= event.event_title %></h2>
-                    <p><%= event.content %></p>
-                  <% end %>
-                </div>
-              </div> 
+              <%= link_to "/events/#{event.id}" do %>
+                <%= render 'home/event_thumbnail',event: event %>
+              <% end %>
             </li>
           <% end %>
         </ul>
