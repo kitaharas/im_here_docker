@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   include SessionsHelper
+  include NotificationsHelper
 
   helper_method :login_check
 
@@ -47,3 +48,4 @@ class ApplicationController < ActionController::Base
   end
   
 end
+

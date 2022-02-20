@@ -1,6 +1,6 @@
 <span id='follow-button_<%= user.id %>' > 
   <% if current_user.following?(user) %>
-    <span class="follow-btn unlock">フォロー解除</span>
+    <span class="follow-btn unlock" >フォロー解除</span>
     
   <% else %>
     <%= link_to 'フォローする', follow_path(user), method: :post, class:'follow-btn', remote: true %>

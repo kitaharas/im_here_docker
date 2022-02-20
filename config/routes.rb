@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   get 'schedules/new'
-  get 'home/zoom', to: 'home#zoom', as: 'zoom'
+  
   
   get 'events/search', to: 'events#search' , as: 'search_path'
   post 'follow/:id', to: 'relationships#follow', as: 'follow'
@@ -35,15 +35,20 @@ Rails.application.routes.draw do
   delete 'logout',  to: 'sessions#destroy'
   resources :users, params: :id
 
-  get 'rooms/:current/:to_user', to: 'rooms#show', as: 'room' # 初回アクセス時
+  
+  
+  get 'rooms/:room_id/message/:page', to: 'rooms#show_message', as: 'fetch' 
+  get 'rooms/:current/:to_user', to: 'rooms#show', as: 'room' 
+  
   get 'rooms/:room_id', to: 'rooms#show', as: 'exist_room' # 初回アクセス時
   post 'message/create', to: 'messages#create', as: 'message_create'
 
+  resources :notifications, only: :index
 
   # resources :rooms, only: [:index,:new,:create]
-  resources :rooms do
-    resources :messages
-  end
+  # resources :rooms do
+  #   resources :messages
+  # end
 
   resources :users do
     resource :relationships, only: [:create, :destroy]

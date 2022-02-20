@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      img {
+        margin: 5px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+
+    <div class="container"></div>
+
+    <script>
+      // Ajax(JQuery)が便利
+      // Get(Javascript)
+      const container = document.querySelector(".container");
+      const URL = "https://dog.ceo/api/breeds/image/random";
+
+      function loadMessage(minumMessage = 50) {
+        let i = 0;
+        while (i < minumMessage) {
+          fetch(URL, {
+            
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              const img = document.createElement("img");
+              img.src = `${data.message}`;
+              container.appendChild(img);
+            });
+          i++;
+        }
+      }
+      loadMessage();
+
+      window.addEventListener("scroll", () => {
+        console.log("scroll", window.scrollY);
+        if (
+          window.scrollY + window.innerHeight >=
+          document.documentElement.scrollHeight
+        ) {
+          loadMessage();
+        }
+      });
+    </script>
+  </body>
+</html>

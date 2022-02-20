@@ -1434,6 +1434,11 @@ header{
   .following-name{
     line-height: 50px;
   }
+  .follow-btn-area{
+    display: inline-block;
+    width: 72%;
+  
+  }
   a {
     display: flex;
     justify-content: space-between;
@@ -1476,6 +1481,7 @@ header{
     padding: 2px;
     color:black;
     cursor: pointer;
+    z-index: 5;
   }
 }
 .self-event{
@@ -2125,7 +2131,9 @@ header{
   height: 57vh;
   overflow-y: scroll;
   padding-right: 13px ;
-
+  li{
+    width: fit-content;
+  }
   .message-left{
     border: 1px solid black;
     border-radius: 16px;

@@ -93,11 +93,7 @@
         <h3>詳細</h3>
         <p><%= safe_join(@event.content.to_s.split("\n"),tag(:br)) %></p>
       </div>
-      <div>
-        レター機能
-        主とやりとりできる。
-        レターの中に何を込めるかは自由
-      </div>
+      
     </div>
 
     <div id="event-nav-right">
@@ -151,7 +147,13 @@
           </div>
           <p>日時:<%= @event.date %></p>
           <p>場所:<%= @event.place %></p>
-          <%= link_to "場所をgoogle mapで検索>>","https://www.google.co.jp/maps/search/#{@event.place}", target: :_blank, rel: "noopener noreferrer" %> 
+          <%= link_to "場所をgoogle mapで検索>>","https://www.google.co.jp/maps/search/#{@event.place}", target: :_blank, rel: "noopener noreferrer" %>
+          <% if @event.people.nil? %>
+            <p>人数：制限なし</p>
+          <% else %>
+            <p>人数：<%= @event.people %>人まで</p>
+          <% end %>
+            
         </div>
       </div>
     </div>

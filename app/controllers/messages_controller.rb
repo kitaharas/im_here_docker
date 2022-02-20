@@ -8,6 +8,8 @@ class MessagesController < ApplicationController
   end
 
   def create
+
+
     p "-----------------"
     p params[:message][:to_user_id]
     p "-----------------"
@@ -34,6 +36,8 @@ class MessagesController < ApplicationController
     end
 
     if @message.save
+      @message.create_notification_message!(current_user, @message.id)
+
       if @exist_room
         redirect_to exist_room_path(@exist_room.id)
       else

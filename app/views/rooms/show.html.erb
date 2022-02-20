@@ -29,47 +29,113 @@
     <div class="event-container">
       <ul class="tab-menu">
         <li>
-          <a class="active" data-id="event-list">
-            <%= @to.name %>さんのイベント
+          <a class="active" data-id="gest-message-list">
+            <%= @to.name %>さんとのメッセージ
           </a>
         </li>
         <li>
-          <a data-id="gest-message-list">
-            <%= @to.name %>さんとのメッセージ
+          <a data-id="event-list">
+            <%= @to.name %>さんのイベント
           </a>
         </li>
       </ul>
 
-      
-      <section class="content active" id="event-list">
-        <% if to_pub_events.count == 0 %>
-          開催予定のイベントはありません
-        <% else %>
-          <% to_pub_events.each do |e|%>
-            <div class="follower_view">
-              <div class="follower">
-                <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
-                  <div class="title_date">
-                    <p><%= e.event_title %></p>
-                    <p class="follower-date"><%= e.date %></p>
-                  </div>
-                  <div class="follower-plofile">
-                    <% if e.user.image_name.size == 0 %>
-                      <%= image_tag "/assets/catman" %>
-                    <% else %>
-                      <p><%= e.user.image_name %></p>
-                    <% end %>
-                    <p class="follower-name"><%= e.user.name %></p>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      </section>
-      <section class="content" id="gest-message-list">
+      <section class="content active" id="gest-message-list">
 
+<button onclick="more_message()" >more messages</button>
+
+<%# <img src="/uploads/message/image_name/18/bratwurst.jpg"> %>
         <ul class="message-list">
+        
+        <script>
+
+          
+          let pageCount = 2
+          "<% if @room %>"
+          console.log("unko");
+          const URL = "http://localhost:3000/rooms/<%= @room.id %>/message"
+          "<% end %>"
+
+          function message_create(page=0) {
+            fetch(URL + "/" + page)
+            .then(res => res.json())
+            .then(data => {
+              const listData = data.messages.map(message => {
+                const li = document.createElement('li');
+                const div = document.createElement('div');
+                const p = document.createElement('p');
+                const pTime = document.createElement('p');
+                pTime.textContent = message.created_at;
+                const img = document.createElement('img');
+                img.classList.add = "message-image"
+                console.log(message);                
+                console.log(message.content.length);;                
+              
+                if(data.user.id === message.user_id ){
+                  document.querySelector('.message-list').appendChild(li);
+                  li.style.marginLeft = "auto";
+                  // li.style.width = "fit-content";
+
+                  if(message.content !== null ){
+
+                    if(message.content.length !== 0 ){
+                    console.log('unko');
+                    p.textContent = message.content;
+                    p.classList.add("message");
+                    div.classList.add("message-right");
+                    li.appendChild(div);
+                    div.appendChild(p);
+                    }
+                    if( message.image_name.url !== null ){
+                      img.src = message.image_name.url;
+                      li.appendChild(img);
+                      
+                    } 
+                    li.appendChild(pTime);
+                    pTime.classList.add("postiong-time-right");
+                  }
+                } else {
+                  document.querySelector('.message-list').appendChild(li);
+                  // li.style.marginLeft = "auto";
+                  // li.style.width = "fit-content";
+
+                  if(message.content !== null ){
+
+                    if(message.content.length !== 0 ){
+                    console.log('unko');
+                    p.textContent = message.content;
+                    p.classList.add("message");
+                    div.classList.add("message-left");
+                    li.appendChild(div);
+                    div.appendChild(p);
+                    }
+                    if( message.image_name.url !== null ){
+                      img.src = message.image_name.url;
+                      li.appendChild(img);
+                      
+                    } 
+                    li.appendChild(pTime);
+                    pTime.classList.add("postiong-time");
+                  }
+                }
+
+
+
+               
+                
+                
+              });
+            });
+          }
+          message_create()
+          function more_message(){
+            message_create(pageCount)
+            pageCount += 1
+            console.log(pageCount)
+          }
+        
+        </script>
+
           <% @messages&.each do | message | %>
             <% if message.user_id == session[:user_id] %>
               <% if message.content.present? %>
@@ -135,6 +201,33 @@
           <%= f.submit "送信する" ,disabled: true ,id: "message-submit" %>
         <% end %>
       
+      </section>
+      
+      <section class="content" id="event-list">
+        <% if to_pub_events.count == 0 %>
+          開催予定のイベントはありません
+        <% else %>
+          <% to_pub_events.each do |e|%>
+            <div class="follower_view">
+              <div class="follower">
+                <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
+                  <div class="title_date">
+                    <p><%= e.event_title %></p>
+                    <p class="follower-date"><%= e.date %></p>
+                  </div>
+                  <div class="follower-plofile">
+                    <% if e.user.image_name.size == 0 %>
+                      <%= image_tag "/assets/catman" %>
+                    <% else %>
+                      <p><%= e.user.image_name %></p>
+                    <% end %>
+                    <p class="follower-name"><%= e.user.name %></p>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </section>
     </div>
   </div>
