@@ -78,6 +78,9 @@
     <div class="status_bar_right" id="status_bar_right">
       <% if logged_in? %>
         <%= link_to image_tag("/assets/login.png"), "/users/#{current_user.id}" ,class:"acount-logo","data-turbolinks":false %>
+        <% if @notifications_check.present? %>
+          <span id="header-notification"></span>
+        <% end %>
       <% else %>
         <div class="acount-logo" id="acount-logo" 
  

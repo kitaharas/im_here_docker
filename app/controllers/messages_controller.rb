@@ -34,11 +34,22 @@ class MessagesController < ApplicationController
       @message = Message.new(message_params)
       @message.room_id = @room.id
     end
-
+      p "-----------"
+      p "こんにちわ"
+      p "-----------"
     if @message.save
-      @message.create_notification_message!(current_user, @message.id)
+      if @message.room.user_id == current_user.id
+        visited = @message.room.to_user_id
+      else
+        visited = @message.room.user_id
+      end
+      @message.create_notification_message!(current_user,visited, @message.room.id)
 
       if @exist_room
+        p "-----------"
+        p "こっちかな"
+        p @exist_room
+        p "-----------"
         redirect_to exist_room_path(@exist_room.id)
       else
         redirect_to exist_room_path(@room.id)

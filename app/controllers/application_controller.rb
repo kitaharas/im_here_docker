@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include NotificationsHelper
 
+  # helper_method :unchecked_notifications
   helper_method :login_check
+
+  before_action :set_notification
+  
 
 
   def sign_in(user)
@@ -45,6 +49,17 @@ class ApplicationController < ActionController::Base
     end
 
     return exist_room
+  end
+
+  private
+  def set_notification
+    if logged_in?()
+      @notifications = Notification.where(visited_id: current_user.id)
+      @notifications_check = @notifications.where(checked: 0)
+      @notifications_follow = @notifications_check.where(action: "follow")
+      @notifications_schedule = @notifications_check.where(action: "schedule")
+      @notifications_message = @notifications_check.where(action: "message")
+    end
   end
   
 end

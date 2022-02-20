@@ -30,8 +30,24 @@
   <div class="event-display">
     <div class="event-container">
       <ul class="tab-menu">
-        <li><a class="active" data-id="follow">フォロー中</a></li>
-        <li><a data-id="follower">フォロワー</a></li>
+        <li>
+          <a class="active" data-id="follow">フォロー中</a>
+          <% if @notifications_follow.present? %>
+            <span class="user-our-notification"></span>
+          <% end %>
+          <% if @notifications_message.present? %>
+            <span class="user-our-notification"></span>
+          <% end %>
+        </li>
+        <li class="follower-li">
+          <a data-id="follower">フォロワー</a>
+          <% if @notifications_follow.present? %>
+            <span class="user-our-notification"></span>
+          <% end %>
+          <% if @notifications_message.present? %>
+            <span class="user-our-notification"></span>
+          <% end %>
+        </li>
       </ul>
       <section class="content active" id="follow">
         <% if following.count == 0 %>
@@ -41,6 +57,12 @@
             <div class="follower_view">
               <% unless user == current_user %>
                 <div class="follower">
+                  <% if @notifications_follow.present? %>
+                    <span class="user-show-foll-notification"></span>
+                  <% end %>
+                  <% if @notifications_message.present? %>
+                    <span class="user-show-foll-notification"></span>
+                  <% end %>
                   <div class="follow-btn-area">
                     <%= link_to room_path(current_user.id, user.id),data: {"turbolinks"=>false} do %>
                       <p class="following-name"><%= user.name %></p>
@@ -68,6 +90,12 @@
             <div class="follower_view">
               <% unless user == current_user %>
                 <div class="follower">
+                  <% if @notifications_follow.present? %>
+                  <span class="user-show-foll-notification"></span>
+                <% end %>
+                <% if @notifications_message.present? %>
+                  <span class="user-show-foll-notification"></span>
+                <% end %>
                   <div class="follow-btn-area">
                     <%= link_to room_path(current_user.id, user.id),data: {"turbolinks"=>false} do %>
                       <p class="following-name"><%= user.name %></p>

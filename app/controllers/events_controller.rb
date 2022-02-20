@@ -45,6 +45,12 @@ class EventsController < ApplicationController
     p @user_events
   
     p "----------------"
+
+
+    if @notifications_schedule.where(visitor_id: @user.id)
+      @notifications_schedule.update_all(checked: true)
+    end
+
   end
 
   def edit

@@ -15,6 +15,12 @@
       <p>フォロー数: <%= @user.followings.count %> フォロワー数: <%= @user.followers.count %></p>
       <%= link_to show_our_path ,data: {"turbolinks"=>false} do %>
         <button class="follow_viewer">一覧</button>
+        <% if @notifications_follow.present? %>
+          <span class="user-show-notification"></span>
+        <% end %>
+        <% if @notifications_message.present? %>
+          <span class="user-show-notification"></span>
+        <% end %>
       <% end %>
     </div>
     <div class="profile-coment">
@@ -42,6 +48,7 @@
           <% @f_event_pubs.each do |e|%>
             <div class="follower_view">
               <div class="follower">
+                
                 <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                   <div class="title_date">
                     <p><%= e.event_title %></p>
@@ -73,6 +80,9 @@
           <% @events_pub.each do |e| %>
             <div class="follower_view">
               <div class="follower self-event">
+                <% if @notifications_schedule.present? %>
+                  <span id="user-show-sche-notification"></span>
+                <% end %>
                 <%= link_to "/events/#{e.id}",data: {"turbolinks"=>false} do %>
                   <div class="title_date">
                     <p><%= e.event_title %></p>
@@ -174,39 +184,40 @@ $(document).on('turbolinks:load', function() {
   const schedulingEvent = document.getElementById('schedulingEvent');
   let count = 1;
   const countBtn = document.getElementById('count-btn');
+  if(countBtn){
+    countBtn.addEventListener('click', function() {
+      count++;
+      if(count % 4 === 1 ){
+        console.log("unko1");
+        pubEvent.classList.remove("hidden")
+        notPubEvent.classList.remove("hidden")
+        schedulingEvent.classList.remove("hidden")
+        countBtn.innerHTML = "全表示中";
+      } else if(count % 4 === 2 ){
+        console.log("unko2");
+        pubEvent.classList.remove("hidden")
+        notPubEvent.classList.add("hidden")
+        schedulingEvent.classList.add("hidden")
+        countBtn.innerHTML = "掲載中";
+      } else if(count % 4 === 3 ){
+        pubEvent.classList.add("hidden")
+        notPubEvent.classList.remove("hidden")
+        schedulingEvent.classList.add("hidden")
+        console.log("unko3");
+        countBtn.innerHTML = "未掲載";
+      } else if(count % 4 === 0 ){
+        pubEvent.classList.add("hidden")
+        notPubEvent.classList.add("hidden")
+        schedulingEvent.classList.remove("hidden")
+        console.log("unko4");
+        countBtn.innerHTML = "参加予定";
+      }
+    });
+  }
 
-  countBtn.addEventListener('click', function() {
-    count++;
-    if(count % 4 === 1 ){
-      console.log("unko1");
-      pubEvent.classList.remove("hidden")
-      notPubEvent.classList.remove("hidden")
-      schedulingEvent.classList.remove("hidden")
-      countBtn.innerHTML = "全表示中";
-    } else if(count % 4 === 2 ){
-      console.log("unko2");
-      pubEvent.classList.remove("hidden")
-      notPubEvent.classList.add("hidden")
-      schedulingEvent.classList.add("hidden")
-      countBtn.innerHTML = "掲載中";
-    } else if(count % 4 === 3 ){
-      pubEvent.classList.add("hidden")
-      notPubEvent.classList.remove("hidden")
-      schedulingEvent.classList.add("hidden")
-      console.log("unko3");
-      countBtn.innerHTML = "未掲載";
-    } else if(count % 4 === 0 ){
-      pubEvent.classList.add("hidden")
-      notPubEvent.classList.add("hidden")
-      schedulingEvent.classList.remove("hidden")
-      console.log("unko4");
-      countBtn.innerHTML = "参加予定";
-    }
 
 
 
-
-  });
 
   
 

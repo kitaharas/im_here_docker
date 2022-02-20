@@ -42,100 +42,14 @@
 
       <section class="content active" id="gest-message-list">
 
-<button onclick="more_message()" >more messages</button>
+<button id="message-onload" onclick="more_message()" >過去のメッセージ<br>読み込み</button>
 
-<%# <img src="/uploads/message/image_name/18/bratwurst.jpg"> %>
+
         <ul class="message-list">
         
-        <script>
+      
 
-          
-          let pageCount = 2
-          "<% if @room %>"
-          console.log("unko");
-          const URL = "http://localhost:3000/rooms/<%= @room.id %>/message"
-          "<% end %>"
-
-          function message_create(page=0) {
-            fetch(URL + "/" + page)
-            .then(res => res.json())
-            .then(data => {
-              const listData = data.messages.map(message => {
-                const li = document.createElement('li');
-                const div = document.createElement('div');
-                const p = document.createElement('p');
-                const pTime = document.createElement('p');
-                pTime.textContent = message.created_at;
-                const img = document.createElement('img');
-                img.classList.add = "message-image"
-                console.log(message);                
-                console.log(message.content.length);;                
-              
-                if(data.user.id === message.user_id ){
-                  document.querySelector('.message-list').appendChild(li);
-                  li.style.marginLeft = "auto";
-                  // li.style.width = "fit-content";
-
-                  if(message.content !== null ){
-
-                    if(message.content.length !== 0 ){
-                    console.log('unko');
-                    p.textContent = message.content;
-                    p.classList.add("message");
-                    div.classList.add("message-right");
-                    li.appendChild(div);
-                    div.appendChild(p);
-                    }
-                    if( message.image_name.url !== null ){
-                      img.src = message.image_name.url;
-                      li.appendChild(img);
-                      
-                    } 
-                    li.appendChild(pTime);
-                    pTime.classList.add("postiong-time-right");
-                  }
-                } else {
-                  document.querySelector('.message-list').appendChild(li);
-                  // li.style.marginLeft = "auto";
-                  // li.style.width = "fit-content";
-
-                  if(message.content !== null ){
-
-                    if(message.content.length !== 0 ){
-                    console.log('unko');
-                    p.textContent = message.content;
-                    p.classList.add("message");
-                    div.classList.add("message-left");
-                    li.appendChild(div);
-                    div.appendChild(p);
-                    }
-                    if( message.image_name.url !== null ){
-                      img.src = message.image_name.url;
-                      li.appendChild(img);
-                      
-                    } 
-                    li.appendChild(pTime);
-                    pTime.classList.add("postiong-time");
-                  }
-                }
-
-
-
-               
-                
-                
-              });
-            });
-          }
-          message_create()
-          function more_message(){
-            message_create(pageCount)
-            pageCount += 1
-            console.log(pageCount)
-          }
-        
-        </script>
-
+<% if false %>
           <% @messages&.each do | message | %>
             <% if message.user_id == session[:user_id] %>
               <% if message.content.present? %>
@@ -180,9 +94,133 @@
               <% end %>
             <% end %>
           <% end %>
+       <% end %>
         </ul>
+  <script>
 
           
+          let pageCount = 2
+          "<% if @room %>"
+          // console.log("unko");
+          const URL = "http://localhost:3000/rooms/<%= @room.id %>/message"
+
+          function message_create(page=0) {
+            fetch(URL + "/" + page)
+            .then(res => res.json())
+            .then(data => {
+              const listData = data.messages.map(message => {
+                const li = document.createElement('li');
+                const div = document.createElement('div');
+                const p = document.createElement('p');
+                const pTime = document.createElement('p');
+
+                let ymd = message.created_at.substr(0,10)
+                let hm = message.created_at.substr(11,5)
+                
+
+                pTime.textContent = ymd + "\u00a0" +hm;
+                const img = document.createElement('img');
+                img.classList.add = "message-image"
+                // console.log(message);                
+                // console.log(message.content.length);;                
+              
+                if(data.user.id === message.user_id ){
+                  document.querySelector('.message-list').prepend(li);
+                  li.style.marginLeft = "auto";
+                  // li.style.width = "fit-content";
+
+                  if(message.content !== null ){
+                    
+                    if(message.content.length !== 0 ){
+                    p.innerHTML = message.content.replace(/(\r\n|\n|\r)/gm, '<br>');
+                    p.classList.add("message");
+                    div.classList.add("message-right");
+                    li.appendChild(div);
+                    div.appendChild(p);
+                    }
+                    if( message.image_name.url !== null ){
+                      img.src = message.image_name.url;
+                      li.appendChild(img);
+                      
+                    } 
+                    li.appendChild(pTime);
+                    pTime.classList.add("posting-time-right");
+                  }
+                } else {
+                  document.querySelector('.message-list').prepend(li);
+                  // li.style.marginLeft = "auto";
+                  // li.style.width = "fit-content";
+
+                  if(message.content !== null ){
+                    
+                    if(message.content.length !== 0 ){
+                    p.textContent = message.content;
+                    p.classList.add("message");
+                    div.classList.add("message-left");
+                    li.appendChild(div);
+                    div.appendChild(p);
+                    }
+                    if( message.image_name.url !== null ){
+                      img.src = message.image_name.url;
+                      li.appendChild(img);
+                      
+                    } 
+                    li.appendChild(pTime);
+                    pTime.classList.add("posting-time");
+                  }
+                }
+
+
+
+               
+                
+                
+              });
+            });
+          
+
+          }
+          message_create()
+
+          function more_message(){
+            message_create(pageCount)
+            pageCount += 1
+            console.log(pageCount)
+          }
+
+          window.onload = function(){
+            let messageList = document.querySelector('.message-list');
+            messageList.scrollTop = messageList.scrollHeight;
+
+            // let list = messageList.firstElementChild;
+            
+            // console.log(list);
+            $(".message-list").scroll(function(){
+              let st = $(".message-list").scrollTop();
+              if (st == 0){
+                more_message();
+              }
+            });
+            // messageList.addEventListener("scroll", () => {
+            //     console.log("scroll", list.scrollHeight);
+            //   if (
+            //     window.scrollY + window.innerHeight >=
+            //     document.documentElement.scrollHeight
+            //   ) {
+            //     more_message();
+            //   }
+            // });
+
+          } 
+
+
+
+    // let messageList = document.querySelector('.message-list');
+    // messageList.scrollTop = messageList.scrollHeight;
+
+        
+          "<% end %>"
+        </script>
 
         <%= form_for @message, url: message_create_path ,html: {class: "message-form"} do |f| %>
           <%= render 'layouts/error_messages', model: f.object %>
@@ -262,9 +300,6 @@
 
 
 
-
-    let messageList = document.querySelector('.message-list');
-    messageList.scrollTop = messageList.scrollHeight;
 
 
     $('textarea').keyup(function(){

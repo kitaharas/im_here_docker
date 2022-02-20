@@ -83,6 +83,48 @@ button {
   }
 }
 
+
+#header-notification,
+.user-show-notification,
+#user-show-sche-notification,
+.user-show-foll-notification,
+.user-our-notification{
+  margin: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 30;
+}
+
+#header-notification{
+  top:13px;
+  left:29px;
+  background-color:khaki ;
+}
+
+.user-show-notification{
+  top: 0px;
+  left: 46px;
+  background-color:khaki ;
+}
+#user-show-sche-notification{
+  top: 2px;
+  right:22px;
+  background-color:$ruby ;
+}
+.user-show-foll-notification{
+  top: 2px;
+  right:22px;
+  background-color:$ruby ;
+}
+.user-our-notification{
+  top: 4px;
+  right: 5px;
+  background-color:$ruby ;
+}
+
+
 .edit-error{
   color:red;
   font-size: 14px;
@@ -649,6 +691,7 @@ header{
       }
     }
     .status_bar_right{
+      position: relative;
       height: 60px;
       margin-left:auto;
       width: 340px;
@@ -1339,6 +1382,7 @@ header{
     }
     & a{
       display: inline-block;
+      position: relative;
     }
     .follow_viewer{
       font-size: 16px;
@@ -1388,6 +1432,7 @@ header{
     display: flex;
     & li {
       flex: 1;
+      position: relative;
       & a{
       text-align: center;
       padding: 8px 0;
@@ -2126,6 +2171,23 @@ header{
 }  
     
       
+#gest-message-list{
+  position: relative;
+  #message-onload{
+    position: absolute;
+    top: -89px;
+    right: 0px;
+    height: 36px;
+    width: 151px;
+    font-size: small;
+    background: $greenfont;
+    border-radius: 6px;
+    border: 2px solid white;
+    -webkit-box-shadow: 0px 0px 1px 0px black;
+    box-shadow: 0px 0px 1px 0px black;
+    line-height: 16px;
+  }
+}
 
 .message-list{
   height: 57vh;
@@ -2149,7 +2211,7 @@ header{
     position: relative;
   }
   .message{
-
+    overflow-wrap: anywhere;
   }
   .posting-time{
     color:grey;
