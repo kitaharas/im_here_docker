@@ -119,19 +119,18 @@
     </div>
   </div>
 </div>
-
-<% @users.each do |user| %>
-  <div style="background-color:green">
-    <%= user.name %>
-    <% if current_user.following?(user) %>
-      <%= link_to "フォロー外す", unfollow_path(user), method: :post, class:'btn btn-info', remote: true %>
-    <% else %>
-      <%= link_to "フォローする", follow_path(user), method: :post, class:'btn btn-default', remote: true  %>
-    <% end %>
-  </div>
+<% if current_user.id == 1 %>
+  <% @users.each do |user| %>
+    <div style="background-color:green">
+      <%= user.name %>
+      <% if current_user.following?(user) %>
+        <%= link_to "フォロー外す", unfollow_path(user), method: :post, class:'btn btn-info', remote: true %>
+      <% else %>
+        <%= link_to "フォローする", follow_path(user), method: :post, class:'btn btn-default', remote: true  %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
-
-<%= render 'relationships/follow_list' %>
 
 <script>
   // タブメニュー

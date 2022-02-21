@@ -189,22 +189,10 @@
   <div class="event-bottom-section">
     <p class="bottom-info">同じユーザーの他のイベント</p>
       <div class="other-events">
-        <% @user_events.each do |e| %>
-          <div class="event-thumbnail">
-            <div class="event-thumb-image">
-              <% if e.event_image_name.size == 0 %>
-                <%= image_tag "/assets/catman" %>
-              <% else %>
-                <%= image_tag e.event_image_name.url %>
-              <% end %>
-            </div>
-            <%= link_to "/events/#{e.id}" do %>
-              <div class="event-thumb-text">
-                <h3><%= e.event_title %></h2>
-                <p><%= e.content %></p>
-              </div>
-            <% end %>
-          </div> 
+        <% @user_events.each do |event| %>
+          <%= link_to "/events/#{event.id}" do %>
+            <%= render 'home/event_thumbnail',event: event %>
+          <% end %>
         <% end %>
       </div>
   </div>
