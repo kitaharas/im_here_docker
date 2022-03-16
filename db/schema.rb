@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_02_16_053318) do
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "event_title"
     t.integer "user_id"
     t.integer "genre_id"
@@ -27,30 +27,30 @@ ActiveRecord::Schema.define(version: 2022_02_16_053318) do
     t.boolean "publish", default: false, null: false
   end
 
-  create_table "feels", force: :cascade do |t|
+  create_table "feels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "feel_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "genres", force: :cascade do |t|
+  create_table "genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "genre_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
     t.string "image_name"
-    t.integer "room_id"
-    t.integer "user_id"
+    t.bigint "room_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
     t.integer "room_id"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_053318) do
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
@@ -74,25 +74,25 @@ ActiveRecord::Schema.define(version: 2022_02_16_053318) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.integer "to_user_id"
-    t.integer "user_id"
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "to_user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["to_user_id"], name: "index_rooms_on_to_user_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
-  create_table "schedules", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "event_id", null: false
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_schedules_on_event_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -103,4 +103,10 @@ ActiveRecord::Schema.define(version: 2022_02_16_053318) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "rooms", "users"
+  add_foreign_key "rooms", "users", column: "to_user_id"
+  add_foreign_key "schedules", "events"
+  add_foreign_key "schedules", "users"
 end

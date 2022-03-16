@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string  :place
       t.integer :people
       t.string :event_image_name
+      
       t.timestamps
     end
   end
