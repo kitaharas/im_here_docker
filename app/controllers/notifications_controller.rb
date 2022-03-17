@@ -8,4 +8,4 @@ class NotificationsController < ApplicationController
 #       notification.update_attributes(checked: true)
 #     end
 #   end
-# end
+end
